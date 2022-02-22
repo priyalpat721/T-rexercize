@@ -18,6 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CalendarActivity"/>
+        <activity android:name=".ProfileActivity"/>
+        <activity android:name=".FavoritesActivity"/>
+        <activity android:name=".ExerciseActivity"/>
     </application>
 
 </manifest>
