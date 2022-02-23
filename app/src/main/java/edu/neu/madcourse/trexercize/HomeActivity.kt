@@ -19,6 +19,7 @@ class HomeActivity : AppCompatActivity() {
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation_bar)
         bottomNavigation.background = null
+        bottomNavigation.menu.getItem(2).isEnabled = false
         bottomNavigation?.setupWithNavController(navController)
 
         val exercises = findViewById<FloatingActionButton>(R.id.exerciseButton)
