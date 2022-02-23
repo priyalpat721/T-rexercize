@@ -2,6 +2,7 @@ package edu.neu.madcourse.trexercize
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -20,7 +21,9 @@ class HomeActivity : AppCompatActivity() {
         bottomNavigation.background = null
         bottomNavigation?.setupWithNavController(navController)
 
-        val exercises = findViewById<FloatingActionButton>(R.id.exerciseFragment);
-
+        val exercises = findViewById<FloatingActionButton>(R.id.exerciseButton);
+        exercises.setOnClickListener {
+           Navigation.findNavController(this, R.id.homeFragment).navigate(R.id.exerciseFragment)
+        }
     }
 }
