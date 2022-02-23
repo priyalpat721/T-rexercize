@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">T-rexercize</string>
+    <string name="app_name">T-Rexercize</string>
     <string name="hello_from_calendar">Hello from Calendar</string>
     <string name="hello_from_exercises">Hello from Exercises</string>
     <string name="hello_from_favorites">Hello from Favorites</string>
