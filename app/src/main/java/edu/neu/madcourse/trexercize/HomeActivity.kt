@@ -21,7 +21,7 @@ class HomeActivity : AppCompatActivity() {
         bottomNavigation.background = null
         bottomNavigation?.setupWithNavController(navController)
 
-        val exercises = findViewById<FloatingActionButton>(R.id.exerciseButton);
+        val exercises = findViewById<FloatingActionButton>(R.id.exerciseButton)
         exercises.setOnClickListener {
            Navigation.findNavController(this, R.id.homeFragment).navigate(R.id.exerciseFragment)
         }
