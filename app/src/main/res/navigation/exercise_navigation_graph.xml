@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/exercise_navigation_graph"
+    app:startDestination="@id/homeScreenFragment">
+
+
+    <fragment
+        android:id="@+id/homeScreenFragment"
+        android:name="edu.neu.madcourse.trexercize.ui.fragments.HomeScreenFragment"
+        android:label="HomeScreenFragment" >
+        <action
+            android:id="@+id/action_homeScreenFragment_to_exerciseFragment"
+            app:destination="@id/exerciseFragment"
+            app:enterAnim="@android:anim/slide_out_right"
+            app:exitAnim="@android:anim/slide_in_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_homeScreenFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@android:anim/slide_out_right"
+            app:exitAnim="@android:anim/slide_in_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_homeScreenFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment"
+            app:enterAnim="@android:anim/slide_out_right"
+            app:exitAnim="@android:anim/slide_in_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_homeScreenFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment"
+            app:enterAnim="@android:anim/slide_out_right"
+            app:exitAnim="@android:anim/slide_in_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="edu.neu.madcourse.trexercize.ui.fragments.CalendarFragment"
+        android:label="CalendarFragment"/>
+    <fragment
+        android:id="@+id/exerciseFragment"
+        android:name="edu.neu.madcourse.trexercize.ui.fragments.ExerciseFragment"
+        android:label="ExerciseFragment" >
+        <action
+            android:id="@+id/action_exerciseFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment"
+            app:enterAnim="@android:anim/slide_out_right"
+            app:exitAnim="@android:anim/slide_in_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="edu.neu.madcourse.trexercize.ui.fragments.FavoritesFragment"
+        android:label="FavoritesFragment" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_exerciseFragment"
+            app:destination="@id/exerciseFragment"
+            app:enterAnim="@android:anim/slide_out_right"
+            app:exitAnim="@android:anim/slide_in_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="edu.neu.madcourse.trexercize.ui.fragments.ProfileFragment"
+        android:label="ProfileFragment"
+        app:enterAnim="@android:anim/slide_out_right"
+        app:exitAnim="@android:anim/slide_in_left"
+        app:popEnterAnim="@android:anim/slide_in_left"
+        app:popExitAnim="@android:anim/slide_out_right"/>
+</navigation>
