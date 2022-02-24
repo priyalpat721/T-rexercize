@@ -1,8 +1,5 @@
 package edu.neu.madcourse.trexercize
 
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.Color.BLUE
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
