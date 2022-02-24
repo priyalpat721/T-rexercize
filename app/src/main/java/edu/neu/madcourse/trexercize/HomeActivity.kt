@@ -1,5 +1,8 @@
 package edu.neu.madcourse.trexercize
 
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.Color.BLUE
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -21,8 +24,8 @@ class HomeActivity : AppCompatActivity() {
         setCurrentFragment(homeScreenFragment)
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation_bar)
-        bottomNavigationView.background = null;
-        bottomNavigationView.menu.getItem(2).isEnabled = false;
+        bottomNavigationView.background = null
+        bottomNavigationView.menu.getItem(2).isEnabled = false
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.homeScreenFragment -> setCurrentFragment(homeScreenFragment)

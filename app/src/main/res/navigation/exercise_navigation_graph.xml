@@ -41,7 +41,8 @@
     <fragment
         android:id="@+id/calendarFragment"
         android:name="edu.neu.madcourse.trexercize.ui.fragments.CalendarFragment"
-        android:label="CalendarFragment"/>
+        android:label="CalendarFragment">
+    </fragment>
     <fragment
         android:id="@+id/exerciseFragment"
         android:name="edu.neu.madcourse.trexercize.ui.fragments.ExerciseFragment"
@@ -74,4 +75,5 @@
         app:exitAnim="@android:anim/slide_in_left"
         app:popEnterAnim="@android:anim/slide_in_left"
         app:popExitAnim="@android:anim/slide_out_right"/>
+    <fragment android:id="@+id/placeholder" />
 </navigation>

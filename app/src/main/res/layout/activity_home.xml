@@ -42,7 +42,9 @@
             app:labelVisibilityMode="labeled"
             app:menu="@menu/navigation_bar_menu"
             android:layout_marginEnd="20dp"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent"
+            app:itemIconTint="@drawable/bottom_nav_icons_selector"
+            app:itemTextColor="@drawable/bottom_nav_icons_selector"/>
 
     </com.google.android.material.bottomappbar.BottomAppBar>
 
