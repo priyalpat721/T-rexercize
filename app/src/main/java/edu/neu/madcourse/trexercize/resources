@@ -1,6 +1,16 @@
+Used to create navigation bar and use fragments:
 https://developer.android.com/guide/navigation/navigation-getting-started#add-navhost
 https://developer.android.com/guide/navigation/navigation-getting-started
 https://developer.android.com/reference/androidx/navigation/fragment/FragmentNavigator.Destination
 https://developer.android.com/guide/navigation/navigation-getting-started
 https://kotlinlang.org/docs/typecasts.html#safe-nullable-cast-operator
 https://stackoverflow.com/questions/67641594/bottomnavigation-view-onnavigationitemselectedlistener-is-deprecated
+
+Life cycle:
+https://developer.android.com/jetpack/androidx/releases/lifecycle
+
+ViewModel:
+https://developer.android.com/topic/libraries/architecture/viewmodel?gclid=Cj0KCQiA7qP9BRCLARIsABDaZzhDtIsNoyAcuVYiA3F3smhaKd4THplNIp1nDr-KGB_XWkzZxiIvrVAaAjYKEALw_wcB&gclsrc=aw.ds
+
+Coroutines:
+https://developer.android.com/topic/libraries/architecture/coroutines

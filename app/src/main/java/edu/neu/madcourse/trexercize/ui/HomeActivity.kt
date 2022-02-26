@@ -1,10 +1,11 @@
-package edu.neu.madcourse.trexercize
+package edu.neu.madcourse.trexercize.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import edu.neu.madcourse.trexercize.*
 import edu.neu.madcourse.trexercize.ui.fragments.*
 
 class HomeActivity : AppCompatActivity() {
