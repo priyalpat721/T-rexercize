@@ -40,12 +40,20 @@
     </fragment>
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="edu.neu.madcourse.trexercize.ui.fragments.CalendarFragment"
+        android:name="edu.neu.madcourse.trexercize.ui.fragments.calendar.CalendarFragment"
         android:label="CalendarFragment">
+        <action
+            android:id="@+id/action_calendarFragment_to_dayFragment"
+            app:destination="@id/dayFragment"
+            app:popUpTo="@id/dayFragment">
+            <argument
+                android:name="date"
+                android:defaultValue="No date" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/exerciseFragment"
-        android:name="edu.neu.madcourse.trexercize.ui.fragments.ExerciseFragment"
+        android:name="edu.neu.madcourse.trexercize.ui.fragments.exercise.ExerciseFragment"
         android:label="ExerciseFragment" >
         <action
             android:id="@+id/action_exerciseFragment_to_calendarFragment"
@@ -69,11 +77,18 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="edu.neu.madcourse.trexercize.ui.fragments.ProfileFragment"
+        android:name="edu.neu.madcourse.trexercize.ui.fragments.profile.ProfileFragment"
         android:label="ProfileFragment"
         app:enterAnim="@android:anim/slide_out_right"
         app:exitAnim="@android:anim/slide_in_left"
         app:popEnterAnim="@android:anim/slide_in_left"
         app:popExitAnim="@android:anim/slide_out_right"/>
-    <fragment android:id="@+id/placeholder" />
+    <fragment
+        android:id="@+id/dayFragment"
+        android:name="edu.neu.madcourse.trexercize.ui.fragments.calendar.DayFragment"
+        android:label="DayFragment" >
+        <argument
+            android:name="date"
+            app:argType="string"/>
+    </fragment>
 </navigation>

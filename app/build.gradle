@@ -1,7 +1,11 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
 }
+
+apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdk 32
@@ -28,6 +32,13 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    sourceSets {
+        main{
+            kotlin {
+                srcDirs += 'build/generated/source/navigation-args/'
+            }
+        }
     }
 }
 
@@ -61,12 +72,12 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:4.5.0"
 
     // ViewModel
-    implementation"androidx.lifecycle:lifecycle-viewmodel:2.5.0-alpha02"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0-alpha02"
     // LiveData
-    implementation"androidx.lifecycle:lifecycle-livedata:2.5.0-alpha02"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.0-alpha02"
     // Lifecycles only (without ViewModel or LiveData)
-    implementation"androidx.lifecycle:lifecycle-runtime:2.5.0-alpha02"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.0-alpha02"
 
     // Saved state module for ViewModel
-    implementation"androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.0-alpha02"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.0-alpha02"
 }

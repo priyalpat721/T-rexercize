@@ -1,4 +1,4 @@
-package edu.neu.madcourse.trexercize.ui.fragments
+package edu.neu.madcourse.trexercize.ui.fragments.exercise
 
 import androidx.fragment.app.Fragment
 import edu.neu.madcourse.trexercize.R
