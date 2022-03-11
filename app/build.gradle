@@ -83,4 +83,8 @@ dependencies {
 
     // Saved state module for ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.0-alpha04"
+
+    // api call
+    implementation 'com.android.volley:volley:1.2.1'
+
 }
