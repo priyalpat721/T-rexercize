@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "685740186965",
+    "project_id": "t-rexercize",
+    "storage_bucket": "t-rexercize.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:685740186965:android:126555862602a804ad23dc",
+        "android_client_info": {
+          "package_name": "edu.neu.madcourse.trexercize"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "685740186965-1bfvdvl2r31vm5710nabbdod1tq18kgl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5AuLz6nHrO2zGy3mEqCxNqwp6dKawXg4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "685740186965-1bfvdvl2r31vm5710nabbdod1tq18kgl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
