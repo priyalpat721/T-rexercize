@@ -10,9 +10,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintGroup7"
         style="@style/groupStylewhite_A700cornerRadius"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,66 +22,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_image"
         app:layout_constraintVertical_bias="0.0">
-
-        <TextView
-            android:id="@+id/height2"
-            style="@style/txtRobotoregular18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="@string/height"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/weight3"
-            app:layout_constraintStart_toStartOf="@+id/age3"
-            app:layout_constraintTop_toBottomOf="@+id/age3" />
-
-        <TextView
-            android:id="@+id/goals2"
-            style="@style/txtRobotoregular18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="@string/goals"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/target_areas2"
-            app:layout_constraintStart_toStartOf="@+id/bmi2"
-            app:layout_constraintTop_toBottomOf="@+id/bmi2" />
-
-        <TextView
-            android:id="@+id/target_areas2"
-            style="@style/txtRobotoregular18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="@string/target_areas"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/streak2"
-            app:layout_constraintStart_toStartOf="@+id/goals2"
-            app:layout_constraintTop_toBottomOf="@+id/goals2" />
-
-        <TextView
-            android:id="@+id/streak2"
-            style="@style/txtRobotoregular18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="@string/longest_streak"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/target_areas2"
-            app:layout_constraintTop_toBottomOf="@+id/target_areas2" />
-
-        <TextView
-            android:id="@+id/weight3"
-            style="@style/txtRobotoregular18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="@string/weight"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/bmi2"
-            app:layout_constraintStart_toStartOf="@+id/height2"
-            app:layout_constraintTop_toBottomOf="@+id/height2" />
 
         <TextView
             android:id="@+id/txtProfile"
@@ -97,116 +39,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/lbl_profile" />
-
-        <TextView
-            android:id="@+id/bmi2"
-            style="@style/txtRobotoregular18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="@string/bmi"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/goals2"
-            app:layout_constraintStart_toStartOf="@+id/weight3"
-            app:layout_constraintTop_toBottomOf="@+id/weight3" />
-
-        <TextView
-            android:id="@+id/height"
-            style="@style/txtRobotoregular18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:gravity="start"
-            android:hint="@string/height"
-            android:textSize="24sp"
-            app:layout_constraintStart_toEndOf="@+id/height2"
-            app:layout_constraintTop_toTopOf="@+id/height2" />
-
-        <TextView
-            android:id="@+id/age"
-            style="@style/txtRobotoregular18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:gravity="start"
-            android:hint="@string/age"
-            android:textSize="24sp"
-            app:layout_constraintStart_toEndOf="@+id/age3"
-            app:layout_constraintTop_toTopOf="@+id/age3" />
-
-        <TextView
-            android:id="@+id/age3"
-            style="@style/txtRobotoregular18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="@string/age"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/height2"
-            app:layout_constraintStart_toStartOf="@+id/txtProfile"
-            app:layout_constraintTop_toBottomOf="@+id/txtProfile" />
-
-        <TextView
-            android:id="@+id/bmi"
-            style="@style/txtRobotoregular18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:gravity="start"
-            android:hint="@string/bmi"
-            android:textSize="24sp"
-            app:layout_constraintStart_toEndOf="@+id/bmi2"
-            app:layout_constraintTop_toTopOf="@+id/bmi2" />
-
-        <TextView
-            android:id="@+id/goals"
-            style="@style/txtRobotoregular18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:gravity="start"
-            android:hint="@string/goals"
-            android:textSize="24sp"
-            app:layout_constraintStart_toEndOf="@+id/goals2"
-            app:layout_constraintTop_toTopOf="@+id/goals2" />
-
-        <TextView
-            android:id="@+id/streak"
-            style="@style/txtRobotoregular18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
-            android:gravity="start"
-            android:hint="@string/longest_streak"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/streak2"
-            app:layout_constraintTop_toTopOf="@+id/streak2" />
-
-        <TextView
-            android:id="@+id/target_areas"
-            style="@style/txtRobotoregular18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:gravity="start"
-            android:hint="@string/target_areas"
-            android:textSize="24sp"
-            app:layout_constraintStart_toEndOf="@+id/target_areas2"
-            app:layout_constraintTop_toTopOf="@+id/target_areas2" />
-
-        <TextView
-            android:id="@+id/weight"
-            style="@style/txtRobotoregular18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:gravity="start"
-            android:hint="@string/weight"
-            android:textSize="24sp"
-            app:layout_constraintStart_toEndOf="@+id/weight3"
-            app:layout_constraintTop_toTopOf="@+id/weight3" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnEdit2"
@@ -230,6 +62,19 @@
             app:layout_constraintTop_toTopOf="@+id/txtProfile"
             app:layout_constraintVertical_bias="0.75"
             tools:text="@string/lbl_edit" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/profile_recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/constraintGroup7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtProfile"
+            app:layout_constraintVertical_bias="0.042" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
