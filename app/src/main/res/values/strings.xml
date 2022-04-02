@@ -38,4 +38,19 @@
     <string name="msg_token_fmt">token</string>
     <string name="done">Done</string>
     <string name="hello_from_sign_out">Hello from sign out</string>
+    <string name="loading">Loading…</string>
+    <string name="no_internet_connection">No internet connection!</string>
+    <string name="msg_spongebob_squar">SpongeBob Squarepants</string>
+    <string name="lbl_larry_s_gym">Larry\u2019s Gym</string>
+    <string name="lbl_edit">Edit</string>
+    <string name="lbl_profile">Profile</string>
+    <string name="msg_age_35_weight">Age : 35 Weight : 4 ounces Height : 4 inches BMI: 21 Goals Get arms like Larry Target areas: Arms Core Highest Streak: 10 days</string>
+    <string name="goals">Goals</string>
+    <string name="weight">Weight</string>
+    <string name="height">Height</string>
+    <string name="longest_streak">Longest Streak</string>
+    <string name="target_areas">Target Areas</string>
+    <string name="gym">Gym</string>
+    <string name="bmi">BMI</string>
+    <string name="age">Age</string>
 </resources>
