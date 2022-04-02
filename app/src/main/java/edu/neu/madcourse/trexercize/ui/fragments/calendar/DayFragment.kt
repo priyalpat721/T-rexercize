@@ -1,14 +1,19 @@
 package edu.neu.madcourse.trexercize.ui.fragments.calendar
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.navArgs
 import edu.neu.madcourse.trexercize.R
+import android.widget.TextView
+import androidx.navigation.fragment.navArgs
 
+/**
+ * A simple [Fragment] subclass.
+ * Use the [DayFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
 class DayFragment : Fragment(R.layout.fragment_day) {
     private val args : DayFragmentArgs by navArgs()
     override fun onCreate(savedInstanceState: Bundle?) {
