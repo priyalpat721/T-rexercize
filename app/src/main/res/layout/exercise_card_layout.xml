@@ -14,10 +14,21 @@
 
         <ImageView
             android:id="@+id/body_part"
-            android:contentDescription="@string/this_is_a_body_part"
             android:layout_width="99dp"
             android:layout_height="93dp"
-            app:srcCompat="@drawable/boba" />
+            app:srcCompat="@drawable/dumbell"
+            android:contentDescription="@string/this_is_a_body_part"
+            android:background="@color/teal_100"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/body_part_title"
+            android:textColor="@android:color/black"
+            android:textSize="21sp"
+            android:text="Title"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="10dp"/>
     </LinearLayout>
 
 
