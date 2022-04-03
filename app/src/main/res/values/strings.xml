@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">T-Rexercize</string>
     <string name="hello_from_calendar">Calendar</string>
-    <string name="hello_from_exercises">Hello from Exercises</string>
+    <string name="hello_from_exercises">Categories</string>
     <string name="hello_from_favorites">Hello from Favorites</string>
     <string name="hello_from_profile">Hello from Profile</string>
     <string name="hello_from_home">Hello from Home</string>
@@ -53,4 +53,5 @@
     <string name="gym">Gym</string>
     <string name="bmi">BMI</string>
     <string name="age">Age</string>
+    <string name="this_is_a_body_part">This is a body part</string>
 </resources>
