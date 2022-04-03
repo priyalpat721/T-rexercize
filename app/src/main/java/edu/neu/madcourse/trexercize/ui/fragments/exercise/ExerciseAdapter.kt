@@ -8,12 +8,13 @@ import edu.neu.madcourse.trexercize.R
 
 class ExerciseAdapter(
     private var exerciseList: MutableList<ExerciseCard>,
-    private var context: Context
+    private var context: Context,
+    private var listener: EachExerciseCardListener
 ) : RecyclerView.Adapter<ExerciseViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {
         val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.exercise_card_layout, parent, false)
-        return ExerciseViewHolder(view)
+        return ExerciseViewHolder(view, listener)
     }
 
     override fun onBindViewHolder(holder: ExerciseViewHolder, position: Int) {
@@ -23,6 +24,10 @@ class ExerciseAdapter(
 
     override fun getItemCount(): Int {
         return exerciseList.size
+    }
+
+    fun setEachOnClickListener(listener: EachExerciseCardListener) {
+        this.listener = listener
     }
 
 }

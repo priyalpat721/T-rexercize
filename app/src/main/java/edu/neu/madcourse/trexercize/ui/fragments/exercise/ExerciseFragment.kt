@@ -1,15 +1,13 @@
 package edu.neu.madcourse.trexercize.ui.fragments.exercise
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import edu.neu.madcourse.trexercize.R
-import edu.neu.madcourse.trexercize.ui.fragments.profile.ProfileCard
 
 class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
     // TODO: Rename and change types of parameters
@@ -39,8 +37,18 @@ class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
 
     }
     private fun setUpResources(){
-        exerciseAdapter = this.context?.let { ExerciseAdapter(exerciseList, it) }
+
+        val listener: EachExerciseCardListener = object : EachExerciseCardListener {
+            override fun onItemClick(position: Int) {
+                val category: ExerciseCard = exerciseList[position]
+                val title = category.title
+                println("This is the category: $title")
+            }
+        }
+        exerciseAdapter = this.context?.let { ExerciseAdapter(exerciseList, it, listener) }
+        exerciseAdapter?.setEachOnClickListener(listener)
         recyclerView!!.adapter = exerciseAdapter
         recyclerView!!.layoutManager = GridLayoutManager(context, 2)
+
     }
 }
