@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,7 +43,7 @@ class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
             override fun onItemClick(position: Int) {
                 val category: ExerciseCard = exerciseList[position]
                 val title = category.title
-                println("This is the category: $title")
+                Toast.makeText(context, "This is the category: $title", Toast.LENGTH_SHORT).show()
             }
         }
         exerciseAdapter = this.context?.let { ExerciseAdapter(exerciseList, it, listener) }
