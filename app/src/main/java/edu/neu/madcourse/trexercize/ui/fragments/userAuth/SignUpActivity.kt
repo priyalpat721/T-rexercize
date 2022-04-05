@@ -96,10 +96,8 @@ class SignUpActivity : AppCompatActivity() {
                         "favoriteRoutines" to arrayListOf(
                             ""
                         ),
-                        "height" to hashMapOf(
-                            "foot" to 0,
-                            "inches" to 0
-                        ),
+                        "foot" to 0,
+                        "inches" to 0,
                         "streak" to 0,
                         "weight" to 0,
                         "equipment" to arrayListOf(

@@ -63,12 +63,12 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
             }
             if (!feet.text.isNullOrEmpty()) {
                 Firebase.auth.currentUser?.uid?.let { it1 -> db.child("users").child(it1)
-                    .child("height").child("feet").setValue(feet.text.toString())
+                    .child("feet").setValue(feet.text.toString())
                 }
             }
             if (!inches.text.isNullOrEmpty()) {
                 Firebase.auth.currentUser?.uid?.let { it1 -> db.child("users").child(it1)
-                    .child("height").child("inches").setValue(inches.text.toString())
+                    .child("inches").setValue(inches.text.toString())
                 }
             }
             if (!weight.text.isNullOrEmpty()) {
