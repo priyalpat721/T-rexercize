@@ -105,7 +105,8 @@ class SignUpActivity : AppCompatActivity() {
                         "equipment" to arrayListOf(
                             ""
                         ),
-                        "calendar" to calendarDoc.toString()
+                        "calendar" to calendarDoc,
+                        "targetAreas" to ""
                     )
                     Firebase.auth.currentUser?.uid?.let {
                         db.child("users").child(it).setValue(newUser)

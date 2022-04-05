@@ -86,7 +86,11 @@
         app:enterAnim="@android:anim/slide_out_right"
         app:exitAnim="@android:anim/slide_in_left"
         app:popEnterAnim="@android:anim/slide_in_left"
-        app:popExitAnim="@android:anim/slide_out_right"/>
+        app:popExitAnim="@android:anim/slide_out_right">
+        <action
+            android:id="@+id/action_profileFragment_to_editFragment"
+            app:destination="@id/editFragment" />
+    </fragment>
     <fragment
         android:id="@+id/dayFragment"
         android:name="edu.neu.madcourse.trexercize.ui.fragments.calendar.DayFragment"
@@ -128,5 +132,13 @@
         <action
             android:id="@+id/action_signOutFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editFragment"
+        android:name="edu.neu.madcourse.trexercize.ui.fragments.profile.EditFragment"
+        android:label="EditFragment" >
+        <action
+            android:id="@+id/action_editFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 </navigation>
