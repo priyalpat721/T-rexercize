@@ -27,6 +27,10 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
     private lateinit var cancelButton: Button
     private var db = Firebase.database.reference
 
+    /**
+     * Gets information from the edit texts and populates the current user's information
+     * once done is hit. Both buttons take the users back to the profile page
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
