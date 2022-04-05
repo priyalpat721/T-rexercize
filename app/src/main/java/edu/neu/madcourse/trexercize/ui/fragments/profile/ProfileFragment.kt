@@ -51,6 +51,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
     }
 
+
     private fun listenForChanges() {
         db.child("users").addValueEventListener(object : ValueEventListener {
             @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
@@ -64,17 +65,34 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         context?.let { Glide.with(it).load(userInfo["profilePicture"]).into(profile) }
                         val inches = userInfo["inches"]
                         val feet = userInfo["feet"]
-                        val height = "${feet}ft ${inches}in"
+                        var height = "${feet}ft ${inches}in"
+                        var bmi = 0.0
+                        if (inches.isNullOrEmpty() || feet.isNullOrEmpty()) {
+                            bmi = 0.0
+                            height = "0ft 0in"
+                        }else{
+                            val totalInches = (Integer.parseInt(feet) * 12) + Integer.parseInt(inches)
+                            bmi = Integer.parseInt(userInfo["weight"]).toDouble() /
+                                    totalInches.toDouble() / totalInches.toDouble() * 703
+                        }
 
-                        val totalInches = (Integer.parseInt(feet) * 12) + Integer.parseInt(inches)
-                        val bmi = Integer.parseInt(userInfo["weight"]).toDouble() /
-                                totalInches.toDouble() / totalInches.toDouble() * 703
                         profileList.add(ProfileCard("Age", userInfo["age"].toString()))
                         profileList.add(ProfileCard("Height", height))
                         profileList.add(ProfileCard("Weight", userInfo["weight"].toString()))
                         profileList.add(ProfileCard("BMI", String.format("%.2f", bmi)))
-                        profileList.add(ProfileCard("Goals", userInfo["goals"].toString()))
-                        profileList.add(ProfileCard("Target Areas", userInfo["targetAreas"].toString()))
+                        if (userInfo["goals"].isNullOrEmpty()) {
+                            profileList.add(ProfileCard("Goals", ""))
+                        }
+                        else {
+                            profileList.add(ProfileCard("Goals", userInfo["goals"].toString()))
+                        }
+
+                        if (userInfo["targetAreas"].isNullOrEmpty()) {
+                            profileList.add(ProfileCard("Target Areas", ""))
+                        }
+                        else{
+                            profileList.add(ProfileCard("Target Areas", userInfo["targetAreas"].toString()))
+                        }
                         profileList.add(ProfileCard("Longest Streak", userInfo["streak"].toString()))
                         adapter?.notifyDataSetChanged()
                     }
