@@ -6,11 +6,13 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -29,6 +31,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private lateinit var editButton: Button
     private lateinit var name : TextView
     private lateinit var gym : TextView
+    private lateinit var profile : ImageView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,6 +40,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         value = view.findViewById(R.id.value)
         name = view.findViewById(R.id.name)
         gym = view.findViewById(R.id.gym_name)
+        profile = view.findViewById(R.id.profile_image)
         setUpResources()
 
         listenForChanges()
@@ -58,6 +62,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         val userInfo = snap.value as Map<String, String>
                         name.text = userInfo["name"]
                         gym.text = userInfo["gym"]
+                        context?.let { Glide.with(it).load(userInfo["profilePicture"]).into(profile) }
                         val inches = userInfo["inches"]
                         val feet = userInfo["feet"]
                         val height = "${feet}ft ${inches}in"

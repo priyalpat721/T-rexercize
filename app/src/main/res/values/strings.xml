@@ -57,4 +57,5 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="feet">feet</string>
     <string name="inches">inches</string>
+    <string name="choose_image">Choose Image</string>
 </resources>
