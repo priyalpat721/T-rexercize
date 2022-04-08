@@ -11,12 +11,12 @@
         style="@style/txtAcmeregular36"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/robotoregular400"
         android:shadowColor="#000000"
         android:shadowDx="1.5"
         android:shadowDy="1.5"
         android:shadowRadius="1.6"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/robotoregular400"
         android:text="@string/date"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -85,12 +85,12 @@
         android:layout_height="200dp"
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
+        android:contentDescription="@string/daily_snap_image"
         android:maxHeight="250dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/snapText"
-        app:srcCompat="@drawable/exercisedino"
-        android:contentDescription="@string/daily_snap_image" />
+        app:srcCompat="@drawable/exercisedino" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -101,15 +101,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/workoutText" />
 
-    <ScrollView
+    <HorizontalScrollView
         android:id="@+id/stickerScroll"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="100dp"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/stickerForward"
+        app:layout_constraintStart_toEndOf="@+id/stickerBack"
         app:layout_constraintTop_toBottomOf="@+id/moodText">
 
         <LinearLayout
@@ -172,8 +172,35 @@
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
                 app:srcCompat="@drawable/sleepdino2" />
+
         </LinearLayout>
-    </ScrollView>
+    </HorizontalScrollView>
+
+    <ImageButton
+        android:id="@+id/stickerBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="8dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/stickerScroll"
+        app:layout_constraintEnd_toStartOf="@+id/stickerScroll"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/stickerScroll"
+        app:srcCompat="@drawable/arrowback" />
+
+    <ImageButton
+        android:id="@+id/stickerForward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="32dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/stickerScroll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/stickerScroll"
+        app:layout_constraintTop_toTopOf="@+id/stickerScroll"
+        app:srcCompat="@drawable/arrowforward" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
