@@ -128,8 +128,8 @@
         android:label="fragment_gallery"
         tools:layout="@layout/fragment_gallery" >
         <action
-            android:id="@+id/action_galleryFragment_to_editFragment2"
-            app:destination="@id/editFragment" />
+            android:id="@+id/action_galleryFragment_to_selectorFragment"
+            app:destination="@id/selectorFragment" />
     </fragment>
     <activity
         android:id="@+id/signInActivity"

@@ -10,13 +10,12 @@
         android:id="@+id/send_image_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
         android:text="@string/done"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gallery"
-        app:layout_constraintVertical_bias="0.309" />
+        app:layout_constraintTop_toBottomOf="@+id/gallery" />
 
     <TextView
         android:id="@+id/textView8"
@@ -52,5 +51,42 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <ImageView
+        android:id="@+id/camera_picture"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:layout_constraintVertical_bias="0.0"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="Camera Preview"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.207"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/send_image_btn" />
+
+    <ImageButton
+        android:id="@+id/back_btn_edit"
+        android:layout_width="44dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/calendar"
+        android:minHeight="48dp"
+        android:src="@drawable/ic_back_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

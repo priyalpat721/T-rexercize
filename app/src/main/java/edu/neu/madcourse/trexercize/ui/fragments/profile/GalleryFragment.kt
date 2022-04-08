@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
@@ -54,7 +55,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
         }
         cancelButton.setOnClickListener {
             val action: NavDirections =
-                GalleryFragmentDirections.actionGalleryFragmentToEditFragment2()
+                GalleryFragmentDirections.actionGalleryFragmentToSelectorFragment()
             view.findNavController().navigate(action)
         }
 
@@ -67,6 +68,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
                 storageRef.child("images").child(userId).child(fileName).putFile(path)
             }
 
+            Log.i("Gallery", "images/${userId}/${fileName}")
             storageRef.child("images/${userId}/${fileName}").downloadUrl.addOnSuccessListener { picture ->
                 userProfileUri = picture.toString()
                 Log.i("SUCCESS", userProfileUri)
@@ -74,13 +76,14 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
                     db.child("users").child(it1).child("profilePicture").setValue(userProfileUri)
                 }
             }.addOnFailureListener {
+                Toast.makeText(this.context, "Sorry, the picture could not be uploaded", Toast.LENGTH_LONG).show()
                 userProfileUri =
                     "https://firebasestorage.googleapis.com/v0/b/t-rexercize.appspot.com/o/frustratedino.png?alt=media&token=59cbbe30-0715-46e8-910c-9958b14c2a30"
             }
 
 
             val action: NavDirections =
-                GalleryFragmentDirections.actionGalleryFragmentToEditFragment2()
+                GalleryFragmentDirections.actionGalleryFragmentToSelectorFragment()
             view.findNavController().navigate(action)
         }
     }

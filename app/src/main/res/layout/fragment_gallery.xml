@@ -6,35 +6,46 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.profile.GalleryFragment">
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/preview"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/gallery_picture"
         android:layout_width="350dp"
         android:layout_height="250dp"
-        android:layout_marginTop="11dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/preview"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/gallery_picture"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/select_pic_btn" />
 
     <Button
         android:id="@+id/select_pic_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="60dp"
         android:text="@string/select_picture"
         app:layout_constraintEnd_toStartOf="@+id/close_gallery_btn"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/send_image"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/done"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gallery_picture" />
 
@@ -47,18 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/select_pic_btn"
-        app:layout_constraintTop_toTopOf="@+id/select_pic_btn" />
-
-    <Button
-        android:id="@+id/send_image"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/done"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.536"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/select_pic_btn"
-        app:layout_constraintVertical_bias="0.309" />
+        app:layout_constraintTop_toTopOf="@+id/select_pic_btn"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

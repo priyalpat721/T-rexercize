@@ -83,7 +83,7 @@ class SignInActivity : AppCompatActivity() {
                             startActivity(intent)
                         }
                     }
-                        .addOnFailureListener { e ->
+                        .addOnFailureListener {
                         }
                 } else {
                     Thread.sleep(1000)
