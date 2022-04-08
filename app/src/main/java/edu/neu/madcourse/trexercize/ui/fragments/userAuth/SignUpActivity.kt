@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import com.google.firebase.Timestamp
@@ -74,8 +75,18 @@ class SignUpActivity : AppCompatActivity() {
 
         auth.createUserWithEmailAndPassword(emailAddress, "password")
             .addOnCompleteListener(this@SignUpActivity) { task ->
-                val time = Timestamp.now()
+                val calendar = arrayListOf(
+                    ""
+                )
+                progressBar.visibility = View.VISIBLE
+
                 if (task.isSuccessful) {
+                    val calendarDoc = db.child("calendars").push().key.toString()
+                    db.child("calendars").child(calendarDoc).setValue(calendar)
+                    Log.i("Calendar", calendarDoc)
+                    val time = Timestamp.now()
+
+
                     val newUser = hashMapOf(
                         "name" to nameText,
                         "password" to "password",
@@ -93,15 +104,13 @@ class SignUpActivity : AppCompatActivity() {
                         "weight" to 0,
                         "equipment" to arrayListOf(
                             ""
-                        )
+                        ),
+                        "calendar" to calendarDoc.toString()
                     )
-
-
-                    progressBar.visibility = View.VISIBLE
-
-                    Firebase.auth.currentUser?.let {
-                        db.child("users").child(it.uid).setValue(newUser)
+                    Firebase.auth.currentUser?.uid?.let {
+                        db.child("users").child(it).setValue(newUser)
                     }
+
 
                     // Sign in success, update UI with the signed-in user's information
                     Toast.makeText(
@@ -113,16 +122,6 @@ class SignUpActivity : AppCompatActivity() {
                     progressBar.visibility = View.GONE
                     startActivity(intent)
 
-
-                } else {
-                    Thread.sleep(1000)
-                    progressBar.visibility = View.GONE
-
-                    // If sign in fails, display a message to the user.
-                    Toast.makeText(
-                        baseContext, "Could not create an account. Please try again",
-                        Toast.LENGTH_SHORT
-                    ).show()
                 }
             }
     }
