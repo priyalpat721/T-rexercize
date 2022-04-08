@@ -66,6 +66,9 @@
             app:exitAnim="@android:anim/slide_in_left"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_exerciseFragment_to_individualExerciseFragment"
+            app:destination="@id/individualExerciseFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
@@ -141,4 +144,8 @@
             android:id="@+id/action_editFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/individualExerciseFragment"
+        android:name="edu.neu.madcourse.trexercize.ui.fragments.exercise.eachCategory.IndividualExerciseFragment"
+        android:label="IndividualExerciseFragment" />
 </navigation>
