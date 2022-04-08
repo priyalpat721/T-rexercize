@@ -58,4 +58,7 @@
     <string name="feet">feet</string>
     <string name="inches">inches</string>
     <string name="choose_image">Choose Image</string>
+    <string name="preview">Preview</string>
+    <string name="select_picture">Select Picture</string>
+    <string name="cancel">Cancel</string>
 </resources>
