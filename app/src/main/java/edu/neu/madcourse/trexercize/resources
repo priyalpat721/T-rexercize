@@ -56,3 +56,6 @@ https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/random.html#random
 
 Activity Result Contracts for Gallery and Camera:
 https://developer.android.com/reference/androidx/activity/result/contract/ActivityResultContracts
+
+Task Snapshots:
+https://firebase.google.com/docs/reference/android/com/google/firebase/storage/UploadTask.TaskSnapshot
