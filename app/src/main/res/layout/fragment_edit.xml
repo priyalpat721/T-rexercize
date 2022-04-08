@@ -100,7 +100,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/goals2"
-            app:layout_constraintVertical_bias="0.239" />
+            app:layout_constraintVertical_bias="0.375" />
 
         <EditText
             android:id="@+id/target_areas"
@@ -225,7 +225,6 @@
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_marginStart="16dp"
-        android:src="@drawable/boba"
         app:civ_border_color="#FF000000"
         app:civ_border_width="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -253,20 +252,32 @@
         app:layout_constraintVertical_bias="0.55"
         tools:ignore="RtlSymmetry">
 
-        <EditText
-            android:id="@+id/name"
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gym"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/gym_name"
+            app:layout_constraintStart_toStartOf="@+id/textView5"
+            app:layout_constraintTop_toTopOf="@+id/gym_name"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView5"
             style="@style/txtRobotoregular14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/name"
-            android:inputType="text"
-            android:minHeight="48dp"
-            android:textColorHint="#006064"
-            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:text="@string/name"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.191"
+            app:layout_constraintHorizontal_bias="0.176"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.641" />
 
         <EditText
             android:id="@+id/gym_name"
@@ -285,7 +296,36 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/name"
             app:layout_constraintTop_toBottomOf="@+id/name"
-            app:layout_constraintVertical_bias="0.714" />
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/name"
+            style="@style/txtRobotoregular14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:hint="@string/name"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:textColorHint="#006064"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.619"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/change_profile_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="@string/choose_image"
+        android:textColor="@color/navy"
+        app:layout_constraintBottom_toTopOf="@+id/constraintGroup7"
+        app:layout_constraintEnd_toEndOf="@+id/profile_image"
+        app:layout_constraintStart_toStartOf="@+id/profile_image"
+        app:layout_constraintTop_toBottomOf="@+id/profile_image"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
