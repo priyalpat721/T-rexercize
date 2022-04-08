@@ -10,12 +10,13 @@
         android:id="@+id/send_image_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
         android:text="@string/done"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gallery" />
+        app:layout_constraintTop_toBottomOf="@+id/camera_picture"
+        app:layout_constraintVertical_bias="0.46" />
 
     <TextView
         android:id="@+id/textView8"
@@ -54,28 +55,27 @@
 
     <ImageView
         android:id="@+id/camera_picture"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="400dp"
+        android:layout_height="250dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.127"
         tools:src="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="60dp"
         android:text="Camera Preview"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.207"
+        app:layout_constraintHorizontal_bias="0.237"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/send_image_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/gallery" />
 
     <ImageButton
         android:id="@+id/back_btn_edit"

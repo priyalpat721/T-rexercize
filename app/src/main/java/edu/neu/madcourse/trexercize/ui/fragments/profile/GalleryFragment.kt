@@ -83,7 +83,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
 
 
             val action: NavDirections =
-                GalleryFragmentDirections.actionGalleryFragmentToSelectorFragment()
+                GalleryFragmentDirections.actionGalleryFragmentToEditFragment()
             view.findNavController().navigate(action)
         }
     }

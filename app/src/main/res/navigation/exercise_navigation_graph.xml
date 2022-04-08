@@ -130,6 +130,9 @@
         <action
             android:id="@+id/action_galleryFragment_to_selectorFragment"
             app:destination="@id/selectorFragment" />
+        <action
+            android:id="@+id/action_galleryFragment_to_editFragment"
+            app:destination="@id/editFragment" />
     </fragment>
     <activity
         android:id="@+id/signInActivity"
