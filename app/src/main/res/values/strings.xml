@@ -54,4 +54,7 @@
     <string name="bmi">BMI</string>
     <string name="age">Age</string>
     <string name="this_is_a_body_part">This is a body part</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="feet">feet</string>
+    <string name="inches">inches</string>
 </resources>
