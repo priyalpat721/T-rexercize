@@ -6,6 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageButton
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        android:contentDescription="@string/back_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back_arrow" />
+
     <TextView
         android:id="@+id/currentDateText"
         style="@style/txtAcmeregular36"
@@ -24,184 +36,190 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.060000002" />
+        app:layout_constraintVertical_bias="0.029999971" />
 
-    <TextView
-        android:id="@+id/workoutText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/robotoregular400"
-        android:text="@string/today_s_workout"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.234"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/snapImage" />
-
-    <TextView
-        android:id="@+id/snapText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/robotoregular400"
-        android:text="@string/today_s_snap"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.23"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentDateText" />
-
-    <TextView
-        android:id="@+id/moodText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/robotoregular400"
-        android:text="@string/how_did_you_feel"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.231"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
-
-    <ImageButton
-        android:id="@+id/back_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/white"
-        android:contentDescription="@string/back_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_back_arrow" />
-
-    <ImageView
-        android:id="@+id/snapImage"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:layout_marginTop="8dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/daily_snap_image"
-        android:maxHeight="250dp"
-        app:circularflow_defaultRadius="@dimen/_100sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/snapText"
-        app:srcCompat="@drawable/gympic" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workoutText" />
-
-    <HorizontalScrollView
-        android:id="@+id/stickerScroll"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/stickerForward"
-        app:layout_constraintStart_toEndOf="@+id/stickerBack"
-        app:layout_constraintTop_toBottomOf="@+id/moodText">
+        app:layout_constraintTop_toBottomOf="@+id/currentDateText">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/snapText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/robotoregular400"
+                android:text="@string/today_s_snap"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.23"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/workoutText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/robotoregular400"
+                android:text="@string/today_s_workout"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.234"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/snapImage" />
+
+            <TextView
+                android:id="@+id/moodText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/robotoregular400"
+                android:text="@string/how_did_you_feel"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.231"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
             <ImageView
-                android:id="@+id/sticker1"
+                android:id="@+id/snapImage"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_marginTop="8dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/daily_snap_image"
+                android:maxHeight="250dp"
+                app:circularflow_defaultRadius="@dimen/_100sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/snapText"
+                app:srcCompat="@drawable/gympic" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/workoutText" />
+
+            <HorizontalScrollView
+                android:id="@+id/stickerScroll"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                app:srcCompat="@drawable/motivatedino" />
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="stickers scroll bar"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/stickerForward"
+                app:layout_constraintStart_toEndOf="@+id/stickerBack"
+                app:layout_constraintTop_toBottomOf="@+id/moodText">
 
-            <ImageView
-                android:id="@+id/sticker2"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                app:srcCompat="@drawable/bubbledino" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/sticker3"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                app:srcCompat="@drawable/happydino" />
+                    <ImageView
+                        android:id="@+id/sticker1"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@drawable/motivatedino" />
 
-            <ImageView
-                android:id="@+id/sticker4"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                app:srcCompat="@drawable/frustratedino" />
+                    <ImageView
+                        android:id="@+id/sticker2"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@drawable/bubbledino" />
 
-            <ImageView
-                android:id="@+id/sticker5"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                app:srcCompat="@drawable/exercisedino" />
+                    <ImageView
+                        android:id="@+id/sticker3"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@drawable/happydino" />
 
-            <ImageView
-                android:id="@+id/sticker6"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                app:srcCompat="@drawable/saddino" />
+                    <ImageView
+                        android:id="@+id/sticker4"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@drawable/frustratedino" />
 
-            <ImageView
-                android:id="@+id/sticker7"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                app:srcCompat="@drawable/sleepdino2" />
+                    <ImageView
+                        android:id="@+id/sticker5"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@drawable/exercisedino" />
 
-        </LinearLayout>
-    </HorizontalScrollView>
+                    <ImageView
+                        android:id="@+id/sticker6"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@drawable/saddino" />
 
-    <ImageButton
-        android:id="@+id/stickerBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="8dp"
-        android:background="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/stickerScroll"
-        app:layout_constraintEnd_toStartOf="@+id/stickerScroll"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/stickerScroll"
-        app:srcCompat="@drawable/arrowback" />
+                    <ImageView
+                        android:id="@+id/sticker7"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@drawable/sleepdino2" />
 
-    <ImageButton
-        android:id="@+id/stickerForward"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="32dp"
-        android:background="#00FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/stickerScroll"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/stickerScroll"
-        app:layout_constraintTop_toTopOf="@+id/stickerScroll"
-        app:srcCompat="@drawable/arrowforward" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <ImageButton
+                android:id="@+id/stickerBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="8dp"
+                android:background="#00FFFFFF"
+                android:contentDescription="left stickers"
+                app:layout_constraintBottom_toBottomOf="@+id/stickerScroll"
+                app:layout_constraintEnd_toStartOf="@+id/stickerScroll"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/stickerScroll"
+                app:srcCompat="@drawable/arrowback" />
+
+            <ImageButton
+                android:id="@+id/stickerForward"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="32dp"
+                android:background="#00FFFFFF"
+                android:contentDescription="right stickers"
+                app:layout_constraintBottom_toBottomOf="@+id/stickerScroll"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/stickerScroll"
+                app:layout_constraintTop_toTopOf="@+id/stickerScroll"
+                app:srcCompat="@drawable/arrowforward" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
