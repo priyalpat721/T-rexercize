@@ -5,7 +5,6 @@
     android:id="@+id/exercise_navigation_graph"
     app:startDestination="@id/homeScreenFragment">
 
-
     <fragment
         android:id="@+id/homeScreenFragment"
         android:name="edu.neu.madcourse.trexercize.ui.fragments.HomeScreenFragment"
@@ -27,13 +26,6 @@
         <action
             android:id="@+id/action_homeScreenFragment_to_calendarFragment"
             app:destination="@id/calendarFragment"
-            app:enterAnim="@android:anim/slide_out_right"
-            app:exitAnim="@android:anim/slide_in_left"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right"/>
-        <action
-            android:id="@+id/action_homeScreenFragment_to_favoritesFragment"
-            app:destination="@id/favoritesFragment"
             app:enterAnim="@android:anim/slide_out_right"
             app:exitAnim="@android:anim/slide_in_left"
             app:popEnterAnim="@android:anim/slide_in_left"
@@ -62,18 +54,6 @@
         <action
             android:id="@+id/action_exerciseFragment_to_calendarFragment"
             app:destination="@id/calendarFragment"
-            app:enterAnim="@android:anim/slide_out_right"
-            app:exitAnim="@android:anim/slide_in_left"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right"/>
-    </fragment>
-    <fragment
-        android:id="@+id/favoritesFragment"
-        android:name="edu.neu.madcourse.trexercize.ui.fragments.FavoritesFragment"
-        android:label="FavoritesFragment" >
-        <action
-            android:id="@+id/action_favoritesFragment_to_exerciseFragment"
-            app:destination="@id/exerciseFragment"
             app:enterAnim="@android:anim/slide_out_right"
             app:exitAnim="@android:anim/slide_in_left"
             app:popEnterAnim="@android:anim/slide_in_left"
