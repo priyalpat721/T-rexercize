@@ -4,23 +4,19 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
-import com.google.firebase.Timestamp
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import edu.neu.madcourse.trexercize.R
-import java.util.*
+import edu.neu.madcourse.trexercize.ui.helper.ImageUploaderFunctions
 
 class GalleryFragment : Fragment(R.layout.fragment_gallery) {
     private lateinit var path: Uri
@@ -30,7 +26,6 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
     private lateinit var cancelButton: Button
     private lateinit var preview: ImageView
     private lateinit var done: Button
-    private lateinit var userProfileUri: String
     private var db = Firebase.database.reference
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,28 +55,8 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
         }
 
         done.setOnClickListener {
-
-            val fileName = "${path.lastPathSegment}.png"
-            val userId = Firebase.auth.currentUser?.uid
-
-            if (userId != null) {
-                storageRef.child("images").child(userId).child(fileName).putFile(path)
-            }
-
-            Log.i("Gallery", "images/${userId}/${fileName}")
-            storageRef.child("images/${userId}/${fileName}").downloadUrl.addOnSuccessListener { picture ->
-                userProfileUri = picture.toString()
-                Log.i("SUCCESS", userProfileUri)
-                Firebase.auth.currentUser?.uid?.let { it1 ->
-                    db.child("users").child(it1).child("profilePicture").setValue(userProfileUri)
-                }
-            }.addOnFailureListener {
-                Toast.makeText(this.context, "Sorry, the picture could not be uploaded", Toast.LENGTH_LONG).show()
-                userProfileUri =
-                    "https://firebasestorage.googleapis.com/v0/b/t-rexercize.appspot.com/o/frustratedino.png?alt=media&token=59cbbe30-0715-46e8-910c-9958b14c2a30"
-            }
-
-
+            val imageUploader = ImageUploaderFunctions()
+            imageUploader.upLoadImageFromGalleryToDb(path, storageRef, db, this.context)
             val action: NavDirections =
                 GalleryFragmentDirections.actionGalleryFragmentToEditFragment()
             view.findNavController().navigate(action)
@@ -92,7 +67,6 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
                 val uri = it.data?.data
-                Log.i("URI", uri.toString())
                 preview.setImageURI(uri)
                 if (uri != null) {
                     path = uri
