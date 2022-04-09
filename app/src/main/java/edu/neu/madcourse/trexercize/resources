@@ -59,3 +59,20 @@ https://developer.android.com/reference/androidx/activity/result/contract/Activi
 
 Task Snapshots:
 https://firebase.google.com/docs/reference/android/com/google/firebase/storage/UploadTask.TaskSnapshot
+
+Carousel documentation:
+https://developer.android.com/reference/kotlin/androidx/viewpager2/widget/CompositePageTransformer
+https://developer.android.com/reference/androidx/viewpager2/widget/ViewPager2.PageTransformer
+https://developer.android.com/reference/androidx/viewpager2/widget/MarginPageTransformer
+https://developer.android.com/training/animation/screen-slide-2
+https://developer.android.com/reference/kotlin/androidx/viewpager2/widget/ViewPager2
+https://developer.android.com/jetpack/androidx/releases/viewpager2#kts
+https://developer.android.com/reference/androidx/viewpager2/widget/ViewPager2#ViewPager2(android.content.Context)
+https://code.luasoftware.com/tutorials/android/android-viewpager2-multiple-transform/
+https://developer.android.com/reference/kotlin/androidx/viewpager2/widget/ViewPager2.OnPageChangeCallback#OnPageChangeCallback()
+
+Needed help to figure out how to scroll infinitely:
+https://medium.com/swlh/android-infinite-auto-image-slider-using-view-pager-2-android-studio-java-a0e450dec071
+
+Information on Handler:
+https://stackoverflow.com/questions/61023968/what-do-i-use-now-that-handler-is-deprecated
