@@ -68,7 +68,10 @@
             app:popExitAnim="@android:anim/slide_out_right"/>
         <action
             android:id="@+id/action_exerciseFragment_to_individualExerciseFragment"
-            app:destination="@id/individualExerciseFragment" />
+            app:destination="@id/individualExerciseFragment"
+            app:popUpTo="@id/individualExerciseFragment">
+
+        </action>
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
@@ -147,5 +150,13 @@
     <fragment
         android:id="@+id/individualExerciseFragment"
         android:name="edu.neu.madcourse.trexercize.ui.fragments.exercise.eachCategory.IndividualExerciseFragment"
-        android:label="IndividualExerciseFragment" />
+        android:label="IndividualExerciseFragment" >
+        <action
+            android:id="@+id/action_individualExerciseFragment_to_exerciseFragment"
+            app:destination="@id/exerciseFragment" />
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue="no title" />
+    </fragment>
 </navigation>

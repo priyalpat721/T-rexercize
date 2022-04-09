@@ -81,7 +81,12 @@ class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
                 val action: NavDirections
                 action = ExerciseFragmentDirections.actionExerciseFragmentToIndividualExerciseFragment()
 
-                //title.also { action.title = it }
+                title.also {
+                    if (it != null) {
+                        action.title = it
+                    }
+                }
+
                 view?.findNavController()?.navigate(action)
 
 //                val bundle =  Bundle()
