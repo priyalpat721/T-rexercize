@@ -63,11 +63,13 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
     @SuppressLint("NotifyDataSetChanged")
     private fun setUpData(){
 
-        exerciseList.add(IndividualExerciseCard("Name: Dummy Exercise Name"))
-        exerciseList.add(IndividualExerciseCard("Name: Dummy Exercise Name"))
-        exerciseList.add(IndividualExerciseCard("Name: Dummy Exercise Name"))
-        exerciseList.add(IndividualExerciseCard("Name: Dummy Exercise Name"))
-        exerciseList.add(IndividualExerciseCard("Name: Dummy Exercise Name"))
+
+        exerciseList.clear()
+        exerciseList.add(IndividualExerciseCard("Dummy Exercise Name"))
+        exerciseList.add(IndividualExerciseCard("Dummy Exercise Name"))
+        exerciseList.add(IndividualExerciseCard("Dummy Exercise Name"))
+        exerciseList.add(IndividualExerciseCard("Dummy Exercise Name"))
+        exerciseList.add(IndividualExerciseCard("Dummy Exercise Name"))
         exerciseAdapter?.notifyDataSetChanged()
 
     }

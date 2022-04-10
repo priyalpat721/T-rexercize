@@ -67,13 +67,13 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
         exerciseTitle.text = args.exerciseName
         exerciseMuscleGroup.text = "Muscle Group: Sample muscle group"
 
-        exerciseVideo.setVideoURI(Uri.parse("https://vimeo.com/123135208"))
+//        exerciseVideo.setVideoURI(Uri.parse("https://vimeo.com/123135208"))
 //        exerciseVideo.requestFocus()
 //        exerciseVideo.start()
 
-        val mediaController: MediaController = MediaController(context)
-        exerciseVideo.setMediaController(mediaController)
-        mediaController.setAnchorView(exerciseVideo)
+//        val mediaController: MediaController = MediaController(context)
+//        exerciseVideo.setMediaController(mediaController)
+//        mediaController.setAnchorView(exerciseVideo)
 
 
 
