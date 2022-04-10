@@ -1,29 +1,26 @@
 package edu.neu.madcourse.trexercize.ui.fragments.userAuth
 
+import androidx.fragment.app.Fragment
 import android.annotation.SuppressLint
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.*
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.CompositePageTransformer
-import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import edu.neu.madcourse.trexercize.R
-import edu.neu.madcourse.trexercize.ui.HomeActivity
 import edu.neu.madcourse.trexercize.ui.helper.CarouselData
 
-class SignUpActivity : AppCompatActivity() {
+class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private lateinit var name: EditText
     private lateinit var email: EditText
     private lateinit var signUp: Button
@@ -37,36 +34,44 @@ class SignUpActivity : AppCompatActivity() {
     var carouselHandler : Handler = Handler(Looper.getMainLooper())
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
-        val title = findViewById<TextView>(R.id.welcome)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // makes the nav bar disappear
+        val navBar : BottomNavigationView? = activity?.findViewById(R.id.bottom_navigation_bar)
+        navBar?.visibility = View.INVISIBLE
+
+        val title = view.findViewById<TextView>(R.id.welcome)
         title.visibility = View.VISIBLE
-        warningSignUp = findViewById(R.id.warning_sign_up)
+        warningSignUp = view.findViewById(R.id.warning_sign_up)
         warningSignUp.text = ""
-        warningSignUp = findViewById(R.id.warning_sign_up)
+        warningSignUp = view.findViewById(R.id.warning_sign_up)
         warningSignUp.text = ""
-        name = findViewById(R.id.name)
+        name = view.findViewById(R.id.name)
         name.visibility = View.VISIBLE
-        email = findViewById(R.id.email)
+        email = view.findViewById(R.id.email)
         email.visibility = View.VISIBLE
-        signUp = findViewById(R.id.sign_up)
+        signUp = view.findViewById(R.id.sign_up)
         signUp.visibility = View.VISIBLE
-        switchToLogIn = findViewById(R.id.to_login_page)
+        switchToLogIn = view.findViewById(R.id.to_login_page)
         switchToLogIn.visibility = View.VISIBLE
-        progressBar = findViewById(R.id.progress_bar)
-        viewPager = findViewById(R.id.carousel_up)
+        progressBar = view.findViewById(R.id.progress_bar)
+        viewPager = view.findViewById(R.id.carousel_up)
 
         populateList()
         val carouselData = CarouselData()
-        carouselData.getCarouselData(carouselList, viewPager, run, carouselHandler, this)
+        this.context?.let {
+            carouselData.getCarouselData(carouselList, viewPager, run, carouselHandler,
+                it
+            )
+        }
 
         switchToLogIn.setOnClickListener {
             carouselList.clear()
             viewPager.adapter?.notifyDataSetChanged()
-            val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
-            finish()
-            startActivity(intent)
+            val action : NavDirections =
+                SignUpFragmentDirections.actionSignUpFragmentToSignInFragment()
+            view.findNavController().navigate(action)
         }
 
         signUp.setOnClickListener {
@@ -121,7 +126,7 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         auth.createUserWithEmailAndPassword(emailAddress, "password")
-            .addOnCompleteListener(this@SignUpActivity) { task ->
+            .addOnCompleteListener{ task ->
                 val calendar = arrayListOf(
                     ""
                 )
@@ -164,14 +169,13 @@ class SignUpActivity : AppCompatActivity() {
 
                     // Sign in success, update UI with the signed-in user's information
                     Toast.makeText(
-                        baseContext, "Account successfully made.",
+                        this.context, "Account successfully made.",
                         Toast.LENGTH_SHORT
                     ).show()
-                    val intent = Intent(this@SignUpActivity, HomeActivity::class.java)
-                    finish()
+                    val action: NavDirections =
+                        SignUpFragmentDirections.actionSignUpFragmentToHomeScreenFragment()
                     progressBar.visibility = View.INVISIBLE
-                    startActivity(intent)
-
+                    view?.findNavController()?.navigate(action)
                 }
             }
     }

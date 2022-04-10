@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 
 class CarouselAdapter(
     private var carouselList: ArrayList<CarouselItem>,
-    private var viewPager: ViewPager2,
+    private var viewPager: ViewPager2?,
     private var context: Context,
     private var layout: Int
 ) : RecyclerView.Adapter<CarouselViewHolder>() {
@@ -29,7 +29,7 @@ class CarouselAdapter(
     override fun onBindViewHolder(holder: CarouselViewHolder, position: Int) {
         Glide.with(context).load(carouselList[position].imageUrl).into(holder.image)
         if (position == carouselList.size - 1) {
-            viewPager.post(run)
+            viewPager?.post(run)
         }
     }
 

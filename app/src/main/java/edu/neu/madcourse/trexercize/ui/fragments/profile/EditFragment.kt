@@ -33,6 +33,7 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
     private var db = Firebase.database.reference
     private lateinit var profile : ImageView
     private lateinit var changePicture : Button
+    private lateinit var  editGoals : Button
 
     /**
      * Gets information from the edit texts and populates the current user's information
@@ -49,11 +50,16 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
         age = view.findViewById(R.id.age)
         feet = view.findViewById(R.id.feet)
         inches = view.findViewById(R.id.inches)
-        goals = view.findViewById(R.id.goals)
         targetAreas = view.findViewById(R.id.target_areas)
         weight = view.findViewById(R.id.weight)
         profile = view.findViewById(R.id.profile_image)
         changePicture = view.findViewById(R.id.change_profile_pic)
+        editGoals = view.findViewById(R.id.edit_goals_btn)
+
+        editGoals.setOnClickListener {
+            val action: NavDirections = EditFragmentDirections.actionEditFragmentToGoalFragment()
+            view.findNavController().navigate(action)
+        }
 
         doneButton.setOnClickListener {
             if (!name.text.isNullOrEmpty()) {
@@ -130,7 +136,6 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
                         feet.setText(ft)
                         age.setText(userInfo["age"])
                         weight.setText(userInfo["weight"])
-                        goals.setText(userInfo["goals"])
                         targetAreas.setText(userInfo["targetAreas"])
                     }
                 }

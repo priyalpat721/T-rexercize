@@ -1,30 +1,28 @@
 package edu.neu.madcourse.trexercize.ui.fragments.userAuth
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.CompositePageTransformer
-import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import edu.neu.madcourse.trexercize.R
-import edu.neu.madcourse.trexercize.ui.HomeActivity
 import edu.neu.madcourse.trexercize.ui.helper.CarouselData
 
-class SignInActivity : AppCompatActivity() {
+
+class SignInFragment : Fragment(R.layout.fragment_sign_in) {
     private lateinit var auth: FirebaseAuth
     private lateinit var warning: TextView
     private lateinit var usernameOrEmail: EditText
@@ -32,26 +30,27 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
     private var db = Firebase.database.reference
     private lateinit var signUp: Button
-    private lateinit var viewPager: ViewPager2
+    private var viewPager: ViewPager2? = null
     private var carouselList = ArrayList<CarouselItem>()
     var carouselHandler : Handler = Handler(Looper.getMainLooper())
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_in)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         populateList()
 
-        val title = findViewById<TextView>(R.id.sign_in_sign)
+        // makes the nav bar disappear
+        val navBar : BottomNavigationView? = activity?.findViewById(R.id.bottom_navigation_bar)
+        navBar?.visibility = View.INVISIBLE
+        val title = view.findViewById<TextView>(R.id.sign_in_sign)
         title.visibility = View.VISIBLE
-        signUp = findViewById(R.id.to_sign_up_page)
+        signUp = view.findViewById(R.id.to_sign_up_page)
         auth = Firebase.auth
-        warning = findViewById(R.id.warning_sign)
-        usernameOrEmail = findViewById(R.id.sign_in_email)
-        signInButton = findViewById(R.id.sign_in_button)
+        warning = view.findViewById(R.id.warning_sign)
+        usernameOrEmail = view.findViewById(R.id.sign_in_email)
+        signInButton = view.findViewById(R.id.sign_in_button)
         signInButton.visibility = View.VISIBLE
-        progressBar = findViewById(R.id.progress_bar_sign_in)
-        viewPager = findViewById(R.id.carousel)
+        progressBar = view.findViewById(R.id.progress_bar_sign_in)
+        viewPager = view.findViewById(R.id.carousel)
         signUp.visibility = View.VISIBLE
         usernameOrEmail.visibility = View.VISIBLE
 
@@ -64,17 +63,20 @@ class SignInActivity : AppCompatActivity() {
         }
 
         signUp.setOnClickListener {
-            val intent = Intent(this@SignInActivity, SignUpActivity::class.java)
-            finish()
-            startActivity(intent)
-
+            val action : NavDirections =
+                SignInFragmentDirections.actionSignInFragmentToSignUpFragment()
+            view.findNavController().navigate(action)
         }
         val carouselData = CarouselData()
-        carouselData.getCarouselData(carouselList, viewPager, run, carouselHandler, this)
+        this.context?.let {
+            carouselData.getCarouselData(carouselList, viewPager, run, carouselHandler,
+                it
+            )
+        }
 
     }
     private val run = Runnable {
-        viewPager.currentItem = viewPager.currentItem + 1
+        viewPager?.currentItem = (viewPager?.currentItem?.plus(1) ?: viewPager?.currentItem) as Int
     }
 
     override fun onResume() {
@@ -89,7 +91,7 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        viewPager.unregisterOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+        viewPager?.unregisterOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
 
         })
     }
@@ -109,15 +111,15 @@ class SignInActivity : AppCompatActivity() {
         }
 
         auth.signInWithEmailAndPassword(userNameOrEmail, "password")
-            .addOnCompleteListener(this@SignInActivity) { task ->
+            .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val userRef = db.child("users")
                     userRef.get().addOnSuccessListener { document ->
                         if (document != null) {
-                            val intent = Intent(this@SignInActivity, HomeActivity::class.java)
-                            finish()
+                            val action : NavDirections =
+                                SignInFragmentDirections.actionSignInFragmentToHomeScreenFragment()
                             progressBar.visibility = View.GONE
-                            startActivity(intent)
+                            view?.findNavController()?.navigate(action)
                         }
                     }
                         .addOnFailureListener {
@@ -128,11 +130,10 @@ class SignInActivity : AppCompatActivity() {
                     progressBar.visibility = View.INVISIBLE
                     warning.text = "Email is invalid! Check email or sign up by clicking here."
                     warning.setOnClickListener {
-                        val intent = Intent(this@SignInActivity, SignUpActivity::class.java)
-                        finish()
+                        val action : NavDirections =
+                            SignInFragmentDirections.actionSignInFragmentToSignUpFragment()
                         progressBar.visibility = View.INVISIBLE
-                        startActivity(intent)
-
+                        view?.findNavController()?.navigate(action)
                     }
 
                 }

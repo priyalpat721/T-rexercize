@@ -22,20 +22,13 @@
                 android:resource="@xml/provider_paths" />
         </provider>
         <activity
-            android:name="edu.neu.madcourse.trexercize.ui.fragments.userAuth.SignInActivity"
-            android:exported="false" />
-        <activity
-            android:name="edu.neu.madcourse.trexercize.ui.fragments.userAuth.SignUpActivity"
+            android:name=".ui.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.HomeActivity"
-            android:exported="false">
         </activity>
     </application>
 

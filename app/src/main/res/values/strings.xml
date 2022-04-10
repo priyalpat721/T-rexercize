@@ -67,4 +67,6 @@
     <string name="how_did_you_feel">How did you feel?</string>
     <string name="date">date</string>
     <string name="daily_snap_image">daily snap image</string>
+    <string name="tasks">Tasks</string>
+    <string name="show_goals">Show Goals</string>
 </resources>
