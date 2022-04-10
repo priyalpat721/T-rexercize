@@ -4,7 +4,10 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,9 +39,18 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
 
         val listener: IndividualExerciseListener = object : IndividualExerciseListener {
             override fun onItemClick(position: Int) {
-//                val exercise: IndividualExerciseCard = exerciseList[position]
-//                val exerciseName = exercise.exerciseName
-//                Toast.makeText(context, "This is the category: $exerciseName", Toast.LENGTH_SHORT).show()
+                val exercise: IndividualExerciseCard = exerciseList[position]
+                val exerciseName = exercise.exerciseName
+                Toast.makeText(context, "This is the exercise name: $exerciseName", Toast.LENGTH_SHORT).show()
+
+                val action: NavDirections
+                action = IndividualExerciseFragmentDirections.actionIndividualExerciseFragmentToEachExerciseFragment()
+                exerciseName.also {
+                    if (it != null) {
+                        action.exerciseName = it
+                    }
+                }
+                view?.findNavController()?.navigate(action)
             }
         }
         exerciseAdapter = this.context?.let { IndividualExerciseAdapter(exerciseList, it, listener) }

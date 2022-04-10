@@ -158,5 +158,17 @@
             android:name="title"
             app:argType="string"
             android:defaultValue="no title" />
+        <action
+            android:id="@+id/action_individualExerciseFragment_to_eachExerciseFragment"
+            app:destination="@id/eachExerciseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eachExerciseFragment"
+        android:name="edu.neu.madcourse.trexercize.ui.fragments.exercise.eachExercise.EachExerciseFragment"
+        android:label="EachExerciseFragment" >
+        <argument
+            android:name="exerciseName"
+            app:argType="string"
+            android:defaultValue="No exercise Name" />
     </fragment>
 </navigation>
