@@ -89,19 +89,6 @@ class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
 
                 view?.findNavController()?.navigate(action)
 
-//                val bundle =  Bundle()
-//                bundle.putString("title", title)
-//                val fragment = IndividualExerciseFragment()
-//                fragment.arguments = bundle
-//                val transaction = activity?.supportFragmentManager?.beginTransaction()
-//                if (transaction != null) {
-//                    transaction.replace(R.id.fragment_exercise, fragment)
-//                    transaction.disallowAddToBackStack()
-//                    transaction.commit()
-//
-//                }
-
-
             }
         }
         exerciseAdapter = this.context?.let { ExerciseAdapter(exerciseList, it, listener) }
@@ -113,14 +100,13 @@ class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setUpData(){
+        exerciseList.clear()
         exerciseList.add(ExerciseCard("Chest", R.drawable.chest))
         exerciseList.add(ExerciseCard("Arms", R.drawable.arms))
         exerciseList.add(ExerciseCard("Back", R.drawable.back))
-        exerciseList.add(ExerciseCard("Abs", R.drawable.abs))
+        exerciseList.add(ExerciseCard("Core", R.drawable.abs))
         exerciseList.add(ExerciseCard("Legs", R.drawable.legs))
         exerciseList.add(ExerciseCard("Full Body", R.drawable.full_body))
-        exerciseList.add(ExerciseCard("HIIT", R.drawable.dumbell))
-        exerciseList.add(ExerciseCard("Cardio", R.drawable.dumbell))
         exerciseAdapter?.notifyDataSetChanged()
 
     }

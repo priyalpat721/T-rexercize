@@ -18,6 +18,7 @@
             android:id="@+id/exercise_name"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_50pxh"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="Name: " />
