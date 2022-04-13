@@ -34,7 +34,7 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
 
     private fun setUpResources() {
         homeScreenAdapter = this.context?.let { HomeScreenAdapter(favoritesList, it) }
-        recyclerView!!.adapter = homeScreenAdapter
-        recyclerView!!.layoutManager = LinearLayoutManager(context)
+        recyclerView?.adapter = homeScreenAdapter
+        recyclerView?.layoutManager = LinearLayoutManager(context)
     }
 }

@@ -15,7 +15,7 @@
         android:layout_marginBottom="24dp"
         android:text="@string/hello_from_calendar"
         android:textAlignment="center"
-        android:textSize="34sp"
+        android:textSize="48sp"
         app:layout_constraintBottom_toTopOf="@+id/scrollable_calendar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
