@@ -34,7 +34,6 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
         title.text = args.title
 
         setUpResources()
-        //setUpData()
         listenForChanges()
     }
 
@@ -48,11 +47,19 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
 
                 val action: NavDirections
                 action = IndividualExerciseFragmentDirections.actionIndividualExerciseFragmentToEachExerciseFragment()
-                exerciseName.also {
-                    if (it != null) {
-                        action.exerciseName = it
+
+                action.also {
+                    if (exerciseName != null) {
+                        action.exerciseName = exerciseName
+                        action.exerciseCategory = title.text.toString()
                     }
                 }
+//                exerciseName.also {
+//                    if (it != null) {
+//                        action.exerciseName = it
+//                    }
+//                }
+                val exerciseCategory = title.text.toString()
                 view?.findNavController()?.navigate(action)
             }
         }
@@ -62,20 +69,6 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
         recyclerView!!.layoutManager = LinearLayoutManager(context)
 
     }
-
-//    @SuppressLint("NotifyDataSetChanged")
-//    private fun setUpData(){
-//
-//
-//        exerciseList.clear()
-//        exerciseList.add(IndividualExerciseCard("Dummy Exercise Name"))
-//        exerciseList.add(IndividualExerciseCard("Dummy Exercise Name"))
-//        exerciseList.add(IndividualExerciseCard("Dummy Exercise Name"))
-//        exerciseList.add(IndividualExerciseCard("Dummy Exercise Name"))
-//        exerciseList.add(IndividualExerciseCard("Dummy Exercise Name"))
-//        exerciseAdapter?.notifyDataSetChanged()
-//
-//    }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun listenForChanges() {
@@ -91,7 +84,6 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
                 }
                 exerciseAdapter?.notifyDataSetChanged()
             }
-
             override fun onCancelled(error: DatabaseError) {
                 // not implemented
             }
