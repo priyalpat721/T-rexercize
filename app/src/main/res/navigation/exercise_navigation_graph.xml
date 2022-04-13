@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/homeScreenFragment"
-        android:name="edu.neu.madcourse.trexercize.ui.fragments.HomeScreenFragment"
+        android:name="edu.neu.madcourse.trexercize.ui.fragments.homescreen.HomeScreenFragment"
         android:label="HomeScreenFragment" >
         <action
             android:id="@+id/action_homeScreenFragment_to_exerciseFragment"
