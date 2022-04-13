@@ -59,3 +59,7 @@ https://developer.android.com/reference/androidx/activity/result/contract/Activi
 
 Task Snapshots:
 https://firebase.google.com/docs/reference/android/com/google/firebase/storage/UploadTask.TaskSnapshot
+
+Sticker smooth scroll
+https://stackoverflow.com/questions/16079486/scrolling-a-horizontalscrollview-by-clicking-buttons-on-its-sides
+

@@ -13,5 +13,11 @@
       </Target>
     </runningDeviceTargetSelectedWithDropDown>
     <timeTargetWasSelectedWithDropDown value="2022-04-08T07:02:40.716817Z" />
+            <value value="$USER_HOME$/.android/avd/Pixel_5_API_30.avd" />
+          </Key>
+        </deviceKey>
+      </Target>
+    </targetSelectedWithDropDown>
+    <timeTargetWasSelectedWithDropDown value="2022-04-08T13:34:23.496453Z" />
   </component>
 </project>
