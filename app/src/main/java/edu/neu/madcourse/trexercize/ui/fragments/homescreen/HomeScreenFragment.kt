@@ -26,6 +26,7 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setUpData() {
+        favoritesList.clear()
         favoritesList.add(FavoriteExerciseCard("Pushup", "Chest", R.drawable.chest))
         favoritesList.add(FavoriteExerciseCard("Pullup", "Back", R.drawable.back))
         favoritesList.add(FavoriteExerciseCard("Crunches", "Abs", R.drawable.abs))

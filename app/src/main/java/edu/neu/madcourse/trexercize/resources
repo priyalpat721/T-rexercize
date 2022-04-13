@@ -75,6 +75,10 @@ https://developer.android.com/reference/androidx/viewpager2/widget/ViewPager2#Vi
 https://code.luasoftware.com/tutorials/android/android-viewpager2-multiple-transform/
 https://developer.android.com/reference/kotlin/androidx/viewpager2/widget/ViewPager2.OnPageChangeCallback#OnPageChangeCallback()
 
+Sticker smooth scroll
+https://stackoverflow.com/questions/16079486/scrolling-a-horizontalscrollview-by-clicking-buttons-on-its-sides
+
+
 Needed help to figure out how to scroll infinitely:
 https://medium.com/swlh/android-infinite-auto-image-slider-using-view-pager-2-android-studio-java-a0e450dec071
 
