@@ -3,23 +3,18 @@ package edu.neu.madcourse.trexercize.ui.fragments.exercise
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import edu.neu.madcourse.trexercize.R
-import edu.neu.madcourse.trexercize.ui.fragments.exercise.eachCategory.IndividualExerciseFragment
 
 class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
-    // TODO: Rename and change types of parameters
     private val exerciseList: MutableList<ExerciseCard> = ArrayList()
     private var recyclerView: RecyclerView? = null
     private var exerciseAdapter: ExerciseAdapter? = null
@@ -58,12 +53,8 @@ class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
                     })
                 .setNegativeButton("Cancel",
                     DialogInterface.OnClickListener { dialog, id ->
-
                     })
-
             builder.create().show()
-
-
         }
 
         setUpResources()
@@ -89,19 +80,6 @@ class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
 
                 view?.findNavController()?.navigate(action)
 
-//                val bundle =  Bundle()
-//                bundle.putString("title", title)
-//                val fragment = IndividualExerciseFragment()
-//                fragment.arguments = bundle
-//                val transaction = activity?.supportFragmentManager?.beginTransaction()
-//                if (transaction != null) {
-//                    transaction.replace(R.id.fragment_exercise, fragment)
-//                    transaction.disallowAddToBackStack()
-//                    transaction.commit()
-//
-//                }
-
-
             }
         }
         exerciseAdapter = this.context?.let { ExerciseAdapter(exerciseList, it, listener) }
@@ -113,39 +91,15 @@ class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setUpData(){
+        exerciseList.clear()
         exerciseList.add(ExerciseCard("Chest", R.drawable.chest))
         exerciseList.add(ExerciseCard("Arms", R.drawable.arms))
         exerciseList.add(ExerciseCard("Back", R.drawable.back))
-        exerciseList.add(ExerciseCard("Abs", R.drawable.abs))
+        exerciseList.add(ExerciseCard("Core", R.drawable.abs))
         exerciseList.add(ExerciseCard("Legs", R.drawable.legs))
         exerciseList.add(ExerciseCard("Full Body", R.drawable.full_body))
-        exerciseList.add(ExerciseCard("HIIT", R.drawable.dumbell))
-        exerciseList.add(ExerciseCard("Cardio", R.drawable.dumbell))
         exerciseAdapter?.notifyDataSetChanged()
 
     }
-
-    // KEEP THIS FOR NOW-- WILL DELETE LATER
-//    equipmentButton?.setOnClickListener{
-//
-//        val builder = AlertDialog.Builder(context)
-//        val equipmentArray = arrayOf("Dumbell", "Barbell", "Yoga Mat", "Ab Roller", "Resistance Bands")
-//        val selectedItems = booleanArrayOf(false, false, false, false, false)
-//        builder.setTitle("Select your equipment")
-//            .setMultiChoiceItems(equipmentArray, selectedItems){
-//                    dialog, which, isChecked ->
-//                selectedItems[which] = isChecked
-//            }
-//        builder.setPositiveButton("Ok"){ dialog, id->
-//
-//
-//        }
-//        builder.setNegativeButton("Cancel"){ dialog, id->
-//
-//
-//        }
-//        builder.create().show()
-//
-//    }
 
 }
