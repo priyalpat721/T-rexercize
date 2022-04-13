@@ -1,23 +1,23 @@
 package edu.neu.madcourse.trexercize.ui.fragments.calendar
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.os.Handler
+import android.os.Looper
+import android.view.MotionEvent
 import android.view.View
-import android.view.View.FOCUS_DOWN
-import android.view.View.FOCUS_UP
+import android.view.View.*
 import android.widget.HorizontalScrollView
 import android.widget.ImageButton
-import edu.neu.madcourse.trexercize.R
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
-import edu.neu.madcourse.trexercize.ui.fragments.profile.ProfileAdapter
-import edu.neu.madcourse.trexercize.ui.fragments.profile.ProfileCard
+import edu.neu.madcourse.trexercize.R
+
 
 class DayFragment : Fragment(R.layout.fragment_day) {
     private val args : DayFragmentArgs by navArgs()
@@ -28,6 +28,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
     private lateinit var stickerForward: ImageButton
     lateinit var adapter: ExerciseTextAdapter
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -55,11 +56,70 @@ class DayFragment : Fragment(R.layout.fragment_day) {
         stickerBack = view.findViewById(R.id.stickerBack)
         stickerForward = view.findViewById(R.id.stickerForward)
 
-        stickerBack.setOnClickListener {
-            stickerScroll.smoothScrollTo(stickerScroll.scrollX - 50, stickerScroll.scrollY)
+        /*stickerBack.setOnClickListener {
+            stickerScroll.smoothScrollTo(stickerScroll.scrollX - 100, stickerScroll.scrollY)
         }
         stickerForward.setOnClickListener {
-            stickerScroll.smoothScrollTo(stickerScroll.scrollX + 50, stickerScroll.scrollY)
-        }
+            stickerScroll.smoothScrollTo(stickerScroll.scrollX + 100, stickerScroll.scrollY)
+        }*/
+
+        // https://stackoverflow.com/questions/16079486/scrolling-a-horizontalscrollview-by-clicking-buttons-on-its-sides
+        stickerBack.setOnTouchListener(object : OnTouchListener {
+            @SuppressLint("ClickableViewAccessibility")
+            private var mHandler: Handler? = null
+            private val mInitialDelay: Long = 300
+            private val mRepeatDelay: Long = 100
+            override fun onTouch(v: View, event: MotionEvent): Boolean {
+                when (event.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        if (mHandler != null) return true
+                        mHandler = Handler(Looper.getMainLooper())
+                        mHandler!!.postDelayed(mAction, mInitialDelay)
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        if (mHandler == null) return true
+                        mHandler!!.removeCallbacks(mAction)
+                        mHandler = null
+                    }
+                }
+                return false
+            }
+
+            var mAction: Runnable = object : Runnable {
+                override fun run() {
+                    stickerScroll.smoothScrollTo(stickerScroll.scrollX - 50, stickerScroll.scrollY)
+                    mHandler?.postDelayed(this, mRepeatDelay)
+                }
+            }
+        })
+
+        stickerForward.setOnTouchListener(object : OnTouchListener {
+            @SuppressLint("ClickableViewAccessibility")
+            private var mHandler: Handler? = null
+            private val mInitialDelay: Long = 300
+            private val mRepeatDelay: Long = 100
+            override fun onTouch(v: View, event: MotionEvent): Boolean {
+                when (event.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        if (mHandler != null) return true
+                        mHandler = Handler(Looper.getMainLooper())
+                        mHandler!!.postDelayed(mAction, mInitialDelay)
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        if (mHandler == null) return true
+                        mHandler!!.removeCallbacks(mAction)
+                        mHandler = null
+                    }
+                }
+                return false
+            }
+
+            var mAction: Runnable = object : Runnable {
+                override fun run() {
+                    stickerScroll.smoothScrollTo(stickerScroll.scrollX + 50, stickerScroll.scrollY)
+                    mHandler?.postDelayed(this, mRepeatDelay)
+                }
+            }
+        })
     }
 }
