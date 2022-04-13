@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/homeScreenFragment"
-        android:name="edu.neu.madcourse.trexercize.ui.fragments.HomeScreenFragment"
+        android:name="edu.neu.madcourse.trexercize.ui.fragments.homescreen.HomeScreenFragment"
         android:label="HomeScreenFragment" >
         <action
             android:id="@+id/action_homeScreenFragment_to_exerciseFragment"
@@ -109,35 +109,13 @@
             app:destination="@id/calendarFragment" />
     </fragment>
     <fragment
-        android:id="@+id/signInFragment"
-        android:name="edu.neu.madcourse.trexercize.ui.fragments.userAuth.SignInFragment"
-        android:label="SignInFragment" >
-        <action
-            android:id="@+id/action_signInFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
-        <action
-            android:id="@+id/action_signInFragment_to_homeScreenFragment"
-            app:destination="@id/homeScreenFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/signUpFragment"
-        android:name="edu.neu.madcourse.trexercize.ui.fragments.userAuth.SignUpFragment"
-        android:label="SignUpFragment" >
-        <action
-            android:id="@+id/action_signUpFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
-        <action
-            android:id="@+id/action_signUpFragment_to_homeScreenFragment"
-            app:destination="@id/homeScreenFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/signOutFragment"
         android:name="edu.neu.madcourse.trexercize.ui.fragments.userAuth.SignOutFragment"
         android:label="fragment_sign_out"
         tools:layout="@layout/fragment_sign_out" >
         <action
-            android:id="@+id/action_signOutFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
+            android:id="@+id/action_signOutFragment_to_signInActivity"
+            app:destination="@id/signInActivity" />
     </fragment>
     <fragment
         android:id="@+id/editFragment"
@@ -146,6 +124,43 @@
         <action
             android:id="@+id/action_editFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_editFragment_to_selectorFragment"
+            app:destination="@id/selectorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/galleryFragment"
+        android:name="edu.neu.madcourse.trexercize.ui.fragments.profile.GalleryFragment"
+        android:label="fragment_gallery"
+        tools:layout="@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_galleryFragment_to_selectorFragment"
+            app:destination="@id/selectorFragment" />
+        <action
+            android:id="@+id/action_galleryFragment_to_editFragment"
+            app:destination="@id/editFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/signInActivity"
+        android:name="edu.neu.madcourse.trexercize.ui.fragments.userAuth.SignInActivity"
+        android:label="activity_sign_in"
+        tools:layout="@layout/activity_sign_in" />
+    <activity
+        android:id="@+id/signUpActivity"
+        android:name="edu.neu.madcourse.trexercize.ui.fragments.userAuth.SignUpActivity"
+        android:label="activity_sign_up"
+        tools:layout="@layout/activity_sign_up" />
+    <fragment
+        android:id="@+id/selectorFragment"
+        android:name="edu.neu.madcourse.trexercize.ui.fragments.profile.SelectorFragment"
+        android:label="fragment_selector"
+        tools:layout="@layout/fragment_selector" >
+        <action
+            android:id="@+id/action_selectorFragment_to_galleryFragment"
+            app:destination="@id/galleryFragment" />
+        <action
+            android:id="@+id/action_selectorFragment_to_editFragment"
+            app:destination="@id/editFragment" />
     </fragment>
     <fragment
         android:id="@+id/individualExerciseFragment"

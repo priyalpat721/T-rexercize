@@ -30,7 +30,6 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
         warningSignUp = findViewById(R.id.warning_sign_up)
         warningSignUp.text = ""
-
         warningSignUp = findViewById(R.id.warning_sign_up)
         warningSignUp.text = ""
         name = findViewById(R.id.name)

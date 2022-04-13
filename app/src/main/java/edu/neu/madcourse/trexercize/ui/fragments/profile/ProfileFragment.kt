@@ -72,8 +72,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                             height = "0ft 0in"
                         }else{
                             val totalInches = (Integer.parseInt(feet) * 12) + Integer.parseInt(inches)
-                            bmi = Integer.parseInt(userInfo["weight"]).toDouble() /
-                                    totalInches.toDouble() / totalInches.toDouble() * 703
+                            bmi = (userInfo["weight"]?.let { Integer.parseInt(it).toDouble() }
+                                ?.div(totalInches.toDouble()) ?: 0.0) / totalInches.toDouble() * 703
                         }
 
                         profileList.add(ProfileCard("Age", userInfo["age"].toString()))

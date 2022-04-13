@@ -106,7 +106,8 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
         }
 
         changePicture.setOnClickListener {
-            Toast.makeText(context, "Change Picture!", Toast.LENGTH_LONG).show()
+            val action: NavDirections = EditFragmentDirections.actionEditFragmentToSelectorFragment()
+            view.findNavController().navigate(action)
         }
     }
     private fun listenForChanges() {
