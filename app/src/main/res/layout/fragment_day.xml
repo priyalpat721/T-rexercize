@@ -133,7 +133,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/sticker1"
+                        android:id="@+id/motivatedSticker"
                         android:layout_width="0dp"
                         android:layout_height="100dp"
                         android:layout_weight="1"
@@ -141,7 +141,7 @@
                         app:srcCompat="@drawable/stickermotivatedino" />
 
                     <ImageView
-                        android:id="@+id/sticker2"
+                        android:id="@+id/hungrySticker"
                         android:layout_width="0dp"
                         android:layout_height="100dp"
                         android:layout_weight="1"
@@ -149,7 +149,7 @@
                         app:srcCompat="@drawable/stickerbubbledino" />
 
                     <ImageView
-                        android:id="@+id/sticker3"
+                        android:id="@+id/happySticker"
                         android:layout_width="0dp"
                         android:layout_height="100dp"
                         android:layout_weight="1"
@@ -157,7 +157,7 @@
                         app:srcCompat="@drawable/stickerhappydino" />
 
                     <ImageView
-                        android:id="@+id/sticker4"
+                        android:id="@+id/frustratedSticker"
                         android:layout_width="0dp"
                         android:layout_height="100dp"
                         android:layout_weight="1"
@@ -165,7 +165,7 @@
                         app:srcCompat="@drawable/stickerfrustratedino" />
 
                     <ImageView
-                        android:id="@+id/sticker5"
+                        android:id="@+id/energizedSticker"
                         android:layout_width="0dp"
                         android:layout_height="100dp"
                         android:layout_weight="1"
@@ -173,7 +173,7 @@
                         app:srcCompat="@drawable/stickerexercisedino" />
 
                     <ImageView
-                        android:id="@+id/sticker6"
+                        android:id="@+id/sadSticker"
                         android:layout_width="0dp"
                         android:layout_height="100dp"
                         android:layout_weight="1"
@@ -181,7 +181,7 @@
                         app:srcCompat="@drawable/stickersaddino" />
 
                     <ImageView
-                        android:id="@+id/sticker7"
+                        android:id="@+id/sleepySticker"
                         android:layout_width="0dp"
                         android:layout_height="100dp"
                         android:layout_weight="1"
