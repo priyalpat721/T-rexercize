@@ -31,6 +31,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private lateinit var name : TextView
     private lateinit var gym : TextView
     private lateinit var profile : ImageView
+    private lateinit var showGoals : Button
+    private lateinit var backBtn : Button
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,6 +42,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         name = view.findViewById(R.id.name)
         gym = view.findViewById(R.id.gym_name)
         profile = view.findViewById(R.id.profile_image)
+        showGoals = view.findViewById(R.id.show_goal_btn)
         setUpResources()
 
         listenForChanges()
@@ -47,6 +50,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         editButton.setOnClickListener {
             val action: NavDirections =
                 ProfileFragmentDirections.actionProfileFragmentToEditFragment()
+            view.findNavController().navigate(action)
+        }
+
+        showGoals.setOnClickListener {
+            val action: NavDirections =
+                ProfileFragmentDirections.actionProfileFragmentToGoalFragment()
             view.findNavController().navigate(action)
         }
     }
@@ -66,26 +75,20 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         val inches = userInfo["inches"]
                         val feet = userInfo["feet"]
                         var height = "${feet}ft ${inches}in"
-                        var bmi = 0.0
+                        var bmi : Double
                         if (inches.isNullOrEmpty() || feet.isNullOrEmpty()) {
                             bmi = 0.0
                             height = "0ft 0in"
                         }else{
                             val totalInches = (Integer.parseInt(feet) * 12) + Integer.parseInt(inches)
-                            bmi = Integer.parseInt(userInfo["weight"]).toDouble() /
-                                    totalInches.toDouble() / totalInches.toDouble() * 703
+                            bmi = (userInfo["weight"]?.let { Integer.parseInt(it).toDouble() }
+                                ?.div(totalInches.toDouble()) ?: 0.0) / totalInches.toDouble() * 703
                         }
 
                         profileList.add(ProfileCard("Age", userInfo["age"].toString()))
                         profileList.add(ProfileCard("Height", height))
                         profileList.add(ProfileCard("Weight", userInfo["weight"].toString()))
                         profileList.add(ProfileCard("BMI", String.format("%.2f", bmi)))
-                        if (userInfo["goals"].isNullOrEmpty()) {
-                            profileList.add(ProfileCard("Goals", ""))
-                        }
-                        else {
-                            profileList.add(ProfileCard("Goals", userInfo["goals"].toString()))
-                        }
 
                         if (userInfo["targetAreas"].isNullOrEmpty()) {
                             profileList.add(ProfileCard("Target Areas", ""))

@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintGroup7"
         style="@style/groupStylewhite_A700cornerRadius"
@@ -29,12 +28,12 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:text="@string/edit_profile"
-            android:textColor="#0097A7"
+            android:textColor="#000000"
             android:textSize="48sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintVertical_chainStyle="packed"/>
 
         <TextView
             android:id="@+id/age3"
@@ -54,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:gravity="start"
             android:text="@string/height"
             android:textSize="24sp"
@@ -66,24 +65,12 @@
             style="@style/txtRobotoregular18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:gravity="start"
             android:text="@string/weight"
             android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="@+id/goals2"
-            app:layout_constraintTop_toBottomOf="@+id/height2" />
-
-        <TextView
-            android:id="@+id/goals2"
-            style="@style/txtRobotoregular18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:gravity="start"
-            android:text="@string/goals"
-            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="@+id/target_areas2"
-            app:layout_constraintTop_toBottomOf="@+id/weight3" />
+            app:layout_constraintTop_toBottomOf="@+id/height2" />
 
         <TextView
             android:id="@+id/target_areas2"
@@ -91,16 +78,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="13dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:gravity="start"
             android:text="@string/target_areas"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/done_btn"
             app:layout_constraintEnd_toStartOf="@+id/target_areas"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/goals2"
-            app:layout_constraintVertical_bias="0.375" />
+            app:layout_constraintTop_toBottomOf="@+id/weight3" />
 
         <EditText
             android:id="@+id/target_areas"
@@ -165,23 +151,6 @@
             tools:ignore="DuplicateSpeakableTextCheck" />
 
         <EditText
-            android:id="@+id/goals"
-            style="@style/txtRobotoregular18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:gravity="start"
-            android:hint="@string/goals"
-            android:importantForAutofill="no"
-            android:inputType="textMultiLine"
-            android:textColorHint="#78909C"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/goals2"
-            app:layout_constraintStart_toEndOf="@+id/goals2"
-            app:layout_constraintTop_toTopOf="@+id/goals2"
-            tools:ignore="DuplicateSpeakableTextCheck" />
-
-        <EditText
             android:id="@+id/weight"
             style="@style/txtRobotoregular18"
             android:layout_width="wrap_content"
@@ -217,6 +186,30 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/done_btn"
             app:layout_constraintTop_toTopOf="@+id/done_btn" />
+
+        <TextView
+            android:id="@+id/goals_to_do"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/goals"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/done_btn"
+            app:layout_constraintStart_toStartOf="@+id/target_areas2"
+            app:layout_constraintTop_toBottomOf="@+id/target_areas2"
+            app:layout_constraintVertical_bias="0.255" />
+
+        <Button
+            android:id="@+id/edit_goals_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Goals"
+            app:layout_constraintBottom_toTopOf="@+id/cancel_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.545"
+            app:layout_constraintStart_toEndOf="@+id/goals_to_do"
+            app:layout_constraintTop_toBottomOf="@+id/target_areas"
+            app:layout_constraintVertical_bias="0.239" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

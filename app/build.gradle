@@ -119,4 +119,7 @@ dependencies {
     // firestore cloud
     implementation 'com.google.firebase:firebase-storage-ktx'
 
+    // view pager 2
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+
 }

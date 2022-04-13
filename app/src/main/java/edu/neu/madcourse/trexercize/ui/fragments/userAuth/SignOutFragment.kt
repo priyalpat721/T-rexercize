@@ -1,10 +1,11 @@
 package edu.neu.madcourse.trexercize.ui.fragments.userAuth
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import edu.neu.madcourse.trexercize.R
@@ -19,11 +20,8 @@ class SignOutFragment : Fragment(R.layout.fragment_sign_out) {
             Toast.LENGTH_SHORT
         ).show()
         Firebase.auth.signOut()
-        requireActivity().finish()
-        requireActivity().startActivityFromFragment(
-            this,
-            Intent(this.context, SignUpActivity::class.java),
-            0
-        )
+        val action : NavDirections =
+            SignOutFragmentDirections.actionSignOutFragmentToSignInFragment()
+        view.findNavController().navigate(action)
     }
 }

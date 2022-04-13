@@ -58,11 +58,16 @@
     <string name="feet">feet</string>
     <string name="inches">inches</string>
     <string name="choose_image">Choose Image</string>
+    <string name="preview">Preview</string>
+    <string name="select_picture">Select Picture</string>
+    <string name="cancel">Cancel</string>
     <string name="today_s_snap">Today\'s snap:</string>
     <string name="back_button">back button</string>
     <string name="today_s_workout">Today\'s workout:</string>
     <string name="how_did_you_feel">How did you feel?</string>
     <string name="date">date</string>
     <string name="daily_snap_image">daily snap image</string>
+    <string name="tasks">Tasks</string>
+    <string name="show_goals">Show Goals</string>
     <string name="exercise_list_background">exercise list background</string>
 </resources>

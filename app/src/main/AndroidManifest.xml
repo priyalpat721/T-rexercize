@@ -3,6 +3,7 @@
     package="edu.neu.madcourse.trexercize">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -11,21 +12,23 @@
         android:roundIcon="@mipmap/ic_launcher_trex_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Trexercize">
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
         <activity
-            android:name="edu.neu.madcourse.trexercize.ui.fragments.userAuth.SignInActivity"
-            android:exported="false" />
-        <activity
-            android:name="edu.neu.madcourse.trexercize.ui.fragments.userAuth.SignUpActivity"
+            android:name=".ui.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.HomeActivity"
-            android:exported="false">
         </activity>
     </application>
 
