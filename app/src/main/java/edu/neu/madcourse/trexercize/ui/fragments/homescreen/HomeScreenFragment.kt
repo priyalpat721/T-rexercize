@@ -19,7 +19,7 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.favorites_rec_view)
         val navBar : BottomNavigationView? = activity?.findViewById(R.id.bottom_navigation_bar)
-        navBar?.visibility = View.INVISIBLE
+        navBar?.visibility = View.VISIBLE
         setUpResources()
         setUpData()
     }
