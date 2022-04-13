@@ -58,6 +58,9 @@
     <string name="feet">feet</string>
     <string name="inches">inches</string>
     <string name="choose_image">Choose Image</string>
+    <string name="preview">Preview</string>
+    <string name="select_picture">Select Picture</string>
+    <string name="cancel">Cancel</string>
     <string name="today_s_snap">Today\'s snap:</string>
     <string name="back_button">back button</string>
     <string name="today_s_workout">Today\'s workout:</string>
