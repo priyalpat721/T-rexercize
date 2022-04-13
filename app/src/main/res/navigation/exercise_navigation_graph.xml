@@ -164,6 +164,10 @@
             android:name="exerciseName"
             app:argType="string"
             android:defaultValue="No exercise Name" />
+        <argument
+            android:name="exerciseCategory"
+            app:argType="string"
+            android:defaultValue="no category" />
     </fragment>
     <fragment
         android:id="@+id/goalFragment"
