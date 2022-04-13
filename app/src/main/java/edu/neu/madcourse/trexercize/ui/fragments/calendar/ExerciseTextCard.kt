@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName
 
 class ExerciseTextCard{
     var exerciseName: String? = null
-    var exerciseMuscleGroups: List<String>? = null
+    var exerciseMuscleGroups: String? = null
 
     constructor()
-    constructor(name: String?, groups:List<String>?){
+    constructor(name: String?, groups:String?){
         this.exerciseName = name
         this.exerciseMuscleGroups = groups
     }
