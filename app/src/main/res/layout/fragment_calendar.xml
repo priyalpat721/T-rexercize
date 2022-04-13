@@ -8,6 +8,7 @@
 
     <TextView
         android:id="@+id/calendar_title"
+        style="@style/txtAcmeregular36"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -18,7 +19,8 @@
         app:layout_constraintBottom_toTopOf="@+id/scrollable_calendar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
 
     <ScrollView
         android:id="@+id/scrollable_calendar"
@@ -39,6 +41,7 @@
 
             <android.widget.CalendarView
                 android:id="@+id/calendar_view"
+                style="@style/txtAcmeregular36"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="32dp"
@@ -71,7 +74,8 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintVertical_bias="1.0"
-                    app:srcCompat="@drawable/dino" />
+                    app:srcCompat="@drawable/dino"
+                    android:contentDescription="@string/dino_with_dialog" />
 
                 <TextView
                     android:id="@+id/quotes"
