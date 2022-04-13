@@ -10,9 +10,13 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import edu.neu.madcourse.trexercize.R
+import edu.neu.madcourse.trexercize.ui.fragments.exercise.eachCategory.IndividualExerciseFragment
 
 class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
     // TODO: Rename and change types of parameters
@@ -73,6 +77,31 @@ class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
                 val category: ExerciseCard = exerciseList[position]
                 val title = category.title
                 Toast.makeText(context, "This is the category: $title", Toast.LENGTH_SHORT).show()
+
+                val action: NavDirections
+                action = ExerciseFragmentDirections.actionExerciseFragmentToIndividualExerciseFragment()
+
+                title.also {
+                    if (it != null) {
+                        action.title = it
+                    }
+                }
+
+                view?.findNavController()?.navigate(action)
+
+//                val bundle =  Bundle()
+//                bundle.putString("title", title)
+//                val fragment = IndividualExerciseFragment()
+//                fragment.arguments = bundle
+//                val transaction = activity?.supportFragmentManager?.beginTransaction()
+//                if (transaction != null) {
+//                    transaction.replace(R.id.fragment_exercise, fragment)
+//                    transaction.disallowAddToBackStack()
+//                    transaction.commit()
+//
+//                }
+
+
             }
         }
         exerciseAdapter = this.context?.let { ExerciseAdapter(exerciseList, it, listener) }

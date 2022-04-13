@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import edu.neu.madcourse.trexercize.R
 
 class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
@@ -18,8 +17,7 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.favorites_rec_view)
-        val navBar : BottomNavigationView? = activity?.findViewById(R.id.bottom_navigation_bar)
-        navBar?.visibility = View.VISIBLE
+
         setUpResources()
         setUpData()
     }
