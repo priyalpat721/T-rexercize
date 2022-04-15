@@ -70,4 +70,6 @@
     <string name="tasks">Tasks</string>
     <string name="show_goals">Show Goals</string>
     <string name="exercise_list_background">exercise list background</string>
+    <string name="take_daily_snap">Take daily snap</string>
+    <string name="category">category</string>
 </resources>

@@ -54,6 +54,20 @@
             android:layout_height="match_parent">
 
 
+            <Button
+                android:id="@+id/change_snap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="@string/take_daily_snap"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/snapImage"
+                app:layout_constraintEnd_toEndOf="@+id/snapImage"
+                app:layout_constraintTop_toTopOf="@+id/snapImage"
+                app:layout_constraintVertical_bias="1.0"
+                app:strokeColor="#000000"
+                app:strokeWidth="10000dp" />
+
             <TextView
                 android:id="@+id/snapText"
                 android:layout_width="wrap_content"
@@ -98,11 +112,13 @@
             <ImageView
                 android:id="@+id/snapImage"
                 android:layout_width="wrap_content"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/daily_snap_image"
-                android:maxHeight="250dp"
                 app:circularflow_defaultRadius="100sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

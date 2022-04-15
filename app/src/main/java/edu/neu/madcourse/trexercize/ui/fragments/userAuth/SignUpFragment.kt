@@ -97,13 +97,6 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         carouselHandler.removeCallbacks(run)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        viewPager.unregisterOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
-
-        })
-    }
-
     @SuppressLint("SetTextI18n")
     private fun signup(emailAddress: String, nameText: String) {
         warningSignUp.text = ""

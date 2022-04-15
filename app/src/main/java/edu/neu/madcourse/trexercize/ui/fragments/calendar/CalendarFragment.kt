@@ -41,7 +41,7 @@ open class CalendarFragment : Fragment(R.layout.fragment_calendar) {
             println(cal)
             // keep
             val day = Integer.valueOf(i2 + 1)
-            val d = "$day/$i3/$i"
+            val d = "$day-$i3-$i"
 
             val action: NavDirections
             action = CalendarFragmentDirections.actionCalendarFragmentToDayFragment()
