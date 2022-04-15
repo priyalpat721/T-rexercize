@@ -12,10 +12,11 @@
         <TextView
             android:id="@+id/each_exercise"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_50pxh"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="Description:\n " />
+            android:text="Description:\n "
+            android:textSize="16sp" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
