@@ -155,6 +155,9 @@
         <action
             android:id="@+id/action_individualExerciseFragment_to_eachExerciseFragment"
             app:destination="@id/eachExerciseFragment" />
+        <argument
+            android:name="equipmentList"
+            app:argType="string[]" />
     </fragment>
     <fragment
         android:id="@+id/eachExerciseFragment"
