@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -36,7 +37,13 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
         equipmentSelected = view.findViewById(R.id.equipment_selected)
         title.text = args.title
         equipmentList = args.equipmentList
-        equipmentSelected.text = "Equipment Selected: \n\n" + equipmentList.contentToString()
+        if(equipmentList!!.isEmpty()) {
+            equipmentSelected.text = "Showing all exercises"
+        } else {
+
+            equipmentSelected.text = "Showing exercises for the following equipment: \n\n" + equipmentList.contentToString()
+
+        }
 
         setUpResources()
         listenForChanges()
@@ -78,13 +85,42 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
             override fun onDataChange(snapshot: DataSnapshot) {
                 exerciseList.clear()
                 for (snap in snapshot.children) {
-                    exerciseList.add(IndividualExerciseCard(snap.key))
+                    val exerciseName = snap.key
+                    println(exerciseName)
+                    snap.key?.let { db.child(title.text.toString().lowercase()).child(it).addValueEventListener(object : ValueEventListener {
+                        @SuppressLint("SetTextI18n")
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            for (snap in snapshot.children) {
+                                if(snap.key == "equipment") {
+                                    val equipmentArray = snap.value as ArrayList<String>
+                                    val equipment = equipmentArray[0]
+                                    println(equipment)
+                                    if(equipmentList?.isEmpty() == true) {
+                                        exerciseList.add(IndividualExerciseCard(exerciseName))
+                                        exerciseAdapter?.notifyDataSetChanged()
+                                    }
+                                     else if(equipmentList?.isNotEmpty() == true && equipmentList!!.contains(equipment)) {
+                                        exerciseList.add(IndividualExerciseCard(exerciseName))
+                                        exerciseAdapter?.notifyDataSetChanged()
+                                    }
+
+                                }
+                            }
+                        }
+                        override fun onCancelled(error: DatabaseError) {
+                            // not implemented
+                        }
+                    }) }
+
+                    // println(value)
+//                    exerciseList.add(IndividualExerciseCard(exerciseName))
                 }
-                exerciseAdapter?.notifyDataSetChanged()
+//                exerciseAdapter?.notifyDataSetChanged()
             }
             override fun onCancelled(error: DatabaseError) {
                 // not implemented
             }
         })
+
     }
 }
