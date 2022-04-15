@@ -16,32 +16,41 @@ import edu.neu.madcourse.trexercize.R
 
 class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
     private val exerciseList: MutableList<ExerciseCard> = ArrayList()
+    private val selectedIndices: MutableList<Int> = ArrayList()
     private var recyclerView: RecyclerView? = null
     private var exerciseAdapter: ExerciseAdapter? = null
     private var equipmentButton: Button? = null
+    private var EQUIPMENT_ARRAY: Array<String>? =  null
+    private var equipmentList: MutableList<String>  = ArrayList()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.exercise_recycler_view)
         equipmentButton = view.findViewById(R.id.select_equipment)
-        val equipmentArray = arrayOf("Dumbell", "Barbell", "Yoga Mat", "Ab Roller", "Resistance Bands")
+        EQUIPMENT_ARRAY = arrayOf("dumbbell", "barbell", "yoga mat", "ab wheel", "resistance bands", "cable", "pull up bar")
 
         equipmentButton?.setOnClickListener{
-            val selectedItems = ArrayList<Int>() // Where we track the selected items
+
+            //clears the equipment list every time this fragment is loaded onto the screen
+            // in other words, the equipment selection is reset
+            selectedIndices.clear()
+            equipmentList.clear()
             val builder = AlertDialog.Builder(context)
             // Set the dialog title
             builder.setTitle("Select your equipment")
                 // Specify the list array, the items to be selected by default (null for none),
                 // and the listener through which to receive callbacks when items are selected
-                .setMultiChoiceItems(equipmentArray, null,
+                .setMultiChoiceItems(EQUIPMENT_ARRAY, null,
                     DialogInterface.OnMultiChoiceClickListener { dialog, which, isChecked ->
                         if (isChecked) {
                             // If the user checked the item, add it to the selected items
-                            selectedItems.add(which)
-                        } else if (selectedItems.contains(which)) {
+                            selectedIndices.add(which)
+                            equipmentList.add(EQUIPMENT_ARRAY!![which])
+                        } else if (selectedIndices.contains(which)) {
                             // Else, if the item is already in the array, remove it
-                            selectedItems.remove(which)
+                            selectedIndices.removeAt(which)
+                            equipmentList.remove(EQUIPMENT_ARRAY!![which])
                         }
                     })
                 // Set the action buttons
@@ -49,7 +58,7 @@ class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
                     DialogInterface.OnClickListener { dialog, id ->
                         // User clicked OK, so save the selectedItems results somewhere
                         // or return them to the component that opened the dialog
-                        Toast.makeText(context, "# of equipment: ${selectedItems.size}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "# of equipment: ${selectedIndices.size}", Toast.LENGTH_SHORT).show()
                     })
                 .setNegativeButton("Cancel",
                     DialogInterface.OnClickListener { dialog, id ->
@@ -70,12 +79,15 @@ class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
                 Toast.makeText(context, "This is the category: $title", Toast.LENGTH_SHORT).show()
 
                 val action: NavDirections
-                action = ExerciseFragmentDirections.actionExerciseFragmentToIndividualExerciseFragment()
+                action = ExerciseFragmentDirections.actionExerciseFragmentToIndividualExerciseFragment(
+                    equipmentList.toTypedArray()
+                )
 
-                title.also {
-                    if (it != null) {
-                        action.title = it
+                action.also {
+                    if (title != null) {
+                        action.title = title
                     }
+                    action.equipmentList = equipmentList.toTypedArray()
                 }
 
                 view?.findNavController()?.navigate(action)
