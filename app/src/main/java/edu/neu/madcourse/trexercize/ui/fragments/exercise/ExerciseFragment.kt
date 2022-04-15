@@ -44,13 +44,11 @@ class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
                 .setMultiChoiceItems(EQUIPMENT_ARRAY, null,
                     DialogInterface.OnMultiChoiceClickListener { dialog, which, isChecked ->
                         if (isChecked) {
-                            println("in the if block $which")
                             // If the user checked the item, add it to the selected items
                             selectedIndices.add(which)
                             equipmentList.add(EQUIPMENT_ARRAY!![which])
                         } else if (selectedIndices.contains(which)) {
                             // Else, if the item is already in the array, remove it
-                                println("in the else block $which")
                             selectedIndices.removeAt(which)
                             equipmentList.remove(EQUIPMENT_ARRAY!![which])
                         }
@@ -81,7 +79,6 @@ class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
                 Toast.makeText(context, "This is the category: $title", Toast.LENGTH_SHORT).show()
 
                 val action: NavDirections
-                println(equipmentList.toTypedArray().contentToString())
                 action = ExerciseFragmentDirections.actionExerciseFragmentToIndividualExerciseFragment(
                     equipmentList.toTypedArray()
                 )
@@ -91,11 +88,6 @@ class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
                         action.title = title
                     }
                     action.equipmentList = equipmentList.toTypedArray()
-                }
-                title.also {
-                    if (it != null) {
-                        action.title = it
-                    }
                 }
 
                 view?.findNavController()?.navigate(action)

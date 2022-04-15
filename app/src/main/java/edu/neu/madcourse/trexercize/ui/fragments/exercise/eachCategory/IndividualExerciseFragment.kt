@@ -59,12 +59,7 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
                         action.exerciseCategory = title.text.toString()
                     }
                 }
-//                exerciseName.also {
-//                    if (it != null) {
-//                        action.exerciseName = it
-//                    }
-//                }
-                val exerciseCategory = title.text.toString()
+
                 view?.findNavController()?.navigate(action)
             }
         }
@@ -78,14 +73,12 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
     @SuppressLint("NotifyDataSetChanged")
     private fun listenForChanges() {
         exerciseList.clear()
-        println(title.text)
         db.child(title.text.toString().lowercase()).addValueEventListener(object : ValueEventListener {
             @SuppressLint("SetTextI18n")
             override fun onDataChange(snapshot: DataSnapshot) {
                 exerciseList.clear()
                 for (snap in snapshot.children) {
                     exerciseList.add(IndividualExerciseCard(snap.key))
-                    println(snap.key)
                 }
                 exerciseAdapter?.notifyDataSetChanged()
             }
