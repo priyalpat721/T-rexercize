@@ -24,14 +24,19 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
     private var recyclerView: RecyclerView? = null
     private var exerciseAdapter: IndividualExerciseAdapter? = null
     private lateinit var title: TextView
+    private lateinit var equipmentSelected: TextView
     private val args : IndividualExerciseFragmentArgs by navArgs()
     private var db = Firebase.database.reference
+    private var equipmentList: Array<String>? =  null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.each_category_exercises)
         title = view.findViewById(R.id.category_name)
+        equipmentSelected = view.findViewById(R.id.equipment_selected)
         title.text = args.title
+        equipmentList = args.equipmentList
+        equipmentSelected.text = "Equipment Selected: \n\n" + equipmentList.contentToString()
 
         setUpResources()
         listenForChanges()
