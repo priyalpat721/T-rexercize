@@ -1,6 +1,7 @@
 package edu.neu.madcourse.trexercize.ui.fragments.calendar
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +23,9 @@ class ExerciseTextAdapter(
     override fun onBindViewHolder(holder: ExerciseTextViewHolder, position: Int) {
         holder.exerciseName.text = dataList[position].exerciseName.toString()
         holder.exerciseMuscleGroups.text = dataList[position].exerciseMuscleGroups.toString()
+        if (position % 2 == 0) {
+            holder.button.setBackgroundColor(Color.rgb(92,188,179))
+        }
     }
 
     override fun getItemCount(): Int {
