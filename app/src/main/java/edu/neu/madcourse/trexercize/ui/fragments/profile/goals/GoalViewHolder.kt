@@ -6,10 +6,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import edu.neu.madcourse.trexercize.R
 
-class GoalViewHolder(itemView: View, checkBox: ICheckBoxListener?) :
+class GoalViewHolder(itemView: View, doneCheckBox: IDoneCheckBoxListener?, favCheckBox: IFavCheckBoxListener?) :
     RecyclerView.ViewHolder(itemView) {
 
-    var checkBoxListener = checkBox
     var task: TextView = itemView.findViewById(R.id.task_name)
     var time: TextView = itemView.findViewById(R.id.time)
     var done: CheckBox = itemView.findViewById(R.id.done_box)
@@ -17,17 +16,17 @@ class GoalViewHolder(itemView: View, checkBox: ICheckBoxListener?) :
 
     init{
         favorite.setOnClickListener {
-            if (checkBoxListener != null) {
+            if (favCheckBox != null) {
                 val position: Int = layoutPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    checkBoxListener?.onBoxClick(position)
+                    favCheckBox.onFavBoxClick(position)
                 }
             }
             done.setOnClickListener {
-                if (checkBoxListener != null) {
+                if (doneCheckBox != null) {
                     val position: Int = layoutPosition
                     if (position != RecyclerView.NO_POSITION) {
-                        checkBoxListener?.onBoxClick(position)
+                        doneCheckBox.onDoneBoxClick(position)
                     }
                 }
             }

@@ -25,7 +25,7 @@
         app:srcCompat="@drawable/ic_back_arrow"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/addGoalBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -47,7 +47,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
+        app:layout_constraintBottom_toTopOf="@+id/addGoalBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

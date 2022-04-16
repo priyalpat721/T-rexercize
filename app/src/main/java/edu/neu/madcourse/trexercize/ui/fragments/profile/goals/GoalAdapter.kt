@@ -7,18 +7,22 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import edu.neu.madcourse.trexercize.R
 
-class GoalAdapter(goalList: ArrayList<GoalCard>, context: Context?) : RecyclerView.Adapter<GoalViewHolder>() {
-    var goalList: ArrayList<GoalCard> = goalList
-    private var checkBoxListener: ICheckBoxListener? = null
-    var context: Context? = context
+class GoalAdapter(private var goalList: ArrayList<GoalCard>, var context: Context?) : RecyclerView.Adapter<GoalViewHolder>() {
+    var doneCheckBox : IDoneCheckBoxListener? = null
+    var favCheckBox : IFavCheckBoxListener? = null
 
-    fun setICheckBoxListener(checkBoxListener : ICheckBoxListener) {
-        this.checkBoxListener = checkBoxListener
+    fun setDoneCheckBoxListener(doneCheckBoxListener : IDoneCheckBoxListener) {
+        this.doneCheckBox = doneCheckBoxListener
     }
+
+    fun setFavCheckBoxListener(favCheckBoxListener : IFavCheckBoxListener) {
+        this.favCheckBox = favCheckBoxListener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoalViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view: View = inflater.inflate(R.layout.task_card_layout, parent, false)
-        return GoalViewHolder(view, checkBoxListener)
+        val view: View = inflater.inflate(R.layout.goal_card_layout, parent, false)
+        return GoalViewHolder(view, doneCheckBox, favCheckBox)
     }
 
     override fun onBindViewHolder(holder: GoalViewHolder, position: Int) {

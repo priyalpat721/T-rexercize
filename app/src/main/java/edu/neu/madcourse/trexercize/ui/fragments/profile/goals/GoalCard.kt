@@ -5,13 +5,17 @@ class GoalCard(
     var time: String,
     var favorite: Boolean,
     var done: Boolean
-) : ICheckBoxListener{
+) : IDoneCheckBoxListener, IFavCheckBoxListener{
 
     override fun toString(): String {
         return "GoalCard(title='$task', time='$time', favorite=$favorite, done=$done)"
     }
 
-    override fun onBoxClick(position: Int) {
+    override fun onFavBoxClick(position: Int) {
         favorite = !favorite
+    }
+
+    override fun onDoneBoxClick(position: Int) {
+        done = !done
     }
 }
