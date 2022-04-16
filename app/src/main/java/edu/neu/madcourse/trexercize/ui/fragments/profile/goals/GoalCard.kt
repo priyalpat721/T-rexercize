@@ -1,21 +1,17 @@
 package edu.neu.madcourse.trexercize.ui.fragments.profile.goals
 
-import kotlin.properties.Delegates
-
-class GoalCard {
-    private var title : String
-    private  var time : String
-    private var favorite by Delegates.notNull<Boolean>()
-    private var done by Delegates.notNull<Boolean>()
-
-    constructor(title: String, time: String, favorite: Boolean, done: Boolean) {
-        this.title = title
-        this.time = time
-        this.favorite = favorite
-        this.done = done
-    }
+class GoalCard(
+    var task: String,
+    var time: String,
+    var favorite: Boolean,
+    var done: Boolean
+) : ICheckBoxListener{
 
     override fun toString(): String {
-        return "GoalCard(title='$title', time='$time', favorite=$favorite, done=$done)"
+        return "GoalCard(title='$task', time='$time', favorite=$favorite, done=$done)"
+    }
+
+    override fun onBoxClick(position: Int) {
+        favorite = !favorite
     }
 }

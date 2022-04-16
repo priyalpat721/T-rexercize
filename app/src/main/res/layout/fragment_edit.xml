@@ -28,12 +28,12 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:text="@string/edit_profile"
-            android:textColor="#000000"
+            android:textColor="#00ACC1"
             android:textSize="48sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"/>
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/age3"
