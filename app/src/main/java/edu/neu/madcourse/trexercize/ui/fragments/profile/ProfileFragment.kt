@@ -32,7 +32,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private lateinit var gym : TextView
     private lateinit var profile : ImageView
     private lateinit var showGoals : Button
-    private lateinit var backBtn : Button
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -24,7 +24,6 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
     private lateinit var feet : EditText
     private lateinit var inches : EditText
     private lateinit var weight : EditText
-    private lateinit var goals : EditText
     private lateinit var targetAreas : EditText
     private lateinit var name: EditText
     private lateinit var gym : EditText
@@ -90,11 +89,6 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
             if (!weight.text.isNullOrEmpty()) {
                 Firebase.auth.currentUser?.uid?.let { it1 -> db.child("users").child(it1)
                     .child("weight").setValue(weight.text.toString())
-                }
-            }
-            if (!goals.text.isNullOrEmpty()) {
-                Firebase.auth.currentUser?.uid?.let { it1 -> db.child("users").child(it1)
-                    .child("goals").setValue(goals.text.toString())
                 }
             }
             if (!targetAreas.text.isNullOrEmpty()) {

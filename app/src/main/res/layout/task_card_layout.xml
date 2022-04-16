@@ -2,18 +2,18 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/url_card_layout_id"
+    android:id="@+id/task_card_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/website_name_card"
+        android:id="@+id/task_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/tasks"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/done_box"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton"
+        app:layout_constraintEnd_toStartOf="@+id/favorites"
         app:layout_constraintHorizontal_bias="0.11"
         app:layout_constraintStart_toEndOf="@+id/done_box"
         app:layout_constraintTop_toTopOf="@+id/done_box"
@@ -23,7 +23,7 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="40dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/done_box" />
@@ -36,21 +36,34 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.28" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/favorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/done"
         android:minWidth="48dp"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/task_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.946"
+        app:layout_constraintStart_toEndOf="@+id/done_box"
+        app:layout_constraintTop_toTopOf="@+id/task_name"
+        app:layout_constraintVertical_bias="0.238"
         app:srcCompat="@drawable/ic_top" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/task_name"
+        app:layout_constraintStart_toStartOf="@+id/task_name"
+        app:layout_constraintTop_toBottomOf="@+id/task_name"
+        app:layout_constraintVertical_bias="0.538" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

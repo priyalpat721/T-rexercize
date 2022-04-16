@@ -1,16 +1,16 @@
 package edu.neu.madcourse.trexercize.ui.fragments.userAuth
 
-import androidx.fragment.app.Fragment
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
-import androidx.viewpager2.widget.ViewPager2
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
@@ -18,7 +18,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import edu.neu.madcourse.trexercize.R
-import edu.neu.madcourse.trexercize.ui.helper.CarouselData
+import java.util.*
 
 class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private lateinit var name: EditText
@@ -29,16 +29,18 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private lateinit var auth: FirebaseAuth
     private lateinit var warningSignUp: TextView
     private var db = Firebase.database.reference
-    private lateinit var viewPager: ViewPager2
     private var carouselList = ArrayList<CarouselItem>()
-    var carouselHandler : Handler = Handler(Looper.getMainLooper())
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: CarouselAdapter
+    private lateinit var layoutManager: LinearLayoutManager
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        recyclerView = view.findViewById(R.id.recyclerView2)
         // makes the nav bar disappear
-        val navBar : BottomNavigationView? = activity?.findViewById(R.id.bottom_navigation_bar)
+        val navBar: BottomNavigationView? = activity?.findViewById(R.id.bottom_navigation_bar)
         navBar?.visibility = View.INVISIBLE
 
         val title = view.findViewById<TextView>(R.id.welcome)
@@ -56,19 +58,12 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         switchToLogIn = view.findViewById(R.id.to_login_page)
         switchToLogIn.visibility = View.VISIBLE
         progressBar = view.findViewById(R.id.progress_bar)
-        viewPager = view.findViewById(R.id.carousel_up)
 
         populateList()
-        val carouselData = CarouselData()
-        this.context?.let {
-            carouselData.getCarouselData(carouselList, viewPager, run, carouselHandler,
-                it
-            )
-        }
+        setUpResources()
 
         switchToLogIn.setOnClickListener {
             carouselList.clear()
-            viewPager.adapter?.notifyDataSetChanged()
             val action : NavDirections =
                 SignUpFragmentDirections.actionSignUpFragmentToSignInFragment()
             view.findNavController().navigate(action)
@@ -83,19 +78,6 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         auth = Firebase.auth
     }
 
-    private val run = Runnable {
-        viewPager.currentItem = viewPager.currentItem + 1
-    }
-
-    override fun onResume() {
-        super.onResume()
-        carouselHandler.postDelayed(run, 1500)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        carouselHandler.removeCallbacks(run)
-    }
 
     @SuppressLint("SetTextI18n")
     private fun signup(emailAddress: String, nameText: String) {
@@ -182,5 +164,33 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         carouselList.add(CarouselItem("https://firebasestorage.googleapis.com/v0/b/t-rexercize.appspot.com/o/saddino.png?alt=media&token=a2944664-2f88-4095-81e3-678c8bb0e316"))
         carouselList.add(CarouselItem("https://firebasestorage.googleapis.com/v0/b/t-rexercize.appspot.com/o/sleepdino2.png?alt=media&token=44d3ce0d-cfac-4f1c-8f3b-484aaba37343"))
 
+    }
+
+    private fun setUpResources() {
+        adapter = CarouselAdapter(carouselList, this.requireContext())
+        recyclerView.adapter = adapter
+        layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.layoutManager = layoutManager
+
+        val helper = LinearSnapHelper()
+        helper.attachToRecyclerView(recyclerView)
+
+        val timer = Timer()
+        timer.schedule(CarouselTimerTask(layoutManager, adapter, recyclerView), 0, 1500)
+    }
+
+    private class CarouselTimerTask(var layoutManager: LinearLayoutManager,
+                                    var adapter: CarouselAdapter, var recyclerView: RecyclerView
+    ) : TimerTask() {
+        override fun run() {
+            if (layoutManager.findLastCompletelyVisibleItemPosition() < (adapter.itemCount - 1)) {
+                layoutManager.smoothScrollToPosition(
+                    recyclerView, RecyclerView.State(),
+                    layoutManager.findLastCompletelyVisibleItemPosition() + 1
+                )
+            } else {
+                layoutManager.smoothScrollToPosition(recyclerView, RecyclerView.State(), 0)
+            }
+        }
     }
 }

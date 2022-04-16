@@ -20,7 +20,7 @@ import edu.neu.madcourse.trexercize.ui.helper.ImageUploaderFunctions
 class SelectorFragment : Fragment(R.layout.fragment_selector) {
     private lateinit var galleryButton: Button
     private lateinit var cameraButton: Button
-    private lateinit var path: Uri
+    private var path: Uri? = null
     private lateinit var storageRef: StorageReference
     private var db = Firebase.database.reference
     private lateinit var storage: FirebaseStorage
@@ -55,7 +55,7 @@ class SelectorFragment : Fragment(R.layout.fragment_selector) {
         }
 
         doneButton.setOnClickListener {
-            imageUploader.uploadImageFromCameraToDb(path, storageRef,  db, this.context)
+            path?.let { it1 -> imageUploader.uploadImageFromCameraToDb(it1, storageRef,  db, this.context) }
             val action: NavDirections =
                 SelectorFragmentDirections.actionSelectorFragmentToEditFragment()
             view.findNavController().navigate(action)

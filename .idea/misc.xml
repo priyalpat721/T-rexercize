@@ -23,6 +23,7 @@
         <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/layout/activity_sign_in.xml" value="0.1" />
         <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/layout/activity_sign_up.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/layout/carousel_card_layout.xml" value="0.1" />
         <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/layout/fragment_calendar.xml" value="0.3860369609856263" />
         <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/layout/fragment_camera.xml" value="0.14947916666666666" />
         <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/layout/fragment_day.xml" value="0.25416666666666665" />
@@ -30,12 +31,12 @@
         <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/layout/fragment_exercise.xml" value="0.1" />
         <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/layout/fragment_favorites.xml" value="0.358695652173913" />
         <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/layout/fragment_gallery.xml" value="0.136" />
-        <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/layout/fragment_goal.xml" value="0.4" />
+        <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/layout/fragment_goal.xml" value="0.1511627906976744" />
         <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/layout/fragment_home_screen.xml" value="0.358695652173913" />
         <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/layout/fragment_main.xml" value="0.3582427536231884" />
         <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
         <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/layout/fragment_selector.xml" value="0.264" />
-        <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/layout/fragment_sign_in.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/layout/fragment_sign_in.xml" value="0.1" />
         <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/layout/fragment_sign_out.xml" value="0.10759493670886076" />
         <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/layout/fragment_sign_up.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/layout/fragment_to_do.xml" value="0.20863616930312098" />
@@ -49,7 +50,7 @@
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.24895833333333334" />
-        <entry key="app/src/main/res/layout/each_category_screen.xml" value="0.4867255115766088" />
+        <entry key="app/src/main/res/layout/each_category_screen.xml" value="0.2668463611859838" />
         <entry key="app/src/main/res/layout/each_exercise_card_layout.xml" value="0.3645320197044335" />
         <entry key="app/src/main/res/layout/each_exercise_layout.xml" value="0.296875" />
         <entry key="app/src/main/res/layout/each_exercise_list_card_layout.xml" value="0.4864719476914944" />

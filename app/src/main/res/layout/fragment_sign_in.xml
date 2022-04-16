@@ -6,31 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.userAuth.SignInFragment">
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/carousel"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-    <ImageView
-        android:id="@+id/carousel_images"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars"
-        android:alpha="0.4"/>
-
     <Button
-        android:visibility="invisible"
         android:id="@+id/to_sign_up_page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:text="@string/don_t_have_an_account_n_click_here"
         android:textColor="@color/black"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,12 +36,12 @@
         app:layout_constraintVertical_bias="0.338" />
 
     <TextView
-        android:visibility="invisible"
         android:id="@+id/warning_sign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:textColor="#FF0000"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/sign_in_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -67,7 +50,6 @@
         app:layout_constraintVertical_bias="0.236" />
 
     <EditText
-        android:visibility="invisible"
         android:id="@+id/sign_in_email"
         android:layout_width="209dp"
         android:layout_height="50dp"
@@ -82,6 +64,7 @@
         android:paddingStart="5dp"
         android:textColor="@color/black"
         android:textSize="20sp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +73,6 @@
         tools:ignore="RtlSymmetry" />
 
     <Button
-        android:visibility="invisible"
         android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -98,6 +80,7 @@
         android:backgroundTint="#039BE5"
         android:text="@string/sign_in"
         android:textColor="@color/black"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,7 +88,6 @@
         tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
 
     <TextView
-        android:visibility="invisible"
         android:id="@+id/sign_in_sign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -115,9 +97,20 @@
         android:text="@string/sign_in"
         android:textColor="@color/black"
         android:textSize="48sp"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/sign_in_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
