@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -39,6 +40,7 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
     private lateinit var addToTodayWorkout: Button
     private var db = Firebase.database.reference
     private val args : EachExerciseFragmentArgs by navArgs()
+    private val currentExercise = hashMapOf<String, Any?>()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,6 +53,10 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
         addToFavorites = view.findViewById(R.id.add_to_favorites_btn)
         addToTodayWorkout = view.findViewById(R.id.add_to_today_workout)
         exerciseEquipment = view.findViewById(R.id.exercise_equipment)
+
+        addToFavorites.setOnClickListener {
+            Firebase.auth.uid?.let { it1 -> db.child("users").child(it1).child("favorites").child(exerciseTitle.text.toString()).setValue(currentExercise) }
+        }
 
         exerciseCategory = args.exerciseCategory
         setUpResources()
@@ -105,16 +111,18 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
 
                     if(snap.key == "muscle groups") {
                         exerciseMuscleGroup.text = "Muscle Group: " + snap.value.toString()
+                        currentExercise["muscle groups"] = snap.value.toString()
                     }
                     if(snap.key == "equipment") {
                         val equipmentList = snap.value as ArrayList<String>
                         val equipment = equipmentList[0]
                         exerciseEquipment.text = "Equipment needed: $equipment"
+                        currentExercise["equipment"] = equipmentList
                     }
 
                     if(snap.key == "description") {
                         var description:String = snap.value as String
-
+                        currentExercise["description"] = description
                         var startIndex = 0
                         var endIndex = 0
 
@@ -156,7 +164,12 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
                         }
 
                     }
+                    if(snap.key == "video") {
+                        currentExercise["video"] = snap.value.toString()
+
+                    }
                 }
+                println(currentExercise)
                 eachExerciseAdapter?.notifyDataSetChanged()
 
             }
