@@ -107,15 +107,6 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
     @SuppressLint("NotifyDataSetChanged")
     private fun setUpData(){
 
-        exerciseDescription.add(EachExerciseCard("1. Keep your back straight"))
-        exerciseDescription.add(EachExerciseCard("2. Keep your chest up"))
-        exerciseDescription.add(EachExerciseCard("3. Keep your feet shoulder width apart"))
-        exerciseDescription.add(EachExerciseCard("4. Breathe in and breathe out"))
-        eachExerciseAdapter?.notifyDataSetChanged()
-
-        exerciseTitle.text = args.exerciseName
-        exerciseMuscleGroup.text = "Muscle Group: Sample muscle group"
-
 //        exerciseVideo.setVideoURI(Uri.parse("https://vimeo.com/123135208"))
 //        exerciseVideo.requestFocus()
 //        exerciseVideo.start()
@@ -123,8 +114,6 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
 //        val mediaController: MediaController = MediaController(context)
 //        exerciseVideo.setMediaController(mediaController)
 //        mediaController.setAnchorView(exerciseVideo)
-
-
 
     }
 
