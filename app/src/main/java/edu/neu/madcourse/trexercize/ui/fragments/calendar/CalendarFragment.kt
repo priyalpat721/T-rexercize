@@ -23,10 +23,6 @@ open class CalendarFragment : Fragment(R.layout.fragment_calendar) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val dino = view.findViewById<ImageView>(R.id.dino)
-        dino.visibility = if (resources.configuration.orientation
-            == Configuration.ORIENTATION_LANDSCAPE) View.GONE else View.VISIBLE
-
         quotesBox = view.findViewById(R.id.quotes)
         getQuote(quotesBox)
 
