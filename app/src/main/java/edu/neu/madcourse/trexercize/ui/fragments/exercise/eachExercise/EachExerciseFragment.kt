@@ -3,8 +3,9 @@ package edu.neu.madcourse.trexercize.ui.fragments.exercise.eachExercise
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
@@ -17,9 +18,6 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import edu.neu.madcourse.trexercize.R
-import edu.neu.madcourse.trexercize.ui.fragments.exercise.eachCategory.IndividualExerciseCard
-import edu.neu.madcourse.trexercize.ui.fragments.exercise.eachCategory.IndividualExerciseFragmentArgs
-import kotlin.math.E
 
 
 class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
@@ -29,7 +27,9 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
     private var eachExerciseAdapter: EachExerciseAdapter?  = null
     private lateinit var exerciseTitle: TextView
     private lateinit var exerciseCategory: String
-    private lateinit var exerciseVideo: VideoView
+//    private lateinit var exerciseVideo: VideoView
+private lateinit var exerciseVideo: WebView
+
     private lateinit var exerciseMuscleGroup: TextView
     private lateinit var exerciseDescriptionText: TextView
     private lateinit var exerciseEquipment: TextView
@@ -38,7 +38,6 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
     private var db = Firebase.database.reference
     private val args : EachExerciseFragmentArgs by navArgs()
     private val currentExercise = hashMapOf<String, Any?>()
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -90,7 +89,7 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
         }
 
         setUpResources()
-        //setUpData()
+        setUpData()
         listenForChanges()
 
 //        "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
@@ -103,19 +102,39 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
         recyclerView!!.layoutManager = LinearLayoutManager(context)
 
     }
-
     @SuppressLint("NotifyDataSetChanged")
     private fun setUpData(){
 
-//        exerciseVideo.setVideoURI(Uri.parse("https://vimeo.com/123135208"))
+        exerciseVideo.webViewClient = WebViewClient()
+        exerciseVideo.apply{
+            loadUrl("https://player.vimeo.com/video/123135208?h=7fd06d3dff&title=0&byline=0&portrait=0")
+            settings.javaScriptEnabled = true
+            settings.safeBrowsingEnabled = true
+
+        }
+
+//        val uri: Uri = Uri.parse("http://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4")
+//        val uri: Uri = Uri.parse("https://drive.google.com/file/d/1UIJA-IqrkfzYi7VjPGeUdMzpr2aTNGX6/view")
+//        val localuri = Uri.parse("android.resource://" + (activity?.packageName ?: "") + "/" + R.raw.barbell_curl)
+
+//        val uri: Uri = Uri.parse("https://player.vimeo.com/video/123135208?h=7fd06d3dff&title=0&byline=0&portrait=0")
+
+//        val mediaController: MediaController = MediaController(activity)
+//        exerciseVideo.setMediaController(mediaController)
+//        exerciseVideo.setVideoURI(uri)
+//        mediaController.setAnchorView(exerciseVideo)
 //        exerciseVideo.requestFocus()
 //        exerciseVideo.start()
-
-//        val mediaController: MediaController = MediaController(context)
-//        exerciseVideo.setMediaController(mediaController)
-//        mediaController.setAnchorView(exerciseVideo)
-
+//        exerciseVideo.setSource("http://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4");
     }
+
+//    override fun onBackPressed() {
+//        if(exerciseVideo.canGoBack()) {
+//            exerciseVideo.goBack()
+//        } else {
+//            super.onBackPressed()
+//        }
+//    }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun listenForChanges() {
