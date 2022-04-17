@@ -23,7 +23,7 @@ class ShowGoalsFragment : Fragment(R.layout.fragment_show_goals) {
     private lateinit var backButton: ImageButton
     private val goalList: ArrayList<GoalCard> = ArrayList()
     private var recyclerView: RecyclerView? = null
-    var adapter: GoalAdapter? = null
+    var adapter: ShowGoalAdapter? = null
     var db = Firebase.database.reference
     private val doneList: ArrayList<GoalCard> = ArrayList()
     private val favList: ArrayList<GoalCard> = ArrayList()
@@ -47,7 +47,7 @@ class ShowGoalsFragment : Fragment(R.layout.fragment_show_goals) {
 
     private fun setUpResources() {
         recyclerView?.setHasFixedSize(true)
-        adapter = GoalAdapter(goalList, context)
+        adapter = ShowGoalAdapter(goalList, context)
         recyclerView?.adapter = adapter
         recyclerView?.layoutManager = LinearLayoutManager(context)
     }
