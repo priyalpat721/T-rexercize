@@ -122,19 +122,12 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                         "email" to emailAddress,
                         "age" to "0",
                         "dateJoined" to time.toDate().toString(),
-                        "favoriteRoutines" to arrayListOf(
-                            ""
-                        ),
                         "foot" to "0",
                         "inches" to "0",
                         "streak" to "0",
                         "weight" to "0",
-                        "equipment" to arrayListOf(
-                            ""
-                        ),
                         "calendar" to calendarDoc,
                         "targetAreas" to "",
-                        "goals" to "",
                         "profilePicture" to "https://firebasestorage.googleapis.com/v0/b/t-rexercize.appspot.com/o/exercisedino.png?alt=media&token=9ef0f90d-80fa-4e5d-9747-856baf0024c8"
                     )
                     Firebase.auth.currentUser?.uid?.let {

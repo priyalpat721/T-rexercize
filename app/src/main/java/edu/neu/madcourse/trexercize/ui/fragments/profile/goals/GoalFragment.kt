@@ -1,12 +1,15 @@
 package edu.neu.madcourse.trexercize.ui.fragments.profile.goals
 
+import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
@@ -17,6 +20,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Timestamp
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import edu.neu.madcourse.trexercize.R
 
 class GoalFragment : Fragment(R.layout.fragment_goal) {
@@ -24,7 +33,8 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
     private val goalList: ArrayList<GoalCard> = ArrayList()
     private var recyclerView: RecyclerView? = null
     var adapter: GoalAdapter? = null
-    lateinit var addGoalBtn: FloatingActionButton;
+    lateinit var addGoalBtn: FloatingActionButton
+    var db = Firebase.database.reference
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,15 +53,19 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
         addGoalBtn.setOnClickListener {
             getTaskName()
         }
-    }
+        listenForChanges()
 
-    private fun setUpResources() {
-        recyclerView?.setHasFixedSize(true)
-        adapter = GoalAdapter(goalList, context)
         val doneCheckBox = object : IDoneCheckBoxListener {
             override fun onDoneBoxClick(position: Int) {
                 goalList[position].onDoneBoxClick(position)
+
                 adapter?.notifyItemChanged(position)
+
+                Firebase.auth.currentUser?.let {
+                    db.child("users").child(it.uid)
+                        .child("goals").child(goalList[position].id)
+                        .child("done").setValue(goalList[position].done)
+                }
             }
         }
         adapter?.setDoneCheckBoxListener(doneCheckBox)
@@ -60,9 +74,20 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
             override fun onFavBoxClick(position: Int) {
                 goalList[position].onFavBoxClick(position)
                 adapter?.notifyItemChanged(position)
+
+                Firebase.auth.currentUser?.let {
+                    db.child("users").child(it.uid)
+                        .child("goals").child(goalList[position].id)
+                        .child("favorite").setValue(goalList[position].favorite)
+                }
             }
         }
         adapter?.setFavCheckBoxListener(favCheckBox)
+    }
+
+    private fun setUpResources() {
+        recyclerView?.setHasFixedSize(true)
+        adapter = GoalAdapter(goalList, context)
         recyclerView?.adapter = adapter
         recyclerView?.layoutManager = LinearLayoutManager(context)
     }
@@ -79,28 +104,43 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
 
         // this is if the user hits done
         dialogBox.setCancelable(false)
-            .setPositiveButton("Done") { dialog: DialogInterface, which: Int ->
+            .setPositiveButton("Done") { dialog: DialogInterface, _: Int ->
                 // create a new goal card to hold new values
-                val card =
-                    GoalCard(goalText.text.toString(), timeText.text.toString(), false, false)
 
-                goalList.add(goalList.size, card)
-                adapter!!.notifyItemInserted(goalList.size)
-                val success = Snackbar.make(
-                    recyclerView!!,
-                    "Successfully created!", Snackbar.LENGTH_LONG
-                )
-                success.show()
+                val goalId = Firebase.auth.uid?.let { it1 ->
+                    db.child("users").child(it1).child("goals").push().key.toString()
+                }
+                val card =
+                    hashMapOf(
+                        "goal" to goalText.text.toString(),
+                        "time" to timeText.text.toString(),
+                        "favorite" to false,
+                        "done" to false
+                    )
+
+                Firebase.auth.uid?.let { it1 ->
+                    db.child("users").child(it1).child("goals").child(goalId.toString()).setValue(card)
+                }
+
+                val success = recyclerView?.let {
+                    Snackbar.make(
+                        it,
+                        "Successfully created!", Snackbar.LENGTH_LONG
+                    )
+                }
+                success?.show()
 
                 dialog.dismiss()
             }
         dialogBox.setCancelable(false)
-            .setNegativeButton("Cancel") { dialog: DialogInterface, which: Int ->
-                val canceled = Snackbar.make(
-                    recyclerView!!,
-                    "Action canceled!", Snackbar.LENGTH_SHORT
-                )
-                canceled.show()
+            .setNegativeButton("Cancel") { dialog: DialogInterface, _: Int ->
+                val canceled = recyclerView?.let {
+                    Snackbar.make(
+                        it,
+                        "Action canceled!", Snackbar.LENGTH_SHORT
+                    )
+                }
+                canceled?.show()
                 dialog.dismiss()
             }
         dialogBox.show()
@@ -121,6 +161,10 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
 
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     val position = viewHolder.layoutPosition
+                    Firebase.auth.currentUser?.let {
+                        db.child("users").child(it.uid)
+                            .child("goals").child(goalList[position].id).removeValue()
+                    }
                     goalList.removeAt(position)
                     adapter!!.notifyItemRemoved(position)
                     val success = Snackbar.make(
@@ -165,6 +209,7 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
                     ) { dialog: DialogInterface, which: Int ->
 
                         val newCard = GoalCard(
+                            card.id,
                             goalText.text.toString(),
                             timeText.text.toString(),
                             card.favorite,
@@ -174,6 +219,13 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
 
                         goalList[position] = newCard
                         adapter!!.notifyItemChanged(position)
+
+                        Firebase.auth.currentUser?.let {
+                            db.child("users").child(it.uid)
+                                .child("goals").child(goalList[position].id)
+                                .child("goal").setValue(goalList[position].goal)
+                        }
+
                         val success = Snackbar.make(
                             recyclerView!!,
                             "Successfully edited!", Snackbar.LENGTH_LONG
@@ -198,5 +250,42 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
                 }
             })
         editOnRight.attachToRecyclerView(recyclerView)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun listenForChanges() {
+        goalList.clear()
+        Firebase.auth.currentUser?.uid?.let {
+            db.child("users").child(it).child("goals")
+                .addValueEventListener(object :
+                    ValueEventListener {
+                    @SuppressLint("SetTextI18n")
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        goalList.clear()
+                        for (snap in snapshot.children) {
+                            Log.i("Goals", snap.toString())
+                            val value = snap.value as Map<String, String>
+
+                            val card = value["goal"]?.let { it1 ->
+                                value["time"]?.let { it2 ->
+                                    GoalCard(
+                                        snap.key.toString(), it1,
+                                        it2, value["favorite"] as Boolean, value["done"] as Boolean
+                                    )
+                                }
+                            };
+                            if (card != null) {
+                                goalList.add(card)
+                            }
+                        }
+                        adapter?.notifyDataSetChanged()
+
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        // not implemented
+                    }
+                })
+        }
     }
 }

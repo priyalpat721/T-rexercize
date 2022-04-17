@@ -67,7 +67,7 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
 
                             if(snap.key == exerciseTitle.text.toString()){
 
-                                addToFavorites.setText("Already in Favorites")
+                                addToFavorites.text = "Already in Favorites"
                             }
                         }
                     }
