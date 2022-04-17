@@ -180,7 +180,7 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
                     dialogBox.setView(view)
                     val timeText = view.findViewById<TextView>(R.id.time_entered)
                     val goalText = view.findViewById<EditText>(R.id.goal_name_dialog)
-                    timeText.text = Timestamp.now().toDate().toString()
+                    timeText.text = SimpleDateFormat("MM-dd-yyyy", Locale.getDefault()).format(Date())
 
                     // this is if the user hits done
                     dialogBox.setCancelable(false).setPositiveButton(
@@ -305,6 +305,12 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
                         db.child("users").child(it2.uid)
                             .child("goals").child(goalList[position].id)
                             .child("favorite").setValue(goalList[position].favorite)
+                    }
+
+                    Firebase.auth.currentUser?.let {
+                        db.child("users").child(it.uid)
+                            .child("goals").child(goalList[position].id)
+                            .child("time").setValue(SimpleDateFormat("MM-dd-yyyy", Locale.getDefault()).format(Date()))
                     }
                 }
             }
