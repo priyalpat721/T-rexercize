@@ -6,9 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import edu.neu.madcourse.trexercize.R
 
-class ShowGoalAdapter(private var goalList: ArrayList<GoalCard>, var context: Context?) : RecyclerView.Adapter<ShowGoalViewHolder>() {
+class ShowGoalAdapter(private var goalList: ArrayList<ShowGoalCard>, var context: Context?) : RecyclerView.Adapter<ShowGoalViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowGoalViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -32,9 +33,9 @@ class ShowGoalAdapter(private var goalList: ArrayList<GoalCard>, var context: Co
         }
 
         holder.time.text = goalList[position].time
-        holder.favorite.isChecked = goalList[position].favorite
         holder.done.isChecked = goalList[position].done
         holder.goal.text = goalList[position].goal
+        context?.let { Glide.with(it).load(goalList[position].favorite).into(holder.favorite) }
 
         if (position % 2 != 0) {
             holder.button.setBackgroundResource(R.drawable.alternate_goal_border)

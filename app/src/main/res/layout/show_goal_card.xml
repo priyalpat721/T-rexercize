@@ -5,6 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <ImageView
+        android:id="@+id/dino_favorite"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="28dp"
+        app:layout_constraintBottom_toBottomOf="@+id/done_box2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/done_box2"
+        app:layout_constraintVertical_bias="0.227" />
+
     <TextView
         android:id="@+id/goal_name2"
         android:layout_width="wrap_content"
@@ -12,8 +22,6 @@
         android:hint="@string/goal"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/done_box2"
-        app:layout_constraintEnd_toStartOf="@+id/favorites2"
-        app:layout_constraintHorizontal_bias="0.121"
         app:layout_constraintStart_toEndOf="@+id/done_box2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.571" />
@@ -38,30 +46,6 @@
         app:layout_constraintTop_toTopOf="@+id/goalBack"
         app:layout_constraintVertical_bias="0.316"
         android:enabled="false"/>
-
-    <CheckBox
-        android:id="@+id/favorites2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
-        app:layout_constraintBottom_toBottomOf="@+id/goal_name2"
-        app:layout_constraintEnd_toEndOf="@+id/goalBack"
-        app:layout_constraintTop_toTopOf="@+id/goal_name2"
-        app:layout_constraintVertical_bias="0.448"
-        android:enabled="false"/>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/favorites"
-        app:layout_constraintBottom_toBottomOf="@+id/goalBack"
-        app:layout_constraintEnd_toEndOf="@+id/goalBack"
-        app:layout_constraintTop_toBottomOf="@+id/favorites2"
-        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/goalBack"

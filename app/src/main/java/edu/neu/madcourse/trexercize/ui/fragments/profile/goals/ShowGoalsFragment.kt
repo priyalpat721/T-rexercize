@@ -18,16 +18,15 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import edu.neu.madcourse.trexercize.R
 
-
 class ShowGoalsFragment : Fragment(R.layout.fragment_show_goals) {
     private lateinit var backButton: ImageButton
-    private val goalList: ArrayList<GoalCard> = ArrayList()
+    private val goalList: ArrayList<ShowGoalCard> = ArrayList()
     private var recyclerView: RecyclerView? = null
     var adapter: ShowGoalAdapter? = null
     var db = Firebase.database.reference
-    private val doneList: ArrayList<GoalCard> = ArrayList()
-    private val favList: ArrayList<GoalCard> = ArrayList()
-    private val pendingList: ArrayList<GoalCard> = ArrayList()
+    private val doneList: ArrayList<ShowGoalCard> = ArrayList()
+    private val favList: ArrayList<ShowGoalCard> = ArrayList()
+    private val pendingList: ArrayList<ShowGoalCard> = ArrayList()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -73,16 +72,23 @@ class ShowGoalsFragment : Fragment(R.layout.fragment_show_goals) {
                             Log.i("Goals", snap.toString())
                             val value = snap.value as Map<*, *>
 
+                            var favImage = ""
+
+                            if (value["favorite"] as Boolean) {
+                                favImage = "https://firebasestorage.googleapis.com/v0/b" +
+                                        "/t-rexercize.appspot.com/o/dino%20selected.JPG?" +
+                                        "alt=media&token=96a20159-face-466a-9df0-c8d51b204e3a"
+                            }
                             val card = value["goal"]?.let { it1 ->
                                 value["time"]?.let { it2 ->
-                                    GoalCard(
+                                    ShowGoalCard(
                                         snap.key.toString(), it1 as String,
-                                        it2 as String, value["favorite"] as Boolean, value["done"] as Boolean
+                                        it2 as String, favImage, value["done"] as Boolean
                                     )
                                 }
                             }
                             if (card != null) {
-                                if (card.favorite) {
+                                if (card.favorite != "") {
                                     favList.add(card)
                                 }
                                 else if (card.done) {
