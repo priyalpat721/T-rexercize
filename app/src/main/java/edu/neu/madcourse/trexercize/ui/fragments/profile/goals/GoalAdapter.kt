@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import edu.neu.madcourse.trexercize.R
 
 class GoalAdapter(private var goalList: ArrayList<GoalCard>, var context: Context?) : RecyclerView.Adapter<GoalViewHolder>() {
-    var doneCheckBox : IDoneCheckBoxListener? = null
-    var favCheckBox : IFavCheckBoxListener? = null
+    private var doneCheckBox: IDoneCheckBoxListener? = null
+    private var favCheckBox: IFavCheckBoxListener? = null
 
-    fun setDoneCheckBoxListener(doneCheckBoxListener : IDoneCheckBoxListener) {
+    fun setDoneCheckBoxListener(doneCheckBoxListener: IDoneCheckBoxListener) {
         this.doneCheckBox = doneCheckBoxListener
     }
 
-    fun setFavCheckBoxListener(favCheckBoxListener : IFavCheckBoxListener) {
+    fun setFavCheckBoxListener(favCheckBoxListener: IFavCheckBoxListener) {
         this.favCheckBox = favCheckBoxListener
     }
 
@@ -27,17 +27,24 @@ class GoalAdapter(private var goalList: ArrayList<GoalCard>, var context: Contex
     }
 
     override fun onBindViewHolder(holder: GoalViewHolder, position: Int) {
-        if (holder.done.isChecked) {
-            holder.task.text = goalList[position].goal
-            holder.task.paintFlags =
-                holder.task.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        if (goalList[position].done) {
+            holder.goal.paintFlags =
+                holder.goal.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            holder.goal.text = goalList[position].goal
         }
         else {
-            holder.task.text = goalList[position].goal
+            holder.goal.paintFlags = 0
+            holder.goal.text = goalList[position].goal
         }
         holder.time.text = goalList[position].time
         holder.favorite.isChecked = goalList[position].favorite
         holder.done.isChecked = goalList[position].done
+
+        if (position % 2 != 0) {
+            holder.button.setBackgroundResource(R.drawable.alternate_goal_border)
+        } else {
+            holder.button.setBackgroundResource(R.drawable.goal_border)
+        }
 
         holder.favorite.setOnClickListener {
             if (favCheckBox != null) {

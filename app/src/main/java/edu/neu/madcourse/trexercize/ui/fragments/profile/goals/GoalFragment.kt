@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
@@ -33,7 +32,7 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
     private val goalList: ArrayList<GoalCard> = ArrayList()
     private var recyclerView: RecyclerView? = null
     var adapter: GoalAdapter? = null
-    lateinit var addGoalBtn: FloatingActionButton
+    private lateinit var addGoalBtn: FloatingActionButton
     var db = Firebase.database.reference
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -99,7 +98,7 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
         dialogBox.setTitle("Enter your goal")
         dialogBox.setView(view)
         val timeText = view.findViewById<TextView>(R.id.time_entered)
-        val goalText = view.findViewById<EditText>(R.id.goal_name)
+        val goalText = view.findViewById<EditText>(R.id.goal_name_dialog)
         timeText.text = Timestamp.now().toDate().toString()
 
         // this is if the user hits done
@@ -200,13 +199,13 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
                     dialogBox.setTitle("Edit Goal")
                     dialogBox.setView(view)
                     val timeText = view.findViewById<TextView>(R.id.time_entered)
-                    val goalText = view.findViewById<EditText>(R.id.goal_name)
+                    val goalText = view.findViewById<EditText>(R.id.goal_name_dialog)
                     timeText.text = Timestamp.now().toDate().toString()
 
                     // this is if the user hits done
                     dialogBox.setCancelable(false).setPositiveButton(
                         "Done"
-                    ) { dialog: DialogInterface, which: Int ->
+                    ) { dialog: DialogInterface, _: Int ->
 
                         val newCard = GoalCard(
                             card.id,
@@ -236,7 +235,7 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
                     }
                     dialogBox.setCancelable(false).setNegativeButton(
                         "Cancel"
-                    ) { dialog: DialogInterface, which: Int ->
+                    ) { dialog: DialogInterface, _: Int ->
                         goalList[position] = card
                         adapter!!.notifyItemChanged(position)
                         val canceled = Snackbar.make(
@@ -264,16 +263,16 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
                         goalList.clear()
                         for (snap in snapshot.children) {
                             Log.i("Goals", snap.toString())
-                            val value = snap.value as Map<String, String>
+                            val value = snap.value as Map<*, *>
 
                             val card = value["goal"]?.let { it1 ->
                                 value["time"]?.let { it2 ->
                                     GoalCard(
-                                        snap.key.toString(), it1,
-                                        it2, value["favorite"] as Boolean, value["done"] as Boolean
+                                        snap.key.toString(), it1 as String,
+                                        it2 as String, value["favorite"] as Boolean, value["done"] as Boolean
                                     )
                                 }
-                            };
+                            }
                             if (card != null) {
                                 goalList.add(card)
                             }

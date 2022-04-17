@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <EditText
-        android:id="@+id/goal_name"
+        android:id="@+id/goal_name_dialog"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:autofillHints=""
@@ -27,7 +27,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="4dp"
         android:text="@string/goal"
-        app:layout_constraintEnd_toStartOf="@+id/goal_name"
+        app:layout_constraintEnd_toStartOf="@+id/goal_name_dialog"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,10 +55,10 @@
         android:minHeight="48dp"
         android:textColorHint="#8D6E63"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/goal_name"
+        app:layout_constraintEnd_toEndOf="@+id/goal_name_dialog"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/goal_name"
-        app:layout_constraintTop_toBottomOf="@+id/goal_name"
+        app:layout_constraintStart_toStartOf="@+id/goal_name_dialog"
+        app:layout_constraintTop_toBottomOf="@+id/goal_name_dialog"
         app:layout_constraintVertical_bias="0.016"
         tools:ignore="DuplicateSpeakableTextCheck" />
 
