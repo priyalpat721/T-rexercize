@@ -18,6 +18,9 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import edu.neu.madcourse.trexercize.R
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
@@ -27,9 +30,9 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
     private var eachExerciseAdapter: EachExerciseAdapter?  = null
     private lateinit var exerciseTitle: TextView
     private lateinit var exerciseCategory: String
-private lateinit var exerciseVideo: WebView
+    private lateinit var exerciseVideo: WebView
     private var videoLink: String? = null
-
+    private var currentCalendarId: String? = null
     private lateinit var exerciseMuscleGroup: TextView
     private lateinit var exerciseDescriptionText: TextView
     private lateinit var exerciseEquipment: TextView
@@ -50,7 +53,7 @@ private lateinit var exerciseVideo: WebView
         addToTodayWorkout = view.findViewById(R.id.add_to_today_workout)
         exerciseEquipment = view.findViewById(R.id.exercise_equipment)
 
-        println(addToFavorites.text.toString())
+//        println(addToFavorites.text.toString())
 
         exerciseTitle.text = args.exerciseName
         exerciseMuscleGroup.text = "Muscle Group: Sample muscle group"
@@ -67,6 +70,29 @@ private lateinit var exerciseVideo: WebView
                             if(snap.key == exerciseTitle.text.toString()){
 
                                 addToFavorites.text = "Already in Favorites"
+                            }
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+
+                })
+            }
+        }
+
+        addToTodayWorkout.setOnClickListener {
+            Firebase.auth.uid?.let { it1->
+                db.child("users").child(it1).addValueEventListener(object: ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        for(snap in snapshot.children){
+                            if(snap.key == "calendar") {
+                                currentCalendarId = snap.value.toString()
+                                var date = SimpleDateFormat("MM-dd-yyyy", Locale.getDefault()).format(
+                                    Date()
+                                )
+                                db.child("calendars").child(currentCalendarId.toString()).child(date).child("workout").child(exerciseTitle.text.toString()).setValue(currentExercise)
                             }
                         }
                     }
@@ -114,7 +140,7 @@ private lateinit var exerciseVideo: WebView
                         videoLink = snap.value.toString()
                         exerciseVideo.webViewClient = WebViewClient()
                         exerciseVideo.apply{
-                            println("This is the video link: $videoLink")
+//                            println("This is the video link: $videoLink")
                             videoLink?.let { loadUrl(it) }
                             settings.javaScriptEnabled = true
                             settings.safeBrowsingEnabled = true
@@ -140,7 +166,7 @@ private lateinit var exerciseVideo: WebView
             override fun onDataChange(snapshot: DataSnapshot) {
                 exerciseDescription.clear()
                 for (snap in snapshot.children) {
-                    println(snap)
+//                    println(snap)
 
                     if(snap.key == "muscle groups") {
                         exerciseMuscleGroup.text = "Muscle Group: " + snap.value.toString()
@@ -203,7 +229,7 @@ private lateinit var exerciseVideo: WebView
 
                     }
                 }
-                println(currentExercise)
+//                println(currentExercise)
                 eachExerciseAdapter?.notifyDataSetChanged()
 
             }
