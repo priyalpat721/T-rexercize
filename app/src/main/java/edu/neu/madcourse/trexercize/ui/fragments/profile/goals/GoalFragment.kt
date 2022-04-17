@@ -299,7 +299,7 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
                         .child("done").setValue(goalList[position].done)
                 }
 
-                if (goalList[position].done == true) {
+                if (goalList[position].favorite) {
                     goalList[position].onFavBoxClick(position)
                     Firebase.auth.currentUser?.let { it2 ->
                         db.child("users").child(it2.uid)
@@ -322,6 +322,15 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
                     db.child("users").child(it.uid)
                         .child("goals").child(goalList[position].id)
                         .child("favorite").setValue(goalList[position].favorite)
+                }
+
+                if (goalList[position].done) {
+                    goalList[position].onDoneBoxClick(position)
+                    Firebase.auth.currentUser?.let { it2 ->
+                        db.child("users").child(it2.uid)
+                            .child("goals").child(goalList[position].id)
+                            .child("favorite").setValue(goalList[position].done)
+                    }
                 }
             }
         }
