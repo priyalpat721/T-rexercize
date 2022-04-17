@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/exercise_card_layout"
+    android:id="@+id/goal_card_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
@@ -23,8 +23,8 @@
             android:elevation="100dp"
             android:text="exercise name"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/exerciseBack"
-            app:layout_constraintTop_toTopOf="@+id/exerciseBack" />
+            app:layout_constraintStart_toStartOf="@+id/goalBack"
+            app:layout_constraintTop_toTopOf="@+id/goalBack" />
 
         <TextView
             android:id="@+id/exerciseGroup"
@@ -34,13 +34,13 @@
             android:elevation="100dp"
             android:text="exercise muscle groups"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/exerciseBack"
+            app:layout_constraintEnd_toEndOf="@+id/goalBack"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/exerciseName"
-            app:layout_constraintTop_toTopOf="@+id/exerciseBack" />
+            app:layout_constraintTop_toTopOf="@+id/goalBack" />
 
         <Button
-            android:id="@+id/exerciseBack"
+            android:id="@+id/goalBack"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"

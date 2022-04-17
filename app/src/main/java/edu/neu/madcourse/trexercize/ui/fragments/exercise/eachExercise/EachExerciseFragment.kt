@@ -66,7 +66,7 @@ private lateinit var exerciseVideo: WebView
 
                             if(snap.key == exerciseTitle.text.toString()){
 
-                                addToFavorites.setText("Already in Favorites")
+                                addToFavorites.text = "Already in Favorites"
                             }
                         }
                     }
