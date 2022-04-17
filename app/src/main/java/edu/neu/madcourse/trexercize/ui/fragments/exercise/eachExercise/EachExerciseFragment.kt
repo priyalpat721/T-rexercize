@@ -93,6 +93,7 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
                                     Date()
                                 )
                                 db.child("calendars").child(currentCalendarId.toString()).child(date).child("workout").child(exerciseTitle.text.toString()).setValue(currentExercise)
+                                Toast.makeText(context, "Workout added!", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }
