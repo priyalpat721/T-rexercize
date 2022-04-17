@@ -1,6 +1,7 @@
 package edu.neu.madcourse.trexercize.ui.fragments.profile.goals
 
 import android.content.Context
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,16 @@ class ShowGoalAdapter(private var goalList: ArrayList<GoalCard>, var context: Co
     }
 
     override fun onBindViewHolder(holder: ShowGoalViewHolder, position: Int) {
+        if (goalList[position].done) {
+            holder.goal.paintFlags =
+                holder.goal.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            holder.goal.text = goalList[position].goal
+        }
+        else {
+            holder.goal.paintFlags = 0
+            holder.goal.text = goalList[position].goal
+        }
+
         holder.time.text = goalList[position].time
         holder.favorite.isChecked = goalList[position].favorite
         holder.done.isChecked = goalList[position].done
