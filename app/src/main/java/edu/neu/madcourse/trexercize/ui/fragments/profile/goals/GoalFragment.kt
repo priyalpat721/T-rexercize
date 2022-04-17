@@ -26,10 +26,17 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import edu.neu.madcourse.trexercize.R
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class GoalFragment : Fragment(R.layout.fragment_goal) {
     private lateinit var backButton: ImageButton
     private val goalList: ArrayList<GoalCard> = ArrayList()
+    private val doneList: ArrayList<GoalCard> = ArrayList()
+    private val favList: ArrayList<GoalCard> = ArrayList()
+    private val pendingList: ArrayList<GoalCard> = ArrayList()
+
     private var recyclerView: RecyclerView? = null
     var adapter: GoalAdapter? = null
     private lateinit var addGoalBtn: FloatingActionButton
@@ -53,35 +60,8 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
             getTaskName()
         }
         listenForChanges()
-
-        val doneCheckBox = object : IDoneCheckBoxListener {
-            override fun onDoneBoxClick(position: Int) {
-                goalList[position].onDoneBoxClick(position)
-
-                adapter?.notifyItemChanged(position)
-
-                Firebase.auth.currentUser?.let {
-                    db.child("users").child(it.uid)
-                        .child("goals").child(goalList[position].id)
-                        .child("done").setValue(goalList[position].done)
-                }
-            }
-        }
-        adapter?.setDoneCheckBoxListener(doneCheckBox)
-
-        val favCheckBox = object : IFavCheckBoxListener {
-            override fun onFavBoxClick(position: Int) {
-                goalList[position].onFavBoxClick(position)
-                adapter?.notifyItemChanged(position)
-
-                Firebase.auth.currentUser?.let {
-                    db.child("users").child(it.uid)
-                        .child("goals").child(goalList[position].id)
-                        .child("favorite").setValue(goalList[position].favorite)
-                }
-            }
-        }
-        adapter?.setFavCheckBoxListener(favCheckBox)
+        doneButtonFunctionality()
+        favButtonFunctionality()
     }
 
     private fun setUpResources() {
@@ -99,7 +79,7 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
         dialogBox.setView(view)
         val timeText = view.findViewById<TextView>(R.id.time_entered)
         val goalText = view.findViewById<EditText>(R.id.goal_name_dialog)
-        timeText.text = Timestamp.now().toDate().toString()
+        timeText.text = SimpleDateFormat("MM-dd-yyyy", Locale.getDefault()).format(Date())
 
         // this is if the user hits done
         dialogBox.setCancelable(false)
@@ -254,6 +234,10 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
     @SuppressLint("NotifyDataSetChanged")
     private fun listenForChanges() {
         goalList.clear()
+        favList.clear()
+        doneList.clear()
+        pendingList.clear()
+
         Firebase.auth.currentUser?.uid?.let {
             db.child("users").child(it).child("goals")
                 .addValueEventListener(object :
@@ -261,6 +245,9 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
                     @SuppressLint("SetTextI18n")
                     override fun onDataChange(snapshot: DataSnapshot) {
                         goalList.clear()
+                        favList.clear()
+                        doneList.clear()
+                        pendingList.clear()
                         for (snap in snapshot.children) {
                             Log.i("Goals", snap.toString())
                             val value = snap.value as Map<*, *>
@@ -274,9 +261,21 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
                                 }
                             }
                             if (card != null) {
-                                goalList.add(card)
+                                if (card.favorite) {
+                                    favList.add(card)
+                                }
+                                else if (card.done) {
+                                    doneList.add(card)
+                                }
+                                else {
+                                    pendingList.add(card)
+                                }
                             }
                         }
+                        goalList.clear()
+                        goalList.addAll(favList)
+                        goalList.addAll(pendingList)
+                        goalList.addAll(doneList)
                         adapter?.notifyDataSetChanged()
 
                     }
@@ -286,5 +285,46 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
                     }
                 })
         }
+    }
+
+    private fun doneButtonFunctionality() {
+        val doneCheckBox = object : IDoneCheckBoxListener {
+            override fun onDoneBoxClick(position: Int) {
+                goalList[position].onDoneBoxClick(position)
+                adapter?.notifyItemChanged(position)
+
+                Firebase.auth.currentUser?.let {
+                    db.child("users").child(it.uid)
+                        .child("goals").child(goalList[position].id)
+                        .child("done").setValue(goalList[position].done)
+                }
+
+                if (goalList[position].done == true) {
+                    goalList[position].onFavBoxClick(position)
+                    Firebase.auth.currentUser?.let { it2 ->
+                        db.child("users").child(it2.uid)
+                            .child("goals").child(goalList[position].id)
+                            .child("favorite").setValue(goalList[position].favorite)
+                    }
+                }
+            }
+        }
+        adapter?.setDoneCheckBoxListener(doneCheckBox)
+    }
+
+    private fun favButtonFunctionality() {
+        val favCheckBox = object : IFavCheckBoxListener {
+            override fun onFavBoxClick(position: Int) {
+                goalList[position].onFavBoxClick(position)
+                adapter?.notifyItemChanged(position)
+
+                Firebase.auth.currentUser?.let {
+                    db.child("users").child(it.uid)
+                        .child("goals").child(goalList[position].id)
+                        .child("favorite").setValue(goalList[position].favorite)
+                }
+            }
+        }
+        adapter?.setFavCheckBoxListener(favCheckBox)
     }
 }
