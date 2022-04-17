@@ -50,11 +50,6 @@ class GoalAdapter(private var goalList: ArrayList<GoalCard>, var context: Contex
             if (doneCheckBox != null) {
                 if (position != RecyclerView.NO_POSITION) {
                     doneCheckBox?.onDoneBoxClick(position)
-                    holder.task.paintFlags =
-                        holder.task.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-                }
-                else {
-                    holder.task.paintFlags = 0
                 }
             }
         }
