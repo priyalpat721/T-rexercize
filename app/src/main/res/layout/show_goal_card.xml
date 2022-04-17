@@ -36,7 +36,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/goalBack"
         app:layout_constraintStart_toStartOf="@+id/goalBack"
         app:layout_constraintTop_toTopOf="@+id/goalBack"
-        app:layout_constraintVertical_bias="0.316" />
+        app:layout_constraintVertical_bias="0.316"
+        android:textIsSelectable="false"/>
 
     <CheckBox
         android:id="@+id/favorites2"
@@ -47,7 +48,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/goal_name2"
         app:layout_constraintEnd_toEndOf="@+id/goalBack"
         app:layout_constraintTop_toTopOf="@+id/goal_name2"
-        app:layout_constraintVertical_bias="0.448" />
+        app:layout_constraintVertical_bias="0.448"
+        android:textIsSelectable="false"/>
 
     <TextView
         android:id="@+id/textView"

@@ -77,8 +77,8 @@
             android:id="@+id/action_profileFragment_to_editFragment"
             app:destination="@id/editFragment" />
         <action
-            android:id="@+id/action_profileFragment_to_goalFragment"
-            app:destination="@id/goalFragment" />
+            android:id="@+id/action_profileFragment_to_showGoalsFragment"
+            app:destination="@id/showGoalsFragment" />
     </fragment>
     <fragment
         android:id="@+id/dayFragment"
@@ -180,9 +180,6 @@
         <action
             android:id="@+id/action_goalFragment_to_editFragment"
             app:destination="@id/editFragment" />
-        <action
-            android:id="@+id/action_goalFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -206,5 +203,13 @@
         <action
             android:id="@+id/action_signInFragment_to_homeScreenFragment"
             app:destination="@id/homeScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/showGoalsFragment"
+        android:name="edu.neu.madcourse.trexercize.ui.fragments.profile.goals.ShowGoalsFragment"
+        android:label="ShowGoalsFragment" >
+        <action
+            android:id="@+id/action_showGoalsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 </navigation>
