@@ -34,7 +34,10 @@ class DayFragment : Fragment(R.layout.fragment_day) {
     private lateinit var stickerBack: ImageButton
     private lateinit var stickerForward: ImageButton
     private lateinit var changeSnapButton: Button
+    private lateinit var saveSnapButton: Button
+    private lateinit var saveMoodButton: Button
     private lateinit var snapImage: ImageView
+    private lateinit var moodImage: ImageView
     lateinit var adapter: ExerciseTextAdapter
     private var path: Uri? = null
     private var pathFromCloud : Uri? = null
@@ -69,6 +72,9 @@ class DayFragment : Fragment(R.layout.fragment_day) {
         exerciseList.add(ExerciseTextCard("swim", "heart"))
         adapter.setDataList(exerciseList)
 
+        // populate the page with data from database
+
+
         // change daily snap image
         storage = FirebaseStorage.getInstance()
         storageRef = storage.reference
@@ -76,37 +82,67 @@ class DayFragment : Fragment(R.layout.fragment_day) {
         val imageUploader = ImageUploaderFunctions()
         snapImage = view.findViewById(R.id.snapImage)
         changeSnapButton = view.findViewById(R.id.change_snap)
+        saveSnapButton = view.findViewById(R.id.save_snap)
+
         changeSnapButton.setOnClickListener {
             path = imageUploader.getImagePathFromCamera(this.context, request, this.requireActivity())
-            pathFromCloud = Uri.parse(imageUploader.uploadImageFromCameraToDb(path!!, storageRef,  db, this.context))
+            imageUploader.uploadImageFromCameraToDb(path!!, storageRef,  db, this.context)
+            changeSnapButton.visibility = GONE
+            saveSnapButton.visibility = VISIBLE
+            Log.i("FILE PATH PIC 1", path.toString())
+        }
 
+        saveSnapButton.setOnClickListener {
             var calendar : String
             Firebase.auth.currentUser?.uid?.let { it1 ->
                 db.child("users").child(
                     it1
                 ).child("calendar").get().addOnSuccessListener {
                     calendar = it.value.toString()
-                    val currentDay = hashMapOf(
-                        "dailySnap" to pathFromCloud.toString(),
-                        "workout" to arrayListOf(exerciseList),
-                        "mood" to mood
-                    )
-                    Log.i("CurrentDate", currentDay.toString())
-                    db.child("calendars").child(calendar).child(args.date).setValue(currentDay)
+//                    val currentDay = hashMapOf(
+//                        "dailySnap" to pathFromCloud.toString()
+//                    )
+//                    Log.i("CurrentDate", currentDay.toString())
+                    db.child("calendars").child(calendar).child(args.date)
+                        .child("dailySnap").setValue(path.toString())
+                    Log.i("FILE PATH PIC 2", path.toString())
                 }
             }
+            saveSnapButton.visibility = GONE
         }
 
         stickerScroll = view.findViewById(R.id.stickerScroll)
         stickerBack = view.findViewById(R.id.stickerBack)
         stickerForward = view.findViewById(R.id.stickerForward)
+        saveMoodButton = view.findViewById(R.id.save_mood)
+        moodImage = view.findViewById(R.id.moodSticker)
 
-        /*stickerBack.setOnClickListener {
-            stickerScroll.smoothScrollTo(stickerScroll.scrollX - 100, stickerScroll.scrollY)
+        saveMoodButton.setOnClickListener {
+            if (mood == "none") {
+                Toast.makeText(context, "No mood selected",Toast.LENGTH_SHORT).show()
+            } else {
+                var calendar: String
+                Firebase.auth.currentUser?.uid?.let { it1 ->
+                    db.child("users").child(
+                        it1
+                    ).child("calendar").get().addOnSuccessListener {
+                        calendar = it.value.toString()
+//                        val currentDay = hashMapOf(
+//                            "dailySnap" to pathFromCloud.toString(),
+//                            "mood" to mood
+//                        )
+                        //Log.i("CurrentDate", currentDay.toString())
+                        db.child("calendars").child(calendar).child(args.date).child("mood").setValue(mood)
+                    }
+                }
+                saveMoodButton.visibility = GONE
+                stickerScroll.visibility = GONE
+                stickerBack.visibility = GONE
+                stickerForward.visibility = GONE
+                moodImage.visibility = VISIBLE
+
+            }
         }
-        stickerForward.setOnClickListener {
-            stickerScroll.smoothScrollTo(stickerScroll.scrollX + 100, stickerScroll.scrollY)
-        }*/
 
         // scroll through stickers with arrow buttons
         // https://stackoverflow.com/questions/16079486/scrolling-a-horizontalscrollview-by-clicking-buttons-on-its-sides
