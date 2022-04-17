@@ -29,6 +29,7 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
     private lateinit var exerciseCategory: String
 //    private lateinit var exerciseVideo: VideoView
 private lateinit var exerciseVideo: WebView
+    private var videoLink: String? = null
 
     private lateinit var exerciseMuscleGroup: TextView
     private lateinit var exerciseDescriptionText: TextView
@@ -89,8 +90,8 @@ private lateinit var exerciseVideo: WebView
         }
 
         setUpResources()
-        setUpData()
         listenForChanges()
+        setUpData()
 
 //        "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     }
@@ -105,13 +106,31 @@ private lateinit var exerciseVideo: WebView
     @SuppressLint("NotifyDataSetChanged")
     private fun setUpData(){
 
-        exerciseVideo.webViewClient = WebViewClient()
-        exerciseVideo.apply{
-            loadUrl("https://player.vimeo.com/video/123135208?h=7fd06d3dff&title=0&byline=0&portrait=0")
-            settings.javaScriptEnabled = true
-            settings.safeBrowsingEnabled = true
+        db.child(exerciseCategory.lowercase()).child(exerciseTitle.text.toString()).addValueEventListener(object :
+            ValueEventListener {
+            @SuppressLint("SetTextI18n")
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (snap in snapshot.children) {
 
-        }
+                    if(snap.key == "video") {
+                        videoLink = snap.value.toString()
+                        exerciseVideo.webViewClient = WebViewClient()
+                        exerciseVideo.apply{
+                            println("This is the video link: $videoLink")
+                            videoLink?.let { loadUrl(it) }
+                            settings.javaScriptEnabled = true
+                            settings.safeBrowsingEnabled = true
+
+                        }
+
+                    }
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                // not implemented
+            }
+        })
+
 
 //        val uri: Uri = Uri.parse("http://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4")
 //        val uri: Uri = Uri.parse("https://drive.google.com/file/d/1UIJA-IqrkfzYi7VjPGeUdMzpr2aTNGX6/view")
@@ -204,6 +223,7 @@ private lateinit var exerciseVideo: WebView
                     }
                     if(snap.key == "video") {
                         currentExercise["video"] = snap.value.toString()
+                        videoLink = snap.value.toString()
 
                     }
                 }
