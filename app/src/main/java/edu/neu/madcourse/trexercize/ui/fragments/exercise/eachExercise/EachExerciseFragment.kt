@@ -3,8 +3,9 @@ package edu.neu.madcourse.trexercize.ui.fragments.exercise.eachExercise
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
@@ -17,9 +18,6 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import edu.neu.madcourse.trexercize.R
-import edu.neu.madcourse.trexercize.ui.fragments.exercise.eachCategory.IndividualExerciseCard
-import edu.neu.madcourse.trexercize.ui.fragments.exercise.eachCategory.IndividualExerciseFragmentArgs
-import kotlin.math.E
 
 
 class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
@@ -29,7 +27,9 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
     private var eachExerciseAdapter: EachExerciseAdapter?  = null
     private lateinit var exerciseTitle: TextView
     private lateinit var exerciseCategory: String
-    private lateinit var exerciseVideo: VideoView
+private lateinit var exerciseVideo: WebView
+    private var videoLink: String? = null
+
     private lateinit var exerciseMuscleGroup: TextView
     private lateinit var exerciseDescriptionText: TextView
     private lateinit var exerciseEquipment: TextView
@@ -38,7 +38,6 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
     private var db = Firebase.database.reference
     private val args : EachExerciseFragmentArgs by navArgs()
     private val currentExercise = hashMapOf<String, Any?>()
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -90,10 +89,9 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
         }
 
         setUpResources()
-        //setUpData()
         listenForChanges()
+        setUpData()
 
-//        "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     }
 
     private fun setUpResources(){
@@ -103,17 +101,33 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
         recyclerView!!.layoutManager = LinearLayoutManager(context)
 
     }
-
     @SuppressLint("NotifyDataSetChanged")
     private fun setUpData(){
 
-//        exerciseVideo.setVideoURI(Uri.parse("https://vimeo.com/123135208"))
-//        exerciseVideo.requestFocus()
-//        exerciseVideo.start()
+        db.child(exerciseCategory.lowercase()).child(exerciseTitle.text.toString()).addValueEventListener(object :
+            ValueEventListener {
+            @SuppressLint("SetTextI18n")
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (snap in snapshot.children) {
 
-//        val mediaController: MediaController = MediaController(context)
-//        exerciseVideo.setMediaController(mediaController)
-//        mediaController.setAnchorView(exerciseVideo)
+                    if(snap.key == "video") {
+                        videoLink = snap.value.toString()
+                        exerciseVideo.webViewClient = WebViewClient()
+                        exerciseVideo.apply{
+                            println("This is the video link: $videoLink")
+                            videoLink?.let { loadUrl(it) }
+                            settings.javaScriptEnabled = true
+                            settings.safeBrowsingEnabled = true
+
+                        }
+
+                    }
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                // not implemented
+            }
+        })
 
     }
 
@@ -185,6 +199,7 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
                     }
                     if(snap.key == "video") {
                         currentExercise["video"] = snap.value.toString()
+                        videoLink = snap.value.toString()
 
                     }
                 }
