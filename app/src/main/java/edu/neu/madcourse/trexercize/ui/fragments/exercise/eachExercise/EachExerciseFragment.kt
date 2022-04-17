@@ -27,7 +27,6 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
     private var eachExerciseAdapter: EachExerciseAdapter?  = null
     private lateinit var exerciseTitle: TextView
     private lateinit var exerciseCategory: String
-//    private lateinit var exerciseVideo: VideoView
 private lateinit var exerciseVideo: WebView
     private var videoLink: String? = null
 
@@ -93,7 +92,6 @@ private lateinit var exerciseVideo: WebView
         listenForChanges()
         setUpData()
 
-//        "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     }
 
     private fun setUpResources(){
@@ -131,29 +129,7 @@ private lateinit var exerciseVideo: WebView
             }
         })
 
-
-//        val uri: Uri = Uri.parse("http://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4")
-//        val uri: Uri = Uri.parse("https://drive.google.com/file/d/1UIJA-IqrkfzYi7VjPGeUdMzpr2aTNGX6/view")
-//        val localuri = Uri.parse("android.resource://" + (activity?.packageName ?: "") + "/" + R.raw.barbell_curl)
-
-//        val uri: Uri = Uri.parse("https://player.vimeo.com/video/123135208?h=7fd06d3dff&title=0&byline=0&portrait=0")
-
-//        val mediaController: MediaController = MediaController(activity)
-//        exerciseVideo.setMediaController(mediaController)
-//        exerciseVideo.setVideoURI(uri)
-//        mediaController.setAnchorView(exerciseVideo)
-//        exerciseVideo.requestFocus()
-//        exerciseVideo.start()
-//        exerciseVideo.setSource("http://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4");
     }
-
-//    override fun onBackPressed() {
-//        if(exerciseVideo.canGoBack()) {
-//            exerciseVideo.goBack()
-//        } else {
-//            super.onBackPressed()
-//        }
-//    }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun listenForChanges() {
