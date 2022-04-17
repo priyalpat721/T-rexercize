@@ -19,6 +19,12 @@ import edu.neu.madcourse.trexercize.BuildConfig
 import java.io.File
 
 class ImageUploaderFunctions {
+     var profile : Boolean = false
+
+    constructor()
+    constructor(profile: Boolean) {
+        this.profile = profile
+    }
 
     // gets the path of the image taken from the camera
     fun getImagePathFromCamera(
@@ -49,24 +55,28 @@ class ImageUploaderFunctions {
         storageRef: StorageReference,
         db: DatabaseReference,
         context: Context?
-    ) {
+    ): String {
         val fileName = path.lastPathSegment.toString()
         val userId = Firebase.auth.currentUser?.uid
+        var pathFromCloud = ""
 
+        Log.i("FileName", fileName)
         if (userId != null) {
             // task snapshot returns a lot of information, including the path
             storageRef.child("images").child(userId).child(fileName).putFile(path)
                 .addOnSuccessListener {
-                    Log.i("Gallery", "${it.metadata?.path}")
                     // once we have the path, we just download the url from cloud
                     storageRef.child("${it.metadata?.path}").downloadUrl.addOnSuccessListener { picture ->
-                        val userProfileUri = picture.toString()
-                        Log.i("SUCCESS", userProfileUri)
+                        val profileUri = picture.toString()
                         // updates the user's profile picture
-                        Firebase.auth.currentUser?.uid?.let { it1 ->
-                            db.child("users").child(it1).child("profilePicture")
-                                .setValue(userProfileUri)
+                        if (profile) {
+                            Firebase.auth.currentUser?.uid?.let { it1 ->
+                                db.child("users").child(it1).child("profilePicture")
+                                    .setValue(profileUri)
+                            }
                         }
+                        pathFromCloud = picture.toString()
+
                     }.addOnFailureListener {
                         Toast.makeText(
                             context,
@@ -76,6 +86,8 @@ class ImageUploaderFunctions {
                     }
                 }
         }
+        Log.i("PathFromCloud", pathFromCloud)
+        return pathFromCloud
     }
 
     fun upLoadImageFromGalleryToDb(

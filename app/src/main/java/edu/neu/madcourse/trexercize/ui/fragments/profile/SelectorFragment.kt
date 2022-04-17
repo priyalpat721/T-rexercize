@@ -37,7 +37,7 @@ class SelectorFragment : Fragment(R.layout.fragment_selector) {
         storage = FirebaseStorage.getInstance()
         storageRef = storage.reference
         cameraPicture = view.findViewById(R.id.camera_picture)
-        val imageUploader = ImageUploaderFunctions()
+        val imageUploader = ImageUploaderFunctions(true)
         galleryButton.setOnClickListener {
             val action: NavDirections =
                 SelectorFragmentDirections.actionSelectorFragmentToGalleryFragment()

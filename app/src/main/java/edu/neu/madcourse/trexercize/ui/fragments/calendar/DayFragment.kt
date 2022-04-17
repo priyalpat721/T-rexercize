@@ -37,6 +37,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
     private lateinit var snapImage: ImageView
     lateinit var adapter: ExerciseTextAdapter
     private var path: Uri? = null
+    private var pathFromCloud : Uri? = null
     private lateinit var storageRef: StorageReference
     private var db = Firebase.database.reference
     private lateinit var storage: FirebaseStorage
@@ -77,26 +78,23 @@ class DayFragment : Fragment(R.layout.fragment_day) {
         changeSnapButton = view.findViewById(R.id.change_snap)
         changeSnapButton.setOnClickListener {
             path = imageUploader.getImagePathFromCamera(this.context, request, this.requireActivity())
-            imageUploader.uploadImageFromCameraToDb(path!!, storageRef,  db, this.context)
+            pathFromCloud = Uri.parse(imageUploader.uploadImageFromCameraToDb(path!!, storageRef,  db, this.context))
 
-            var calendar: String = ""
+            var calendar : String
             Firebase.auth.currentUser?.uid?.let { it1 ->
                 db.child("users").child(
                     it1
                 ).child("calendar").get().addOnSuccessListener {
                     calendar = it.value.toString()
                     val currentDay = hashMapOf(
-                        "dailySnap" to path.toString(),
+                        "dailySnap" to pathFromCloud.toString(),
                         "workout" to arrayListOf(exerciseList),
                         "mood" to mood
                     )
-                    Log.i("CALENDAR", calendar)
+                    Log.i("CurrentDate", currentDay.toString())
                     db.child("calendars").child(calendar).child(args.date).setValue(currentDay)
-
                 }
             }
-
-
         }
 
         stickerScroll = view.findViewById(R.id.stickerScroll)
