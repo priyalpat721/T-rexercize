@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import edu.neu.madcourse.trexercize.R
 
-class GoalViewHolder(itemView: View) :
+class ShowGoalViewHolder(itemView: View) :
     RecyclerView.ViewHolder(itemView) {
 
     var goal: TextView = itemView.findViewById(R.id.goal_name2)

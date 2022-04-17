@@ -54,7 +54,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         showGoals.setOnClickListener {
             val action: NavDirections =
-                ProfileFragmentDirections.actionProfileFragmentToGoalFragment()
+                ProfileFragmentDirections.actionProfileFragmentToShowGoalsFragment()
             view.findNavController().navigate(action)
         }
     }

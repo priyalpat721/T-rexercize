@@ -18,7 +18,7 @@
         android:contentDescription="@string/back_button"
         android:minWidth="32dp"
         android:minHeight="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/recycler_view_show"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
@@ -42,7 +42,7 @@
         tools:ignore="RedundantDescriptionCheck,ImageContrastCheck,SpeakableTextPresentCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/recycler_view_show"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="32dp"

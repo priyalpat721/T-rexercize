@@ -47,11 +47,11 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
         backButton = view.findViewById(R.id.back_btn2)
 
         backButton.setOnClickListener {
-            val action: NavDirections = GoalFragmentDirections.actionGoalFragmentToProfileFragment()
+            val action: NavDirections = GoalFragmentDirections.actionGoalFragmentToEditFragment()
             view.findNavController().navigate(action)
         }
 
-        recyclerView = view.findViewById(R.id.recyclerView)
+        recyclerView = view.findViewById(R.id.recycler_view_show)
         setUpResources()
         manageSwipes()
 
