@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_day"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -67,6 +68,21 @@
                 app:strokeColor="#000000"
                 app:strokeWidth="10000dp" />
 
+            <Button
+                android:id="@+id/save_snap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="Save snap"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/snapImage"
+                app:layout_constraintEnd_toEndOf="@+id/snapImage"
+                app:layout_constraintTop_toTopOf="@+id/snapImage"
+                app:layout_constraintVertical_bias="1.0"
+                app:strokeColor="#000000"
+                app:strokeWidth="10000dp" />
+
             <TextView
                 android:id="@+id/snapText"
                 android:layout_width="wrap_content"
@@ -123,6 +139,81 @@
                 app:layout_constraintTop_toBottomOf="@+id/snapText"
                 app:srcCompat="@drawable/gympic" />
 
+            <Button
+                android:id="@+id/save_mood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:background="@android:color/transparent"
+                android:text="Save mood"
+                android:textColor="#2196F3"
+                app:layout_constraintBottom_toBottomOf="@+id/moodText"
+                app:layout_constraintStart_toEndOf="@+id/moodText"
+                app:layout_constraintTop_toTopOf="@+id/moodText"
+                app:strokeColor="#000000"
+                app:strokeWidth="10000dp" />
+
+            <ImageView
+                android:id="@+id/moodSticker"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/moodText"
+                app:layout_constraintStart_toStartOf="@+id/moodText"
+                app:layout_constraintTop_toBottomOf="@+id/moodText"
+                app:srcCompat="@drawable/stickerexercisedino" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/noRecycler"
+                android:layout_width="wrap_content"
+                android:layout_height="180dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/workoutText">
+
+                <ImageView
+                    android:id="@+id/speechdino"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/saddino" />
+
+                <TextView
+                    android:id="@+id/noWorkout"
+                    android:layout_width="146dp"
+                    android:layout_height="101dp"
+                    android:text="No workout done for this day. Exercise now!"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/speech"
+                    app:layout_constraintEnd_toEndOf="@+id/speech"
+                    app:layout_constraintHorizontal_bias="0.703"
+                    app:layout_constraintStart_toStartOf="@+id/speech"
+                    app:layout_constraintTop_toTopOf="@+id/speech"
+                    app:layout_constraintVertical_bias="0.538" />
+
+                <ImageView
+                    android:id="@+id/speech"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    app:layout_constraintBottom_toBottomOf="@+id/speechdino"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/speechdino"
+                    app:layout_constraintTop_toTopOf="@+id/speechdino"
+                    app:srcCompat="@drawable/speechbubble2" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/workoutRecycler"
                 android:layout_width="match_parent"
@@ -130,7 +221,9 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/workoutText" />
+                app:layout_constraintTop_toBottomOf="@+id/workoutText" >
+
+            </androidx.recyclerview.widget.RecyclerView>
 
             <HorizontalScrollView
                 android:id="@+id/stickerScroll"
@@ -243,4 +336,3 @@
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
