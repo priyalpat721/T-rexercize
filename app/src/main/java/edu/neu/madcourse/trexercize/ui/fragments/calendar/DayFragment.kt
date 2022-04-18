@@ -17,12 +17,18 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import edu.neu.madcourse.trexercize.R
+import edu.neu.madcourse.trexercize.ui.fragments.profile.ProfileAdapter
+import edu.neu.madcourse.trexercize.ui.fragments.profile.ProfileCard
 import edu.neu.madcourse.trexercize.ui.helper.ImageUploaderFunctions
 
 
@@ -45,6 +51,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
     private var db = Firebase.database.reference
     private lateinit var storage: FirebaseStorage
     private var mood: String = "none"
+    private lateinit var userCalendar : String
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,19 +67,74 @@ class DayFragment : Fragment(R.layout.fragment_day) {
         }
         // recycler view
         recyclerView = view.findViewById(R.id.workoutRecycler)
-        adapter = ExerciseTextAdapter(view.context)
+        //adapter = ExerciseTextAdapter(view.context)
+        adapter = ExerciseTextAdapter(exerciseList, this.requireContext())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         // some dummy exercises for now
-        exerciseList.add(ExerciseTextCard("pushup", "arm"))
-        exerciseList.add(ExerciseTextCard("potato", "leg"))
-        exerciseList.add(ExerciseTextCard("presses", "chest"))
-        exerciseList.add(ExerciseTextCard("run", "leg"))
-        exerciseList.add(ExerciseTextCard("swim", "heart"))
-        adapter.setDataList(exerciseList)
+//        exerciseList.add(ExerciseTextCard("pushup", "arm"))
+//        exerciseList.add(ExerciseTextCard("potato", "leg"))
+//        exerciseList.add(ExerciseTextCard("presses", "chest"))
+//        exerciseList.add(ExerciseTextCard("run", "leg"))
+//        exerciseList.add(ExerciseTextCard("swim", "heart"))
+//        adapter.setDataList(exerciseList)
 
-        // populate the page with data from database
+        Firebase.auth.currentUser?.uid?.let { it1 ->
+            db.child("users").child(
+                it1
+            ).child("calendar").get().addOnSuccessListener {
+                userCalendar = it.value.toString()
+                println("Calendar " + userCalendar)
+                // populate the page with data from database
+                db.child("calendars").child(userCalendar).child(args.date)
+                    .addValueEventListener(object: ValueEventListener {
+                        @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            //exerciseList.clear()
+                            for (snap in snapshot.children){
+                                if (snap.key == "dailySnap") {
+                                    // set pic image view
+                                }
+                                if (snap.key == "workout") {
+                                    // set the workout items to exercise list
+                                    val workoutInfo = snap.value as Map<String, String>
+                                    for (exercise in workoutInfo) {
+                                        //println("exercise $exercise")
+                                        val exerciseInfo = exercise.value as Map<String, String>
+                                        for (info in exerciseInfo) {
+                                            //println("info $info")
+                                            if (info.key == "muscle groups") {
+                                                val exerciseString = exercise.key
+                                                val muscleString = info.value
+                                                //exerciseList.add(ExerciseTextCard("exerciseString", "muscleString"))
+                                                exerciseList.add(ExerciseTextCard(exerciseString, muscleString))
+                                                println("EXERCISE: $exerciseString MUSCLE: $muscleString")
+                                                adapter?.notifyDataSetChanged()
+                                                exerciseList.forEach{
+                                                    println("LIST NAME " + it.exerciseName)
+                                                    println("LIST MUSCLE " + it.exerciseMuscleGroups)
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                    //println("snap in $workoutInfo")
+                                }
+                                if (snap.key == "mood") {
+                                    // set the mode image view
+                                }
+
+                            }
+
+                        }
+                        override fun onCancelled(error: DatabaseError) {
+                            // NOT IMPLEMENTED
+                        }
+
+                    })
+            }
+        }
 
 
         // change daily snap image
