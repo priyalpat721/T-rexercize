@@ -17,11 +17,9 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import edu.neu.madcourse.trexercize.BuildConfig
 import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
 
 class ImageUploaderFunctions {
-    var profile: Boolean = false
+     var profile : Boolean = false
 
     constructor()
     constructor(profile: Boolean) {
@@ -57,13 +55,10 @@ class ImageUploaderFunctions {
         storageRef: StorageReference,
         db: DatabaseReference,
         context: Context?
-    ) {
-        lateinit var userCalendar: String
+    ): String {
         val fileName = path.lastPathSegment.toString()
         val userId = Firebase.auth.currentUser?.uid
-        val date = SimpleDateFormat("M-d-yyyy", Locale.getDefault()).format(
-            Date()
-        )
+        var pathFromCloud = ""
 
         Log.i("FileName", fileName)
         if (userId != null) {
@@ -72,26 +67,16 @@ class ImageUploaderFunctions {
                 .addOnSuccessListener {
                     // once we have the path, we just download the url from cloud
                     storageRef.child("${it.metadata?.path}").downloadUrl.addOnSuccessListener { picture ->
-                        val pictureUri = picture.toString()
+                        val profileUri = picture.toString()
                         // updates the user's profile picture
                         if (profile) {
                             Firebase.auth.currentUser?.uid?.let { it1 ->
                                 db.child("users").child(it1).child("profilePicture")
-                                    .setValue(pictureUri)
-                            }
-                        } else {
-                            Firebase.auth.currentUser?.uid?.let { it1 ->
-                                db.child("users").child(
-                                    it1
-                                ).child("calendar").get().addOnSuccessListener {
-                                    userCalendar = it.value.toString()
-                                    println("Calendar " + userCalendar)
-                                    // populate the page with data from database
-                                    db.child("calendars").child(userCalendar).child(date)
-                                        .child("dailySnap").setValue(pictureUri)
-                                }
+                                    .setValue(profileUri)
                             }
                         }
+                        pathFromCloud = picture.toString()
+
                     }.addOnFailureListener {
                         Toast.makeText(
                             context,
@@ -101,6 +86,8 @@ class ImageUploaderFunctions {
                     }
                 }
         }
+        Log.i("PathFromCloud", pathFromCloud)
+        return pathFromCloud
     }
 
     fun upLoadImageFromGalleryToDb(
@@ -124,11 +111,7 @@ class ImageUploaderFunctions {
                 db.child("users").child(it1).child("profilePicture").setValue(userProfileUri)
             }
         }.addOnFailureListener {
-            Toast.makeText(
-                context,
-                "Sorry, the picture could not be uploaded",
-                Toast.LENGTH_LONG
-            ).show()
+            Toast.makeText(context, "Sorry, the picture could not be uploaded", Toast.LENGTH_LONG).show()
         }
     }
 }

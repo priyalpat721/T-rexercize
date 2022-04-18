@@ -32,16 +32,16 @@ open class CalendarFragment : Fragment(R.layout.fragment_calendar) {
     }
 
     private fun getDayView(calendar: CalendarView) {
-        calendar.setOnDateChangeListener { _, i, i2, i3 ->
+        calendar.setOnDateChangeListener { cal, i, i2, i3 ->
+            // ignore
+            println(cal)
             // keep
-            val month = Integer.valueOf(i2 + 1)
-            val d = "$month-$i3-$i"
+            val day = Integer.valueOf(i2 + 1)
+            val d = "$day-$i3-$i"
 
             val action: NavDirections
             action = CalendarFragmentDirections.actionCalendarFragmentToDayFragment()
             d.also { action.date = it }
-            // check if the date clicked is after current date
-
             view?.findNavController()?.navigate(action)
         }
     }
