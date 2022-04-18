@@ -25,7 +25,7 @@ open class CalendarFragment : Fragment(R.layout.fragment_calendar) {
 
         quotesBox = view.findViewById(R.id.quotes)
         getQuote(quotesBox)
-        // calendar view
+
         calendar = view.findViewById(R.id.calendar_view)
         getDayView(calendar)
 
