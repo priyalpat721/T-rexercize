@@ -29,9 +29,10 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import edu.neu.madcourse.trexercize.R
-import edu.neu.madcourse.trexercize.ui.fragments.profile.ProfileAdapter
-import edu.neu.madcourse.trexercize.ui.fragments.profile.ProfileCard
 import edu.neu.madcourse.trexercize.ui.helper.ImageUploaderFunctions
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class DayFragment : Fragment(R.layout.fragment_day) {
@@ -104,7 +105,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                                     context?.let { it2 -> Glide.with(it2).load(snap.value).into(snapImage) }
                                 }
                                 if (snap.key == "workout") {
-                                    noWorkout = view.findViewById(R.id.noWorkout)
+                                    noWorkout = view.findViewById(R.id.noRecycler)
                                     noWorkout.visibility = GONE
                                     // set the workout items to exercise list
                                     val workoutInfo = snap.value as Map<String, String>
@@ -120,15 +121,10 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                                                 exerciseList.add(ExerciseTextCard(exerciseString, muscleString))
                                                 println("EXERCISE: $exerciseString MUSCLE: $muscleString")
                                                 adapter?.notifyDataSetChanged()
-                                                exerciseList.forEach{
-                                                    println("LIST NAME " + it.exerciseName)
-                                                    println("LIST MUSCLE " + it.exerciseMuscleGroups)
-                                                }
                                             }
                                         }
 
                                     }
-                                    //println("snap in $workoutInfo")
                                 }
                                 if (snap.key == "mood") {
                                     // set the mode image view
@@ -171,7 +167,9 @@ class DayFragment : Fragment(R.layout.fragment_day) {
             }
         }
 
-
+        var currentDay = SimpleDateFormat("M-d-yyyy", Locale.getDefault()).format(
+            Date()
+        )
         // change daily snap image
         storage = FirebaseStorage.getInstance()
         storageRef = storage.reference
@@ -348,6 +346,11 @@ class DayFragment : Fragment(R.layout.fragment_day) {
             mood = "sleepy"
             clearStickerSelection()
             sleepySticker.setBackgroundResource(R.drawable.rectangle_bg_teal_100_radius_15)
+        }
+
+        if (args.date != currentDay) {
+            changeSnapButton.visibility = GONE
+            saveMoodButton.visibility = GONE
         }
     }
 
