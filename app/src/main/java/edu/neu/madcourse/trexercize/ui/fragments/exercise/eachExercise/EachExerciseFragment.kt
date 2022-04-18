@@ -89,7 +89,7 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
                         for(snap in snapshot.children){
                             if(snap.key == "calendar") {
                                 currentCalendarId = snap.value.toString()
-                                var date = SimpleDateFormat("MM-dd-yyyy", Locale.getDefault()).format(
+                                var date = SimpleDateFormat("M-d-yyyy", Locale.getDefault()).format(
                                     Date()
                                 )
                                 db.child("calendars").child(currentCalendarId.toString()).child(date).child("workout").child(exerciseTitle.text.toString()).setValue(currentExercise)
