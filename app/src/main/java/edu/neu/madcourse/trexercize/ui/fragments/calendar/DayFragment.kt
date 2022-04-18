@@ -78,35 +78,25 @@ class DayFragment : Fragment(R.layout.fragment_day) {
         changeSnapButton = view.findViewById(R.id.change_snap)
         changeSnapButton.setOnClickListener {
             path = imageUploader.getImagePathFromCamera(this.context, request, this.requireActivity())
-            pathFromCloud = Uri.parse(imageUploader.uploadImageFromCameraToDb(path!!, storageRef,  db, this.context))
+
+            changeSnapButton.visibility = GONE
+            saveSnapButton.visibility = VISIBLE
+            Log.i("FILE PATH PIC 1", path.toString())
+        }
 
             var calendar : String
-            Firebase.auth.currentUser?.uid?.let { it1 ->
-                db.child("users").child(
-                    it1
-                ).child("calendar").get().addOnSuccessListener {
-                    calendar = it.value.toString()
-                    val currentDay = hashMapOf(
-                        "dailySnap" to pathFromCloud.toString(),
-                        "workout" to arrayListOf(exerciseList),
-                        "mood" to mood
-                    )
-                    Log.i("CurrentDate", currentDay.toString())
-                    db.child("calendars").child(calendar).child(args.date).setValue(currentDay)
-                }
-            }
+
+            imageUploader.uploadImageFromCameraToDb(path!!, storageRef,  db, this.context)
+
+            saveSnapButton.visibility = GONE
+
         }
 
         stickerScroll = view.findViewById(R.id.stickerScroll)
         stickerBack = view.findViewById(R.id.stickerBack)
         stickerForward = view.findViewById(R.id.stickerForward)
 
-        /*stickerBack.setOnClickListener {
-            stickerScroll.smoothScrollTo(stickerScroll.scrollX - 100, stickerScroll.scrollY)
-        }
-        stickerForward.setOnClickListener {
-            stickerScroll.smoothScrollTo(stickerScroll.scrollX + 100, stickerScroll.scrollY)
-        }*/
+\
 
         // scroll through stickers with arrow buttons
         // https://stackoverflow.com/questions/16079486/scrolling-a-horizontalscrollview-by-clicking-buttons-on-its-sides
