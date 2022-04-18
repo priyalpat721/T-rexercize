@@ -12,6 +12,7 @@ import android.view.View
 import android.view.View.*
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
@@ -45,6 +46,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
     private lateinit var saveMoodButton: Button
     private lateinit var snapImage: ImageView
     private lateinit var moodImage: ImageView
+    private lateinit var noWorkout: ConstraintLayout
     lateinit var adapter: ExerciseTextAdapter
     private var path: Uri? = null
     private var pathFromCloud : Uri? = null
@@ -102,6 +104,8 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                                     context?.let { it2 -> Glide.with(it2).load(snap.value).into(snapImage) }
                                 }
                                 if (snap.key == "workout") {
+                                    noWorkout = view.findViewById(R.id.noWorkout)
+                                    noWorkout.visibility = GONE
                                     // set the workout items to exercise list
                                     val workoutInfo = snap.value as Map<String, String>
                                     for (exercise in workoutInfo) {
