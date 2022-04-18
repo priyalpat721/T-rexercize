@@ -10,12 +10,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintGroup7"
         style="@style/groupStylewhite_A700cornerRadius"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -23,82 +22,112 @@
         app:layout_constraintTop_toBottomOf="@+id/profile_image"
         app:layout_constraintVertical_bias="0.0">
 
-        <Button
-            android:id="@+id/show_goal_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:text="@string/show_goals"
-            app:layout_constraintBottom_toBottomOf="@+id/goals_to_do2"
-            app:layout_constraintStart_toEndOf="@+id/goals_to_do2" />
-
-        <TextView
-            android:id="@+id/goals_to_do2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="@string/goals"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toStartOf="@+id/show_goal_btn"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/show_goal_btn" />
-
-        <TextView
-            android:id="@+id/txtProfile"
-            style="@style/txtAcmeregular36"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="20dp"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="@string/lbl_profile"
-            android:textSize="48sp"
-            app:layout_constraintEnd_toStartOf="@+id/edit_btn"
-            app:layout_constraintHorizontal_bias="0.136"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/lbl_profile" />
+            app:layout_constraintVertical_bias="1.0">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/edit_btn"
-            style="@style/btnSolidRounded"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="36dp"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:paddingStart="24px"
-            android:paddingTop="6px"
-            android:paddingEnd="24px"
-            android:paddingBottom="7px"
-            android:singleLine="true"
-            android:text="@string/lbl_edit"
-            android:textAllCaps="false"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="@+id/txtProfile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txtProfile"
-            app:layout_constraintVertical_bias="0.75"
-            tools:text="@string/lbl_edit" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/profile_recycler_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:paddingStart="5dp"
-            app:layout_constraintBottom_toTopOf="@+id/goals_to_do2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtProfile"
-            app:layout_constraintVertical_bias="0.119">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="81dp">
 
-        </androidx.recyclerview.widget.RecyclerView>
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/edit_btn"
+                        style="@style/btnSolidRounded"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:paddingStart="24dp"
+                        android:paddingTop="6dp"
+                        android:paddingEnd="24dp"
+                        android:paddingBottom="7dp"
+                        android:singleLine="true"
+                        android:text="@string/lbl_edit"
+                        android:textAllCaps="false"
+                        android:textSize="16sp"
+                        android:textStyle="normal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/txtProfile"
+                        app:layout_constraintTop_toTopOf="@+id/txtProfile"
+                        tools:text="@string/lbl_edit" />
+
+                    <TextView
+                        android:id="@+id/txtProfile"
+                        style="@style/txtAcmeregular36"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="@string/lbl_profile"
+                        android:textSize="48sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@string/lbl_profile" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/profile_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="5dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <Button
+                        android:id="@+id/show_goal_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="@string/show_goals"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/goals_to_do2"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/goals_to_do2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="@string/goals"
+                        android:textColor="@color/black"
+                        android:textSize="24sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -107,12 +136,11 @@
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         app:civ_border_color="#FF000000"
         app:civ_border_width="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.038" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/description_profile"
