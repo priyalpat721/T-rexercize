@@ -1,7 +1,6 @@
 package edu.neu.madcourse.trexercize.ui.fragments.calendar
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -50,7 +49,6 @@ class DayFragment : Fragment(R.layout.fragment_day) {
     private lateinit var noWorkout: ConstraintLayout
     lateinit var adapter: ExerciseTextAdapter
     private var path: Uri? = null
-    private var pathFromCloud : Uri? = null
     private lateinit var storageRef: StorageReference
     private var db = Firebase.database.reference
     private lateinit var storage: FirebaseStorage
