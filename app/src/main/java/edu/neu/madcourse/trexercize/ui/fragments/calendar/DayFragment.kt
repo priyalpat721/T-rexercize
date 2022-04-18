@@ -71,6 +71,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
         adapter = ExerciseTextAdapter(exerciseList, this.requireContext())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
+        moodImage = view.findViewById(R.id.moodSticker)
 
         // some dummy exercises for now
 //        exerciseList.add(ExerciseTextCard("pushup", "arm"))
@@ -91,10 +92,13 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                     .addValueEventListener(object: ValueEventListener {
                         @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
                         override fun onDataChange(snapshot: DataSnapshot) {
-                            //exerciseList.clear()
+                            exerciseList.clear()
                             for (snap in snapshot.children){
                                 if (snap.key == "dailySnap") {
                                     // set pic image view
+                                    snapImage = view.findViewById(R.id.snapImage)
+                                    context?.let { it2 -> Glide.with(it2).load(snap.value).into(snapImage) }
+                                    changeSnapButton.visibility = GONE
                                 }
                                 if (snap.key == "workout") {
                                     // set the workout items to exercise list
@@ -123,6 +127,33 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                                 }
                                 if (snap.key == "mood") {
                                     // set the mode image view
+                                    mood = snap.value.toString()
+                                    if (mood == "motivated"){
+                                       moodImage.setImageResource(R.drawable.stickermotivatedino)
+                                    }
+                                    if (mood == "hungry"){
+                                        moodImage.setImageResource(R.drawable.stickerbubbledino)
+                                    }
+                                    if (mood == "happy"){
+                                        moodImage.setImageResource(R.drawable.stickerhappydino)
+                                    }
+                                    if (mood == "frustrated"){
+                                        moodImage.setImageResource(R.drawable.stickerfrustratedino)
+                                    }
+                                    if (mood == "energized"){
+                                        moodImage.setImageResource(R.drawable.stickerexercisedino)
+                                    }
+                                    if (mood == "sad"){
+                                        moodImage.setImageResource(R.drawable.stickersaddino)
+                                    }
+                                    if (mood == "sleepy"){
+                                        moodImage.setImageResource(R.drawable.stickersleepdino)
+                                    }
+                                    saveMoodButton.visibility = GONE
+                                    stickerScroll.visibility = GONE
+                                    stickerBack.visibility = GONE
+                                    stickerForward.visibility = GONE
+                                    moodImage.visibility = VISIBLE
                                 }
 
                             }
