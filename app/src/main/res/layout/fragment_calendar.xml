@@ -11,6 +11,10 @@
         style="@style/txtAcmeregular36"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:shadowColor="#000000"
+        android:shadowDx="1.5"
+        android:shadowDy="1.5"
+        android:shadowRadius="1.6"
         android:text="@string/hello_from_calendar"
         android:textAlignment="center"
         android:textSize="48sp"
@@ -18,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.050000012"
         tools:ignore="TextContrastCheck" />
 
     <ScrollView
