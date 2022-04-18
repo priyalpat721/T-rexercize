@@ -133,7 +133,9 @@
                 android:layout_marginEnd="32dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/daily_snap_image"
+                android:visibility="invisible"
                 app:circularflow_defaultRadius="100sp"
+                app:circularflow_radiusInDP="100sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/snapText"
@@ -147,6 +149,7 @@
                 android:background="@android:color/transparent"
                 android:text="Save mood"
                 android:textColor="#2196F3"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/moodText"
                 app:layout_constraintStart_toEndOf="@+id/moodText"
                 app:layout_constraintTop_toTopOf="@+id/moodText"
@@ -163,8 +166,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/moodText"
                 app:layout_constraintStart_toStartOf="@+id/moodText"
-                app:layout_constraintTop_toBottomOf="@+id/moodText"
-                app:srcCompat="@drawable/stickerexercisedino" />
+                app:layout_constraintTop_toBottomOf="@+id/moodText" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/noRecycler"
@@ -232,6 +234,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:contentDescription="stickers scroll bar"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/stickerForward"
                 app:layout_constraintStart_toEndOf="@+id/stickerBack"
@@ -311,6 +314,7 @@
                 android:contentDescription="left stickers"
                 android:minWidth="48dp"
                 android:minHeight="48dp"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/stickerScroll"
                 app:layout_constraintEnd_toStartOf="@+id/stickerScroll"
                 app:layout_constraintStart_toStartOf="parent"
@@ -327,6 +331,7 @@
                 android:contentDescription="right stickers"
                 android:minWidth="48dp"
                 android:minHeight="48dp"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/stickerScroll"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/stickerScroll"

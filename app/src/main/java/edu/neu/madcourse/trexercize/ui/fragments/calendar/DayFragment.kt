@@ -150,7 +150,13 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                                 }
 
                             }
-
+                            if (mood == "none"){
+                                saveMoodButton.visibility = VISIBLE
+                                stickerScroll.visibility = VISIBLE
+                                stickerBack.visibility = VISIBLE
+                                stickerForward.visibility = VISIBLE
+                            }
+                            snapImage.visibility = VISIBLE
                         }
                         override fun onCancelled(error: DatabaseError) {
                             // NOT IMPLEMENTED
@@ -216,7 +222,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
         stickerBack.setOnTouchListener(object : OnTouchListener {
             @SuppressLint("ClickableViewAccessibility")
             private var mHandler: Handler? = null
-            private val mInitialDelay: Long = 300
+            private val mInitialDelay: Long = 100
             private val mRepeatDelay: Long = 100
             override fun onTouch(v: View, event: MotionEvent): Boolean {
                 when (event.action) {
@@ -244,7 +250,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
         stickerForward.setOnTouchListener(object : OnTouchListener {
             @SuppressLint("ClickableViewAccessibility")
             private var mHandler: Handler? = null
-            private val mInitialDelay: Long = 300
+            private val mInitialDelay: Long = 100
             private val mRepeatDelay: Long = 100
             override fun onTouch(v: View, event: MotionEvent): Boolean {
                 when (event.action) {
