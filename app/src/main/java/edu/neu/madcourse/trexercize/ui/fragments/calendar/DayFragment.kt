@@ -1,6 +1,7 @@
 package edu.neu.madcourse.trexercize.ui.fragments.calendar
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -96,9 +97,9 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                             for (snap in snapshot.children){
                                 if (snap.key == "dailySnap") {
                                     // set pic image view
+                                    changeSnapButton.visibility = GONE
                                     snapImage = view.findViewById(R.id.snapImage)
                                     context?.let { it2 -> Glide.with(it2).load(snap.value).into(snapImage) }
-                                    changeSnapButton.visibility = GONE
                                 }
                                 if (snap.key == "workout") {
                                     // set the workout items to exercise list
@@ -127,6 +128,11 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                                 }
                                 if (snap.key == "mood") {
                                     // set the mode image view
+                                    saveMoodButton.visibility = GONE
+                                    stickerScroll.visibility = GONE
+                                    stickerBack.visibility = GONE
+                                    stickerForward.visibility = GONE
+                                    moodImage.visibility = VISIBLE
                                     mood = snap.value.toString()
                                     if (mood == "motivated"){
                                        moodImage.setImageResource(R.drawable.stickermotivatedino)
@@ -149,11 +155,6 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                                     if (mood == "sleepy"){
                                         moodImage.setImageResource(R.drawable.stickersleepdino)
                                     }
-                                    saveMoodButton.visibility = GONE
-                                    stickerScroll.visibility = GONE
-                                    stickerBack.visibility = GONE
-                                    stickerForward.visibility = GONE
-                                    moodImage.visibility = VISIBLE
                                 }
 
                             }
@@ -162,7 +163,6 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                         override fun onCancelled(error: DatabaseError) {
                             // NOT IMPLEMENTED
                         }
-
                     })
             }
         }
@@ -192,10 +192,6 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                     it1
                 ).child("calendar").get().addOnSuccessListener {
                     calendar = it.value.toString()
-//                    val currentDay = hashMapOf(
-//                        "dailySnap" to pathFromCloud.toString()
-//                    )
-//                    Log.i("CurrentDate", currentDay.toString())
                     db.child("calendars").child(calendar).child(args.date)
                         .child("dailySnap").setValue(path.toString())
                     Log.i("FILE PATH PIC 2", path.toString())
@@ -220,11 +216,6 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                         it1
                     ).child("calendar").get().addOnSuccessListener {
                         calendar = it.value.toString()
-//                        val currentDay = hashMapOf(
-//                            "dailySnap" to pathFromCloud.toString(),
-//                            "mood" to mood
-//                        )
-                        //Log.i("CurrentDate", currentDay.toString())
                         db.child("calendars").child(calendar).child(args.date).child("mood").setValue(mood)
                     }
                 }
@@ -233,7 +224,6 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                 stickerBack.visibility = GONE
                 stickerForward.visibility = GONE
                 moodImage.visibility = VISIBLE
-
             }
         }
 
@@ -295,63 +285,65 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                 }
             }
         })
+        val motivatedSticker: ImageView = view.findViewById(R.id.motivatedSticker)
+        val hungrySticker: ImageView = view.findViewById(R.id.hungrySticker)
+        val happySticker: ImageView = view.findViewById(R.id.happySticker)
+        val frustratedSticker: ImageView = view.findViewById(R.id.frustratedSticker)
+        val energizedSticker: ImageView = view.findViewById(R.id.energizedSticker)
+        val sadSticker: ImageView = view.findViewById(R.id.sadSticker)
+        val sleepySticker: ImageView = view.findViewById(R.id.sleepySticker)
+
+        fun clearStickerSelection() {
+            motivatedSticker.setBackgroundResource(0)
+            hungrySticker.setBackgroundResource(0)
+            happySticker.setBackgroundResource(0)
+            frustratedSticker.setBackgroundResource(0)
+            energizedSticker.setBackgroundResource(0)
+            sadSticker.setBackgroundResource(0)
+            sleepySticker.setBackgroundResource(0)
+        }
 
         // listeners for stickers
-        val motivatedSticker: ImageView = view.findViewById(R.id.motivatedSticker)
         motivatedSticker.setOnClickListener {
             mood = "motivated"
-            Toast.makeText(
-                this.context, "motivated sticker pressed",
-                Toast.LENGTH_SHORT
-            ).show()
+            clearStickerSelection()
+            motivatedSticker.setBackgroundResource(R.drawable.rectangle_bg_teal_100_radius_15)
         }
-        val hungrySticker: ImageView = view.findViewById(R.id.hungrySticker)
+
         hungrySticker.setOnClickListener {
             mood = "hungry"
-            Toast.makeText(
-                this.context, "hungry sticker pressed",
-                Toast.LENGTH_SHORT
-            ).show()
+            clearStickerSelection()
+            hungrySticker.setBackgroundResource(R.drawable.rectangle_bg_teal_100_radius_15)
         }
-        val happySticker: ImageView = view.findViewById(R.id.happySticker)
+
         happySticker.setOnClickListener {
             mood = "happy"
-            Toast.makeText(
-                this.context, "happy sticker pressed",
-                Toast.LENGTH_SHORT
-            ).show()
+            clearStickerSelection()
+            happySticker.setBackgroundResource(R.drawable.rectangle_bg_teal_100_radius_15)
         }
-        val frustratedSticker: ImageView = view.findViewById(R.id.frustratedSticker)
+
         frustratedSticker.setOnClickListener {
             mood = "frustrated"
-            Toast.makeText(
-                this.context, "frustrated sticker pressed",
-                Toast.LENGTH_SHORT
-            ).show()
+            clearStickerSelection()
+            frustratedSticker.setBackgroundResource(R.drawable.rectangle_bg_teal_100_radius_15)
         }
-        val energizedSticker: ImageView = view.findViewById(R.id.energizedSticker)
+
         energizedSticker.setOnClickListener {
             mood = "energized"
-            Toast.makeText(
-                this.context, "energized sticker pressed",
-                Toast.LENGTH_SHORT
-            ).show()
+            clearStickerSelection()
+            energizedSticker.setBackgroundResource(R.drawable.rectangle_bg_teal_100_radius_15)
         }
-        val sadSticker: ImageView = view.findViewById(R.id.sadSticker)
+
         sadSticker.setOnClickListener {
             mood = "sad"
-            Toast.makeText(
-                this.context, "sad sticker pressed",
-                Toast.LENGTH_SHORT
-            ).show()
+            clearStickerSelection()
+            sadSticker.setBackgroundResource(R.drawable.rectangle_bg_teal_100_radius_15)
         }
-        val sleepySticker: ImageView = view.findViewById(R.id.sleepySticker)
+
         sleepySticker.setOnClickListener {
             mood = "sleepy"
-            Toast.makeText(
-                this.context, "sleepy sticker pressed",
-                Toast.LENGTH_SHORT
-            ).show()
+            clearStickerSelection()
+            sleepySticker.setBackgroundResource(R.drawable.rectangle_bg_teal_100_radius_15)
         }
     }
 
