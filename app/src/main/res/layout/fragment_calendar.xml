@@ -101,7 +101,6 @@
                     android:autoSizeMinTextSize="12sp"
                     android:autoSizeStepGranularity="2sp"
                     android:autoSizeTextType="uniform"
-                    android:text="@string/motivational_quote"
                     android:textAlignment="textStart"
                     app:layout_constraintBottom_toBottomOf="@+id/bubble"
                     app:layout_constraintEnd_toEndOf="@+id/bubble"

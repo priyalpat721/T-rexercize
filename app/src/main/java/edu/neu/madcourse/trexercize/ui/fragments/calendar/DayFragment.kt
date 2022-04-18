@@ -181,7 +181,6 @@ class DayFragment : Fragment(R.layout.fragment_day) {
 
         changeSnapButton.setOnClickListener {
             path = imageUploader.getImagePathFromCamera(this.context, request, this.requireActivity())
-            imageUploader.uploadImageFromCameraToDb(path!!, storageRef,  db, this.context)
             changeSnapButton.visibility = GONE
             saveSnapButton.visibility = VISIBLE
             Log.i("FILE PATH PIC 1", path.toString())
@@ -189,16 +188,17 @@ class DayFragment : Fragment(R.layout.fragment_day) {
 
         saveSnapButton.setOnClickListener {
             var calendar : String
-            Firebase.auth.currentUser?.uid?.let { it1 ->
-                db.child("users").child(
-                    it1
-                ).child("calendar").get().addOnSuccessListener {
-                    calendar = it.value.toString()
-                    db.child("calendars").child(calendar).child(args.date)
-                        .child("dailySnap").setValue(path.toString())
-                    Log.i("FILE PATH PIC 2", path.toString())
-                }
-            }
+            imageUploader.uploadImageFromCameraToDb(path!!, storageRef,  db, this.context)
+//            Firebase.auth.currentUser?.uid?.let { it1 ->
+//                db.child("users").child(
+//                    it1
+//                ).child("calendar").get().addOnSuccessListener {
+//                    calendar = it.value.toString()
+//                    db.child("calendars").child(calendar).child(args.date)
+//                        .child("dailySnap").setValue(path.toString())
+//                    Log.i("FILE PATH PIC 2", path.toString())
+//                }
+//            }
             saveSnapButton.visibility = GONE
         }
 
