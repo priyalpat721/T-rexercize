@@ -21,4 +21,9 @@ class FavoriteExerciseCard {
         this.exerciseCategory = exerciseCategory
         this.categoryImage = categoryImage
     }
+
+    override fun toString(): String {
+        return "FavoriteExerciseCard(favoriteExercise=$favoriteExercise, exerciseCategory=$exerciseCategory, categoryImage=$categoryImage)"
+    }
+
 }
