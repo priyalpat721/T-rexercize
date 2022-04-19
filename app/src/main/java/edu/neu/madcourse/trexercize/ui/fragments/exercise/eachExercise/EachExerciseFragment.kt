@@ -34,8 +34,10 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
     private var videoLink: String? = null
     private var currentCalendarId: String? = null
     private lateinit var exerciseMuscleGroup: TextView
+    private lateinit var actualMuscleGroup: TextView
     private lateinit var exerciseDescriptionText: TextView
     private lateinit var exerciseEquipment: TextView
+    private lateinit var actualEquipment: TextView
     private lateinit var addToFavorites: Button
     private lateinit var addToTodayWorkout: Button
     private var db = Firebase.database.reference
@@ -48,16 +50,19 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
         exerciseVideo = view.findViewById(R.id.exercise_video)
         exerciseTitle = view.findViewById(R.id.exercise_title)
         exerciseMuscleGroup = view.findViewById(R.id.exercise_muscle_group)
+        actualMuscleGroup = view.findViewById(R.id.actual_muscle)
         exerciseDescriptionText = view.findViewById(R.id.exercise_description)
         addToFavorites = view.findViewById(R.id.add_to_favorites_btn)
         addToTodayWorkout = view.findViewById(R.id.add_to_today_workout)
         exerciseEquipment = view.findViewById(R.id.exercise_equipment)
+        actualEquipment = view.findViewById(R.id.actual_equipment_text_view)
 
 //        println(addToFavorites.text.toString())
 
         exerciseTitle.text = args.exerciseName
-        exerciseMuscleGroup.text = "Muscle Group: Sample muscle group"
+        exerciseMuscleGroup.text = "Muscle Group:"
         exerciseCategory = args.exerciseCategory
+        exerciseEquipment.text = "Equipment needed"
 
         if(addToFavorites.text.toString() == "Add to Favorites") {
             Firebase.auth.uid?.let {
@@ -170,13 +175,13 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
 //                    println(snap)
 
                     if(snap.key == "muscle groups") {
-                        exerciseMuscleGroup.text = "Muscle Group: " + snap.value.toString()
+                        actualMuscleGroup.text = snap.value.toString()
                         currentExercise["muscle groups"] = snap.value.toString()
                     }
                     if(snap.key == "equipment") {
                         val equipmentList = snap.value as ArrayList<String>
                         val equipment = equipmentList[0]
-                        exerciseEquipment.text = "Equipment needed: $equipment"
+                        actualEquipment.text = equipment
                         currentExercise["equipment"] = equipmentList
                     }
 
