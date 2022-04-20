@@ -48,6 +48,7 @@
         <entry key="app/src/main/res/drawable/ic_dino_background.xml" value="0.115" />
         <entry key="app/src/main/res/drawable/rectangle_bg_teal_100_radius_10.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rectangle_bg_teal_100_radius_15.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/rectangle_bg_white_a700_border_black_900.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.24895833333333334" />
@@ -58,7 +59,7 @@
         <entry key="app/src/main/res/layout/exercise_card_layout.xml" value="0.3994049072265625" />
         <entry key="app/src/main/res/layout/exercise_text_card_layout.xml" value="0.41239316239316237" />
         <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.2624755859375" />
-        <entry key="app/src/main/res/layout/fragment_day.xml" value="0.24169616699218752" />
+        <entry key="app/src/main/res/layout/fragment_day.xml" value="0.25269012451171874" />
         <entry key="app/src/main/res/layout/fragment_edit.xml" value="0.18215535481770836" />
         <entry key="app/src/main/res/layout/fragment_exercise.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_favorites.xml" value="0.24895833333333334" />

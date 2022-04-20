@@ -3,8 +3,10 @@ package edu.neu.madcourse.trexercize.ui.fragments.exercise.eachCategory
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.view.View.GONE
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
@@ -13,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -28,6 +29,8 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
     private val args : IndividualExerciseFragmentArgs by navArgs()
     private var db = Firebase.database.reference
     private var equipmentList: Array<String>? =  null
+    private lateinit var noExercises: ConstraintLayout
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -96,10 +99,15 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
                                     println(equipment)
                                     if(equipmentList?.isEmpty() == true) {
                                         exerciseList.add(IndividualExerciseCard(exerciseName))
+                                        noExercises = view!!.findViewById(R.id.no_exercises_constraint)
+                                        noExercises.visibility = GONE
+
                                         exerciseAdapter?.notifyDataSetChanged()
                                     }
                                      else if(equipmentList?.isNotEmpty() == true && equipmentList!!.contains(equipment)) {
                                         exerciseList.add(IndividualExerciseCard(exerciseName))
+                                        noExercises = view!!.findViewById(R.id.no_exercises_constraint)
+                                        noExercises.visibility = GONE
                                         exerciseAdapter?.notifyDataSetChanged()
                                     }
 
