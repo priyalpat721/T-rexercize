@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -34,6 +35,9 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        noExercises = view.findViewById(R.id.no_exercises_constraint)
+        noExercises.visibility = GONE
         recyclerView = view.findViewById(R.id.each_category_exercises)
         title = view.findViewById(R.id.category_name)
         equipmentSelected = view.findViewById(R.id.equipment_selected)
@@ -99,19 +103,25 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
                                     println(equipment)
                                     if(equipmentList?.isEmpty() == true) {
                                         exerciseList.add(IndividualExerciseCard(exerciseName))
-                                        noExercises = view!!.findViewById(R.id.no_exercises_constraint)
-                                        noExercises.visibility = GONE
+//                                        noExercises = view!!.findViewById(R.id.no_exercises_constraint)
+//                                        noExercises.visibility = GONE
 
                                         exerciseAdapter?.notifyDataSetChanged()
                                     }
                                      else if(equipmentList?.isNotEmpty() == true && equipmentList!!.contains(equipment)) {
                                         exerciseList.add(IndividualExerciseCard(exerciseName))
-                                        noExercises = view!!.findViewById(R.id.no_exercises_constraint)
-                                        noExercises.visibility = GONE
+//                                        noExercises = view!!.findViewById(R.id.no_exercises_constraint)
+//                                        noExercises.visibility = GONE
                                         exerciseAdapter?.notifyDataSetChanged()
                                     }
 
                                 }
+                            }
+
+                            println("is it empty: "+ exerciseList.isEmpty())
+                            if(exerciseList.isEmpty()) {
+                                println("is it coming here")
+                                noExercises.visibility = VISIBLE
                             }
                         }
                         override fun onCancelled(error: DatabaseError) {
