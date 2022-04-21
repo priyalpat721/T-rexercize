@@ -47,6 +47,8 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
     private val args : EachExerciseFragmentArgs by navArgs()
     private val currentExercise = hashMapOf<String, Any?>()
 
+    private var equipmentList: Array<String>? =  null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.exercise_description_recycler_view)
@@ -60,18 +62,21 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
         exerciseEquipment = view.findViewById(R.id.exercise_equipment)
         actualEquipment = view.findViewById(R.id.actual_equipment_text_view)
 
-        val backBtn = view.findViewById<ImageButton>(R.id.back_to_exercise_list)
-        backBtn.setOnClickListener {
-            val action: NavDirections = EachExerciseFragmentDirections.actionEachExerciseFragmentToIndividualExerciseFragment(
-                emptyArray()
-            )
-            view.findNavController().navigate(action)
-        }
 
         exerciseTitle.text = args.exerciseName
         exerciseMuscleGroup.text = "Muscle Group:"
         exerciseCategory = args.exerciseCategory
         exerciseEquipment.text = "Equipment needed"
+        equipmentList = args.equipmentList
+
+        val backBtn = view.findViewById<ImageButton>(R.id.back_to_exercise_list)
+        backBtn.setOnClickListener {
+            val action: NavDirections = EachExerciseFragmentDirections.actionEachExerciseFragmentToIndividualExerciseFragment(
+                equipmentList as Array<out String>
+            )
+
+            view.findNavController().navigate(action)
+        }
 
         if(addToFavorites.text.toString() == "Add to Favorites") {
             Firebase.auth.uid?.let {

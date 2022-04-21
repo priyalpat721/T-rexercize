@@ -73,7 +73,7 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
                 Toast.makeText(context, "This is the exercise name: $exerciseName", Toast.LENGTH_SHORT).show()
 
                 val action: NavDirections
-                action = IndividualExerciseFragmentDirections.actionIndividualExerciseFragmentToEachExerciseFragment()
+                action = IndividualExerciseFragmentDirections.actionIndividualExerciseFragmentToEachExerciseFragment(equipmentList!!)
 
                 action.also {
                     if (exerciseName != null) {
