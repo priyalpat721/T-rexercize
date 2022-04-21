@@ -30,6 +30,7 @@ import com.google.firebase.storage.StorageReference
 import edu.neu.madcourse.trexercize.R
 import edu.neu.madcourse.trexercize.ui.helper.ImageUploaderFunctions
 import java.lang.Integer.parseInt
+import java.sql.Types.NULL
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -48,6 +49,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
     private lateinit var changeSnapButton: Button
     private lateinit var saveSnapButton: Button
     private lateinit var saveMoodButton: Button
+    private lateinit var restDayButton: Button
     private lateinit var snapImage: ImageView
     private lateinit var moodImage: ImageView
     private lateinit var noWorkout: ConstraintLayout
@@ -60,7 +62,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
     private lateinit var userCalendar: String
     private lateinit var currentLocalDate: LocalDate
     private lateinit var selectedLocalDate: LocalDate
-    private lateinit var snapLocalDate: LocalDate
+    private var snapLocalDate: LocalDate? = null
     private var currentStreak by Delegates.notNull<Int>()
     private var longestStreak by Delegates.notNull<Int>()
 
@@ -78,6 +80,61 @@ class DayFragment : Fragment(R.layout.fragment_day) {
         // parse the dates into LocalDate
         currentLocalDate = LocalDate.parse(currentDay, DateTimeFormatter.ofPattern("M-d-yyyy"))
         selectedLocalDate = LocalDate.parse(args.date, DateTimeFormatter.ofPattern("M-d-yyyy"))
+
+        // get the date of most recent snap and streak info
+        db.child("users").child(Firebase.auth.currentUser?.uid.toString())
+            .child("streakInfo")
+            .addValueEventListener(object : ValueEventListener {
+                @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (snap in snapshot.children) {
+                        if (snap.key == "last snap date") {
+                            if (snap.value.toString() != "none") {
+                                snapLocalDate = LocalDate.parse(
+                                    snap.value.toString(),
+                                    DateTimeFormatter.ofPattern("M-d-yyyy")
+                                )
+                            }
+                            /*db.child("users").child(Firebase.auth.currentUser?.uid.toString())
+                                .child("streakInfo").child("last snap date")
+                                .setValue(currentDay)*/
+                        }
+                        if (snap.key == "current streak count") {
+                            currentStreak = parseInt(snap.value.toString())
+                            /*if (snapLocalDate.isBefore(currentLocalDate.minusDays(1))) {
+                                db.child("users")
+                                    .child(Firebase.auth.currentUser?.uid.toString())
+                                    .child("streakInfo").child("current streak count")
+                                    .setValue(1)
+                                currentStreak = 1
+                            }
+                            val updateCount = currentCount + 1
+                            if (snapLocalDate.isEqual(currentLocalDate.minusDays(1))) {
+                                db.child("users")
+                                    .child(Firebase.auth.currentUser?.uid.toString())
+                                    .child("streakInfo").child("current streak count")
+                                    .setValue(updateCount)
+                                currentStreak = updateCount
+                            }*/
+                        }
+                        if (snap.key == "longest streak count") {
+                            longestStreak = parseInt(snap.value.toString())
+                            /*if (longestStreak < currentStreak) {
+                                db.child("users")
+                                    .child(Firebase.auth.currentUser?.uid.toString())
+                                    .child("streakInfo").child("longest streak count")
+                                    .setValue(currentStreak)
+                            }*/
+                        }
+                        // if there is streak info update it
+                        // need to reset the current streak to 0 if it's a new day
+                        // and no snap was taken on the previous day so need to track that
+                    }
+                }
+                override fun onCancelled(error: DatabaseError) {
+                    // not implemented
+                }
+            })
 
         val backBtn = view.findViewById<ImageButton>(R.id.back_btn)
         backBtn.setOnClickListener {
@@ -214,61 +271,11 @@ class DayFragment : Fragment(R.layout.fragment_day) {
             // increase streak counter
             // change bool that shows if user saved a snap this day
             // also need longest streak info
-            db.child("users").child(Firebase.auth.currentUser?.uid.toString())
-                .child("streakInfo")
-                .addValueEventListener(object : ValueEventListener {
-                    @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        for (snap in snapshot.children) {
-                            if (snap.key == "last snap date") {
-                                if (snap.value.toString() != "none") {
-                                    snapLocalDate = LocalDate.parse(
-                                        snap.value.toString(),
-                                        DateTimeFormatter.ofPattern("M-d-yyyy")
-                                    )
-                                }
-                                db.child("users").child(Firebase.auth.currentUser?.uid.toString())
-                                    .child("streakInfo").child("last snap date")
-                                    .setValue(currentDay)
-                            }
-                            if (snap.key == "current streak count") {
-                                currentStreak = parseInt(snap.value.toString())
-                                /*if (snapLocalDate.isBefore(currentLocalDate.minusDays(1))) {
-                                    db.child("users")
-                                        .child(Firebase.auth.currentUser?.uid.toString())
-                                        .child("streakInfo").child("current streak count")
-                                        .setValue(1)
-                                    currentStreak = 1
-                                }
-                                val updateCount = currentCount + 1
-                                if (snapLocalDate.isEqual(currentLocalDate.minusDays(1))) {
-                                    db.child("users")
-                                        .child(Firebase.auth.currentUser?.uid.toString())
-                                        .child("streakInfo").child("current streak count")
-                                        .setValue(updateCount)
-                                    currentStreak = updateCount
-                                }*/
-                            }
-                            if (snap.key == "longest streak count") {
-                                longestStreak = parseInt(snap.value.toString())
-                                /*if (longestStreak < currentStreak) {
-                                    db.child("users")
-                                        .child(Firebase.auth.currentUser?.uid.toString())
-                                        .child("streakInfo").child("longest streak count")
-                                        .setValue(currentStreak)
-                                }*/
-                            }
-                            // if there is streak info update it
-                            // need to reset the current streak to 0 if it's a new day
-                            // and no snap was taken on the previous day so need to track that
-                        }
-                    }
-                    override fun onCancelled(error: DatabaseError) {
-                        // not implemented
-                    }
-                })
+
+            // update the current streak based on when last snap was taken
             // if the previously taken pic was before yesterday
-            if (snapLocalDate.isBefore(currentLocalDate.minusDays(1))) {
+            if (snapLocalDate == null
+                || snapLocalDate!!.isBefore(currentLocalDate.minusDays(1))) {
                 db.child("users")
                     .child(Firebase.auth.currentUser?.uid.toString())
                     .child("streakInfo").child("current streak count")
@@ -276,21 +283,28 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                 currentStreak = 1
             }
             // if the previously taken pic was yesterday
-            else if (snapLocalDate.isEqual(currentLocalDate.minusDays(1))) {
+            else if (snapLocalDate!!.isEqual(currentLocalDate.minusDays(1))) {
                 currentStreak += 1
                 db.child("users")
                     .child(Firebase.auth.currentUser?.uid.toString())
                     .child("streakInfo").child("current streak count")
-                    .setValue(currentStreak)
+                    .setValue(currentStreak.toString())
             }
+            // update longest streak
             if (currentStreak > longestStreak) {
                 db.child("users")
                     .child(Firebase.auth.currentUser?.uid.toString())
                     .child("streakInfo").child("longest streak count")
-                    .setValue(currentStreak)
+                    .setValue(currentStreak.toString())
             }
+            // update last snap date
+            db.child("users").child(Firebase.auth.currentUser?.uid.toString())
+            .child("streakInfo").child("last snap date")
+            .setValue(currentDay)
+
             saveSnapButton.visibility = GONE
         }
+
         stickerScroll = view.findViewById(R.id.stickerScroll)
         stickerBack = view.findViewById(R.id.stickerBack)
         stickerForward = view.findViewById(R.id.stickerForward)
@@ -318,6 +332,44 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                 moodImage.visibility = VISIBLE
             }
         }
+
+        /*// rest day button for rest days
+        restDayButton = view.findViewById(R.id.rest_day)
+        if (args.date == currentDay) {
+            restDayButton.visibility = VISIBLE
+        }
+
+        restDayButton.setOnClickListener {
+            if (snapLocalDate == null
+                || snapLocalDate!!.isBefore(currentLocalDate.minusDays(1))) {
+                db.child("users")
+                    .child(Firebase.auth.currentUser?.uid.toString())
+                    .child("streakInfo").child("current streak count")
+                    .setValue(1)
+                currentStreak = 1
+            }
+            // if the previously taken pic was yesterday
+            else if (snapLocalDate!!.isEqual(currentLocalDate.minusDays(1))) {
+                currentStreak += 1
+                db.child("users")
+                    .child(Firebase.auth.currentUser?.uid.toString())
+                    .child("streakInfo").child("current streak count")
+                    .setValue(currentStreak.toString())
+            }
+            // update longest streak
+            if (currentStreak > longestStreak) {
+                db.child("users")
+                    .child(Firebase.auth.currentUser?.uid.toString())
+                    .child("streakInfo").child("longest streak count")
+                    .setValue(currentStreak.toString())
+            }
+            // update last snap date
+            db.child("users").child(Firebase.auth.currentUser?.uid.toString())
+                .child("streakInfo").child("last snap date")
+                .setValue(currentDay)
+
+            restDayButton.visibility = GONE
+        }*/
 
         // scroll through stickers with arrow buttons
         // https://stackoverflow.com/questions/16079486/scrolling-a-horizontalscrollview-by-clicking-buttons-on-its-sides
@@ -441,6 +493,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
         if (args.date != currentDay) {
             changeSnapButton.visibility = GONE
             saveMoodButton.visibility = GONE
+            restDayButton.visibility = GONE
         }
     }
 

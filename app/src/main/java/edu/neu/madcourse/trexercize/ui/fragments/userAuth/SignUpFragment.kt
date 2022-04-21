@@ -132,8 +132,8 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                     )
 
                     val streakInfo = hashMapOf(
-                        "longest streak count" to 0,
-                        "current streak count" to 0,
+                        "longest streak count" to "0",
+                        "current streak count" to "0",
                         "last snap date" to "none"
                     )
 
