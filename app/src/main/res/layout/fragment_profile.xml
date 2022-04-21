@@ -149,7 +149,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintGroup7"
-                style="@style/groupStylewhite_A700cornerRadius"
+                android:background="@drawable/goal_border"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
