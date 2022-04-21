@@ -180,6 +180,9 @@
             android:name="exerciseCategory"
             app:argType="string"
             android:defaultValue="no category" />
+        <action
+            android:id="@+id/action_eachExerciseFragment_to_individualExerciseFragment"
+            app:destination="@id/individualExerciseFragment" />
     </fragment>
     <fragment
         android:id="@+id/goalFragment"

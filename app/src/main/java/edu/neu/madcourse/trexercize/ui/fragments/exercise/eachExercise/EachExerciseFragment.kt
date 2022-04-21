@@ -8,6 +8,8 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +20,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import edu.neu.madcourse.trexercize.R
+import edu.neu.madcourse.trexercize.ui.fragments.calendar.DayFragmentDirections
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -56,8 +59,6 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
         addToTodayWorkout = view.findViewById(R.id.add_to_today_workout)
         exerciseEquipment = view.findViewById(R.id.exercise_equipment)
         actualEquipment = view.findViewById(R.id.actual_equipment_text_view)
-
-//        println(addToFavorites.text.toString())
 
         exerciseTitle.text = args.exerciseName
         exerciseMuscleGroup.text = "Muscle Group:"
