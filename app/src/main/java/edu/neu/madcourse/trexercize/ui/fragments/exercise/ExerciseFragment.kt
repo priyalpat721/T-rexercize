@@ -66,6 +66,9 @@ class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
                     })
                 .setNegativeButton("Cancel",
                     DialogInterface.OnClickListener { dialog, id ->
+
+                        selectedIndices.clear()
+                        equipmentList.clear()
                     })
             builder.create().show()
         }
