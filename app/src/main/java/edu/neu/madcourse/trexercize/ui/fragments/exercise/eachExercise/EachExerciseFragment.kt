@@ -71,7 +71,7 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
 
         val backBtn = view.findViewById<ImageButton>(R.id.back_to_exercise_list)
         backBtn.setOnClickListener {
-            val action: NavDirections = EachExerciseFragmentDirections.actionEachExerciseFragmentToIndividualExerciseFragment(
+            val action: NavDirections = EachExerciseFragmentDirections.actionEachExerciseFragmentToIndividualExerciseFragment3(
                 equipmentList as Array<out String>
             )
 

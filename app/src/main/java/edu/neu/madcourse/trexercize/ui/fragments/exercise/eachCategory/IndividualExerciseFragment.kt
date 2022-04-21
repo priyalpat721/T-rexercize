@@ -21,7 +21,6 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import edu.neu.madcourse.trexercize.R
-import edu.neu.madcourse.trexercize.ui.fragments.exercise.eachExercise.EachExerciseFragmentDirections
 
 class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
     private val exerciseList: MutableList<IndividualExerciseCard> = ArrayList()
