@@ -10,6 +10,7 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -69,14 +70,15 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
         exerciseEquipment.text = "Equipment needed"
         equipmentList = args.equipmentList
 
-//        val backBtn = view.findViewById<ImageButton>(R.id.back_to_exercise_list)
-//        backBtn.setOnClickListener {
+        val backBtn = view.findViewById<ImageButton>(R.id.back_to_exercise_list)
+        backBtn.setOnClickListener {
 //            val action: NavDirections = EachExerciseFragmentDirections.actionEachExerciseFragmentToIndividualExerciseFragment3(
 //                equipmentList as Array<out String>
 //            )
 //
 //            view.findNavController().navigate(action)
-//        }
+            findNavController().popBackStack()
+        }
 
         if(addToFavorites.text.toString() == "Add to Favorites") {
             Firebase.auth.uid?.let {
