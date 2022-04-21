@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -51,6 +52,13 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
 
         }
 
+        val backBtn = view.findViewById<ImageButton>(R.id.back_to_categories)
+        backBtn.setOnClickListener {
+            val action: NavDirections = IndividualExerciseFragmentDirections.actionIndividualExerciseFragmentToExerciseFragment(
+            )
+            view.findNavController().navigate(action)
+        }
+
         setUpResources()
         listenForChanges()
     }
@@ -64,7 +72,7 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
                 Toast.makeText(context, "This is the exercise name: $exerciseName", Toast.LENGTH_SHORT).show()
 
                 val action: NavDirections
-                action = IndividualExerciseFragmentDirections.actionIndividualExerciseFragmentToEachExerciseFragment()
+                action = IndividualExerciseFragmentDirections.actionIndividualExerciseFragmentToEachExerciseFragment(equipmentList!!)
 
                 action.also {
                     if (exerciseName != null) {

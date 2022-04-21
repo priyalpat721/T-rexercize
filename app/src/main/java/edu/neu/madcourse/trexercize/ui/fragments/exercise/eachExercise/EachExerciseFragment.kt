@@ -8,6 +8,9 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +21,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import edu.neu.madcourse.trexercize.R
+import edu.neu.madcourse.trexercize.ui.fragments.calendar.DayFragmentDirections
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -44,6 +48,8 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
     private val args : EachExerciseFragmentArgs by navArgs()
     private val currentExercise = hashMapOf<String, Any?>()
 
+    private var equipmentList: Array<String>? =  null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.exercise_description_recycler_view)
@@ -57,12 +63,22 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
         exerciseEquipment = view.findViewById(R.id.exercise_equipment)
         actualEquipment = view.findViewById(R.id.actual_equipment_text_view)
 
-//        println(addToFavorites.text.toString())
 
         exerciseTitle.text = args.exerciseName
         exerciseMuscleGroup.text = "Muscle Group:"
         exerciseCategory = args.exerciseCategory
         exerciseEquipment.text = "Equipment needed"
+        equipmentList = args.equipmentList
+
+        val backBtn = view.findViewById<ImageButton>(R.id.back_to_exercise_list)
+        backBtn.setOnClickListener {
+//            val action: NavDirections = EachExerciseFragmentDirections.actionEachExerciseFragmentToIndividualExerciseFragment3(
+//                equipmentList as Array<out String>
+//            )
+//
+//            view.findNavController().navigate(action)
+            findNavController().popBackStack()
+        }
 
         if(addToFavorites.text.toString() == "Add to Favorites") {
             Firebase.auth.uid?.let {
