@@ -60,6 +60,14 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
         exerciseEquipment = view.findViewById(R.id.exercise_equipment)
         actualEquipment = view.findViewById(R.id.actual_equipment_text_view)
 
+        val backBtn = view.findViewById<ImageButton>(R.id.back_to_exercise_list)
+        backBtn.setOnClickListener {
+            val action: NavDirections = EachExerciseFragmentDirections.actionEachExerciseFragmentToIndividualExerciseFragment(
+                emptyArray()
+            )
+            view.findNavController().navigate(action)
+        }
+
         exerciseTitle.text = args.exerciseName
         exerciseMuscleGroup.text = "Muscle Group:"
         exerciseCategory = args.exerciseCategory
