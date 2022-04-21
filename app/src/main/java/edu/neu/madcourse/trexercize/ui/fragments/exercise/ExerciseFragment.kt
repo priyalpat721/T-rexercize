@@ -48,8 +48,12 @@ class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
                             selectedIndices.add(which)
                             equipmentList.add(EQUIPMENT_ARRAY!![which])
                         } else if (selectedIndices.contains(which)) {
+
+                            var targetIndex = selectedIndices.indexOf(which)
+
                             // Else, if the item is already in the array, remove it
-                            selectedIndices.removeAt(which)
+                            selectedIndices.removeAt(targetIndex)
+
                             equipmentList.remove(EQUIPMENT_ARRAY!![which])
                         }
                     })
