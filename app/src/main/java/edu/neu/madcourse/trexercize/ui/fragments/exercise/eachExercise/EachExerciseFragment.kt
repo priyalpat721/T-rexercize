@@ -69,14 +69,14 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
         exerciseEquipment.text = "Equipment needed"
         equipmentList = args.equipmentList
 
-        val backBtn = view.findViewById<ImageButton>(R.id.back_to_exercise_list)
-        backBtn.setOnClickListener {
-            val action: NavDirections = EachExerciseFragmentDirections.actionEachExerciseFragmentToIndividualExerciseFragment3(
-                equipmentList as Array<out String>
-            )
-
-            view.findNavController().navigate(action)
-        }
+//        val backBtn = view.findViewById<ImageButton>(R.id.back_to_exercise_list)
+//        backBtn.setOnClickListener {
+//            val action: NavDirections = EachExerciseFragmentDirections.actionEachExerciseFragmentToIndividualExerciseFragment3(
+//                equipmentList as Array<out String>
+//            )
+//
+//            view.findNavController().navigate(action)
+//        }
 
         if(addToFavorites.text.toString() == "Add to Favorites") {
             Firebase.auth.uid?.let {
