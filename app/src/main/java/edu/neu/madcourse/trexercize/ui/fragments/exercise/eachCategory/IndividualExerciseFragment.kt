@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -49,6 +50,13 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
 
             equipmentSelected.text = "Showing exercises for the following equipment: \n\n" + equipmentList.contentToString()
 
+        }
+
+        val backBtn = view.findViewById<ImageButton>(R.id.back_to_categories)
+        backBtn.setOnClickListener {
+            val action: NavDirections = IndividualExerciseFragmentDirections.actionIndividualExerciseFragmentToExerciseFragment(
+            )
+            view.findNavController().navigate(action)
         }
 
         setUpResources()
@@ -122,6 +130,8 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
                             if(exerciseList.isEmpty()) {
                                 println("is it coming here")
                                 noExercises.visibility = VISIBLE
+                            } else {
+                                noExercises.visibility = GONE
                             }
                         }
                         override fun onCancelled(error: DatabaseError) {
