@@ -155,7 +155,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                 it1
             ).child("calendar").get().addOnSuccessListener {
                 userCalendar = it.value.toString()
-                println("Calendar " + userCalendar)
+                //println("Calendar " + userCalendar)
                 // populate the page with data from database
                 db.child("calendars").child(userCalendar).child(args.date)
                     .addValueEventListener(object : ValueEventListener {
@@ -191,7 +191,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                                                         muscleString
                                                     )
                                                 )
-                                                println("EXERCISE: $exerciseString MUSCLE: $muscleString")
+                                                //println("EXERCISE: $exerciseString MUSCLE: $muscleString")
                                                 adapter?.notifyDataSetChanged()
                                             }
                                         }
@@ -229,10 +229,13 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                                     }
                                 }
                                 if (snap.key == "rest day") {
-                                    val speechDino: ImageView = view.findViewById(R.id.speechdino)
-                                    speechDino.setImageResource(R.drawable.sleepdino2)
-                                    val speechText: TextView = view.findViewById(R.id.noWorkout)
-                                    speechText.text = "Have a nice rest day!"
+                                    if (snap.value == "true") {
+                                        val speechDino: ImageView =
+                                            view.findViewById(R.id.speechdino)
+                                        speechDino.setImageResource(R.drawable.sleepdino2)
+                                        val speechText: TextView = view.findViewById(R.id.noWorkout)
+                                        speechText.text = getString(R.string.restSnap)
+                                    }
                                     restDayButton.visibility = GONE
                                 }
 
@@ -347,7 +350,8 @@ class DayFragment : Fragment(R.layout.fragment_day) {
         }
 
         restDayButton.setOnClickListener {
-            if (snapLocalDate == null
+            // the streak info only updates if we take a snap?
+            /*if (snapLocalDate == null
                 || snapLocalDate!!.isBefore(currentLocalDate.minusDays(1))) {
                 db.child("users")
                     .child(Firebase.auth.currentUser?.uid.toString())
@@ -373,7 +377,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
             // update last snap date
             db.child("users").child(Firebase.auth.currentUser?.uid.toString())
                 .child("streakInfo").child("last snap date")
-                .setValue(currentDay)
+                .setValue(currentDay)*/
 
             // save that this day was a rest day
             var calendar: String
@@ -388,11 +392,11 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                 }
             }
 
+            // display dino saying it is a rest day
             val speechDino: ImageView = view.findViewById(R.id.speechdino)
             speechDino.setImageResource(R.drawable.sleepdino2)
             val speechText: TextView = view.findViewById(R.id.noWorkout)
-            speechText.text = "Have a nice rest day!"
-
+            speechText.text = getString(R.string.restSnap)
 
             restDayButton.visibility = GONE
         }
