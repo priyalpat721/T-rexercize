@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_homeScreenFragment_to_signOutFragment"
             app:destination="@id/signOutFragment" />
+        <action
+            android:id="@+id/action_homeScreenFragment_to_eachExerciseFragment"
+            app:destination="@id/eachExerciseFragment" />
     </fragment>
     <fragment
         android:id="@+id/calendarFragment"

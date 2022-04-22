@@ -2,8 +2,9 @@ package edu.neu.madcourse.trexercize.ui.fragments.homescreen
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import edu.neu.madcourse.trexercize.ui.fragments.exercise.EachExerciseCardListener
 
-class FavoriteExerciseCard {
+class FavoriteExerciseCard : EachExerciseCardListener{
     @SerializedName("favoriteExercise")
     @Expose
     var favoriteExercise: String? = null
@@ -20,6 +21,10 @@ class FavoriteExerciseCard {
         this.favoriteExercise = favoriteExercise
         this.exerciseCategory = exerciseCategory
         this.categoryImage = categoryImage
+    }
+
+    override fun onItemClick(position: Int) {
+
     }
 
     override fun toString(): String {

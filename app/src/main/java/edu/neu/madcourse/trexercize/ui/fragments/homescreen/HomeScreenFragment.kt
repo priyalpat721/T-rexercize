@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -16,6 +19,9 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import edu.neu.madcourse.trexercize.R
+import edu.neu.madcourse.trexercize.ui.fragments.exercise.EachExerciseCardListener
+import edu.neu.madcourse.trexercize.ui.fragments.exercise.ExerciseCard
+import edu.neu.madcourse.trexercize.ui.fragments.exercise.ExerciseFragmentDirections
 
 class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
     private var user = Firebase.auth.currentUser?.uid
@@ -73,7 +79,31 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
     }
 
     private fun setUpResources() {
-        homeScreenAdapter = this.context?.let { HomeScreenAdapter(favoritesList, it) }
+
+        val listener: EachExerciseCardListener = object : EachExerciseCardListener {
+            override fun onItemClick(position: Int) {
+                val exerciseCard: FavoriteExerciseCard = favoritesList[position]
+                val favoriteExercise = exerciseCard.favoriteExercise
+                val category = exerciseCard.exerciseCategory
+                Toast.makeText(context, "This is: $favoriteExercise", Toast.LENGTH_SHORT).show()
+
+                val action: NavDirections
+                action = HomeScreenFragmentDirections.actionHomeScreenFragmentToEachExerciseFragment()
+
+                action.also {
+                    if (favoriteExercise != null) {
+                        action.exerciseName = favoriteExercise
+                        action.exerciseCategory = category.toString()
+                    }
+                }
+
+                view?.findNavController()?.navigate(action)
+
+            }
+        }
+
+        homeScreenAdapter = this.context?.let { HomeScreenAdapter(favoritesList, it, listener) }
+        homeScreenAdapter?.setEachOnClickListener(listener)
         recyclerView?.adapter = homeScreenAdapter
         recyclerView?.layoutManager = LinearLayoutManager(context)
     }
