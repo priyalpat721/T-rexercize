@@ -48,7 +48,6 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
     private val args : EachExerciseFragmentArgs by navArgs()
     private val currentExercise = hashMapOf<String, Any?>()
 
-    private var equipmentList: Array<String>? =  null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,7 +67,6 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
         exerciseMuscleGroup.text = "Muscle Group:"
         exerciseCategory = args.exerciseCategory
         exerciseEquipment.text = "Equipment needed"
-        equipmentList = args.equipmentList
 
         val backBtn = view.findViewById<ImageButton>(R.id.back_to_exercise_list)
         backBtn.setOnClickListener {

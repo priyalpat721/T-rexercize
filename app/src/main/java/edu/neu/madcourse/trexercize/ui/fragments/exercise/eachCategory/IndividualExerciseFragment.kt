@@ -72,7 +72,7 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
                 Toast.makeText(context, "This is the exercise name: $exerciseName", Toast.LENGTH_SHORT).show()
 
                 val action: NavDirections
-                action = IndividualExerciseFragmentDirections.actionIndividualExerciseFragmentToEachExerciseFragment(equipmentList!!)
+                action = IndividualExerciseFragmentDirections.actionIndividualExerciseFragmentToEachExerciseFragment()
 
                 action.also {
                     if (exerciseName != null) {
@@ -130,6 +130,8 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
                             if(exerciseList.isEmpty()) {
                                 println("is it coming here")
                                 noExercises.visibility = VISIBLE
+                            } else {
+                                noExercises.visibility = GONE
                             }
                         }
                         override fun onCancelled(error: DatabaseError) {

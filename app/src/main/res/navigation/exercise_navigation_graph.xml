@@ -180,9 +180,6 @@
             android:name="exerciseCategory"
             app:argType="string"
             android:defaultValue="no category" />
-        <argument
-            android:name="equipmentList"
-            app:argType="string[]" />
         <action
             android:id="@+id/action_eachExerciseFragment_to_individualExerciseFragment3"
             app:destination="@id/individualExerciseFragment" />
