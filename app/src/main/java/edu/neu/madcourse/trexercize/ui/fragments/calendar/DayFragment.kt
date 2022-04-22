@@ -230,6 +230,8 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                                 }
                                 if (snap.key == "rest day") {
                                     if (snap.value == "true") {
+                                        noWorkout = view.findViewById(R.id.noRecycler)
+                                        noWorkout.visibility = VISIBLE
                                         val speechDino: ImageView =
                                             view.findViewById(R.id.speechdino)
                                         speechDino.setImageResource(R.drawable.sleepdino2)
@@ -249,6 +251,10 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                                 stickerForward.visibility = VISIBLE
                             }
                             snapImage.visibility = VISIBLE
+                            if (exerciseList.isEmpty()) {
+                                noWorkout = view.findViewById(R.id.noRecycler)
+                                noWorkout.visibility = VISIBLE
+                            }
                         }
 
                         override fun onCancelled(error: DatabaseError) {
