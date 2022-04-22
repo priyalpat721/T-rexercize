@@ -228,6 +228,13 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                                         moodImage.setImageResource(R.drawable.stickersleepdino)
                                     }
                                 }
+                                if (snap.key == "rest day") {
+                                    val speechDino: ImageView = view.findViewById(R.id.speechdino)
+                                    speechDino.setImageResource(R.drawable.sleepdino2)
+                                    val speechText: TextView = view.findViewById(R.id.noWorkout)
+                                    speechText.text = "Have a nice rest day!"
+                                    restDayButton.visibility = GONE
+                                }
 
                             }
                             if (mood == "none") {
@@ -333,7 +340,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
             }
         }
 
-        /*// rest day button for rest days
+        // rest day button for rest days
         restDayButton = view.findViewById(R.id.rest_day)
         if (args.date == currentDay) {
             restDayButton.visibility = VISIBLE
@@ -368,8 +375,27 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                 .child("streakInfo").child("last snap date")
                 .setValue(currentDay)
 
+            // save that this day was a rest day
+            var calendar: String
+            Firebase.auth.currentUser?.uid?.let { it1 ->
+                db.child("users").child(
+                    it1
+                ).child("calendar").get().addOnSuccessListener {
+                    calendar = it.value.toString()
+                    db.child("calendars").child(calendar).child(args.date)
+                        .child("rest day")
+                        .setValue("true")
+                }
+            }
+
+            val speechDino: ImageView = view.findViewById(R.id.speechdino)
+            speechDino.setImageResource(R.drawable.sleepdino2)
+            val speechText: TextView = view.findViewById(R.id.noWorkout)
+            speechText.text = "Have a nice rest day!"
+
+
             restDayButton.visibility = GONE
-        }*/
+        }
 
         // scroll through stickers with arrow buttons
         // https://stackoverflow.com/questions/16079486/scrolling-a-horizontalscrollview-by-clicking-buttons-on-its-sides
