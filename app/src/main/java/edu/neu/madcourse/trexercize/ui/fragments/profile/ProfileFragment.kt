@@ -95,7 +95,21 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         else{
                             profileList.add(ProfileCard("Target Areas", userInfo["targetAreas"].toString()))
                         }
-                        profileList.add(ProfileCard("Longest Streak", userInfo["streak"].toString()))
+                        for (info in userInfo) {
+                            if (info.key == "streakInfo") {
+                                val streakInfo = info.value as Map<String, String>
+                                for (sInfo in streakInfo) {
+                                    if (sInfo.key == "longest streak count") {
+                                        profileList.add(
+                                            ProfileCard(
+                                                "Longest Streak",
+                                                sInfo.value
+                                            )
+                                        )
+                                    }
+                                }
+                            }
+                        }
                         adapter?.notifyDataSetChanged()
                     }
                 }
