@@ -8,6 +8,9 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +21,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import edu.neu.madcourse.trexercize.R
+import edu.neu.madcourse.trexercize.ui.fragments.calendar.DayFragmentDirections
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -34,13 +38,16 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
     private var videoLink: String? = null
     private var currentCalendarId: String? = null
     private lateinit var exerciseMuscleGroup: TextView
+    private lateinit var actualMuscleGroup: TextView
     private lateinit var exerciseDescriptionText: TextView
     private lateinit var exerciseEquipment: TextView
+    private lateinit var actualEquipment: TextView
     private lateinit var addToFavorites: Button
     private lateinit var addToTodayWorkout: Button
     private var db = Firebase.database.reference
     private val args : EachExerciseFragmentArgs by navArgs()
     private val currentExercise = hashMapOf<String, Any?>()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,16 +55,28 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
         exerciseVideo = view.findViewById(R.id.exercise_video)
         exerciseTitle = view.findViewById(R.id.exercise_title)
         exerciseMuscleGroup = view.findViewById(R.id.exercise_muscle_group)
+        actualMuscleGroup = view.findViewById(R.id.actual_muscle)
         exerciseDescriptionText = view.findViewById(R.id.exercise_description)
         addToFavorites = view.findViewById(R.id.add_to_favorites_btn)
         addToTodayWorkout = view.findViewById(R.id.add_to_today_workout)
         exerciseEquipment = view.findViewById(R.id.exercise_equipment)
+        actualEquipment = view.findViewById(R.id.actual_equipment_text_view)
 
-//        println(addToFavorites.text.toString())
 
         exerciseTitle.text = args.exerciseName
-        exerciseMuscleGroup.text = "Muscle Group: Sample muscle group"
+        exerciseMuscleGroup.text = "Muscle Group:"
         exerciseCategory = args.exerciseCategory
+        exerciseEquipment.text = "Equipment needed"
+
+        val backBtn = view.findViewById<ImageButton>(R.id.back_to_exercise_list)
+        backBtn.setOnClickListener {
+//            val action: NavDirections = EachExerciseFragmentDirections.actionEachExerciseFragmentToIndividualExerciseFragment3(
+//                equipmentList as Array<out String>
+//            )
+//
+//            view.findNavController().navigate(action)
+            findNavController().popBackStack()
+        }
 
         if(addToFavorites.text.toString() == "Add to Favorites") {
             Firebase.auth.uid?.let {
@@ -170,13 +189,13 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
 //                    println(snap)
 
                     if(snap.key == "muscle groups") {
-                        exerciseMuscleGroup.text = "Muscle Group: " + snap.value.toString()
+                        actualMuscleGroup.text = snap.value.toString()
                         currentExercise["muscle groups"] = snap.value.toString()
                     }
                     if(snap.key == "equipment") {
                         val equipmentList = snap.value as ArrayList<String>
                         val equipment = equipmentList[0]
-                        exerciseEquipment.text = "Equipment needed: $equipment"
+                        actualEquipment.text = equipment
                         currentExercise["equipment"] = equipmentList
                     }
 
