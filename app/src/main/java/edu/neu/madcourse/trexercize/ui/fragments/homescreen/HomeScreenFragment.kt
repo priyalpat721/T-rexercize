@@ -22,6 +22,12 @@ import edu.neu.madcourse.trexercize.R
 import edu.neu.madcourse.trexercize.ui.fragments.exercise.EachExerciseCardListener
 import edu.neu.madcourse.trexercize.ui.fragments.exercise.ExerciseCard
 import edu.neu.madcourse.trexercize.ui.fragments.exercise.ExerciseFragmentDirections
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
     private var user = Firebase.auth.currentUser?.uid
@@ -29,14 +35,16 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
     private var favoritesList: MutableList<FavoriteExerciseCard> = ArrayList()
     private var recyclerView: RecyclerView? = null
     private var homeScreenAdapter: HomeScreenAdapter? = null
-    var streak_counter : TextView? = null
+    private var streakCounter : TextView? = null
+    private lateinit var currentLocalDate: LocalDate
+    private lateinit var snapLocalDate: LocalDate
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.favorites_rec_view)
         val navBar: BottomNavigationView? = activity?.findViewById(R.id.bottom_navigation_bar)
         navBar?.visibility = View.VISIBLE
-        streak_counter = view.findViewById(R.id.streak_counter)
+        streakCounter = view.findViewById(R.id.streak_counter)
         setUpResources()
         setUpData()
     }
@@ -73,9 +81,53 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
                     }
                 })
         }
+        val currentDay = SimpleDateFormat("M-d-yyyy", Locale.getDefault()).format(
+            Date()
+        )
+        Firebase.auth.currentUser?.uid?.let { it ->
+            db.child("users").child(it)
+            .child("streakInfo").child("last snap date").get()
+            .addOnSuccessListener {
+                if (it.value != "none") {
+                    snapLocalDate = LocalDate.parse(
+                        it.value.toString(),
+                        DateTimeFormatter.ofPattern("M-d-yyyy")
+                    )
+                    currentLocalDate =
+                        LocalDate.parse(currentDay, DateTimeFormatter.ofPattern("M-d-yyyy"))
+                    if (snapLocalDate.isBefore(currentLocalDate.minusDays(1))) {
+                        db.child("users")
+                            .child(Firebase.auth.currentUser?.uid.toString())
+                            .child("streakInfo").child("current streak count")
+                            .setValue(0)
+                    }
+                }
+            } }
+
         homeScreenAdapter?.notifyDataSetChanged()
 
-        var streak = Firebase.auth.currentUser?.uid?.let { db.child("users").child(it).child("streak").get().addOnSuccessListener { streak_counter?.text = "\uD83D\uDD25 ${it.value} day streak... Hit the gym!" } }
+        Firebase.auth.currentUser?.uid?.let {
+            db.child("users").child(it).child("streakInfo")
+                .child("current streak count")
+                .addValueEventListener(object : ValueEventListener {
+                    @SuppressLint("SetTextI18n")
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                            val count = snapshot.value.toString()
+                            if (count == "0") {
+                                streakCounter?.text = "0 day streak... Hit the gym!"
+                            } else {
+                                streakCounter?.text = "\uD83D\uDD25 $count day streak! Keep it up!"
+                            }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        // not implemented
+                    }
+                })
+        }
+//        Firebase.auth.currentUser?.uid?.let { db.child("users").child(it)
+//            .child("streakInfo").child("current streak count")
+//            .get().addValueEventListener { streak_counter?.text = "\uD83D\uDD25 ${it.value} day streak... Hit the gym!" } }
     }
 
     private fun setUpResources() {
