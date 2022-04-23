@@ -116,7 +116,13 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                                             )
                                         )
                                     }
-
+                                    if (sInfo.key == "last snap date") {
+                                        profileList.add(
+                                            ProfileCard("Last Snap Date",
+                                                sInfo.value
+                                            )
+                                        )
+                                    }
                                 }
                             }
                         }
