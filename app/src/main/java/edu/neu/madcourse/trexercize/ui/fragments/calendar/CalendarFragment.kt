@@ -13,12 +13,18 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import edu.neu.madcourse.trexercize.R
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.*
+import java.time.format.DateTimeFormatter
 
 
 open class CalendarFragment : Fragment(R.layout.fragment_calendar) {
     private lateinit var calendar: CalendarView
     private lateinit var quotesBox: TextView
     private var quoteApi : String = "https://api.quotable.io/random?maxLength=150"
+    private lateinit var currentLocalDate: LocalDate
+    private lateinit var selectedLocalDate: LocalDate
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,8 +47,18 @@ open class CalendarFragment : Fragment(R.layout.fragment_calendar) {
             action = CalendarFragmentDirections.actionCalendarFragmentToDayFragment()
             d.also { action.date = it }
             // check if the date clicked is after current date
+            // get the current day
+            val currentDay = SimpleDateFormat("M-d-yyyy", Locale.getDefault()).format(
+                Date()
+            )
+            // parse the dates into LocalDate
+            currentLocalDate = LocalDate.parse(currentDay, DateTimeFormatter.ofPattern("M-d-yyyy"))
+            selectedLocalDate = LocalDate.parse(d, DateTimeFormatter.ofPattern("M-d-yyyy"))
 
-            view?.findNavController()?.navigate(action)
+            if (selectedLocalDate.isBefore(currentLocalDate)
+                || selectedLocalDate.isEqual(currentLocalDate)) {
+                view?.findNavController()?.navigate(action)
+            }
         }
     }
 

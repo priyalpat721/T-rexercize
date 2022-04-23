@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
@@ -116,21 +115,43 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (snap in snapshot.children) {
                     if (snap.key == Firebase.auth.currentUser?.uid.toString()) {
-                        val userInfo = snap.value as Map<String, String>
+                        val userInfo = snap.value as Map<*, *>
                         context?.let {
                             Glide.with(it).load(userInfo["profilePicture"]).into(profile)
                         }
-                        name.setText(userInfo["name"])
-                        gym.setText(userInfo["gym"])
+                        if (userInfo["name"].toString().isEmpty()){
+                            name.setText("")
+                        }
+                        else{
+                            name.setText(userInfo["name"].toString())
+                        }
+                        if (userInfo["gym"].toString().isEmpty()) {
+                            gym.setText("None")
+                        }
+                        else{
+                            gym.setText(userInfo["gym"].toString())
+                        }
 
                         val ins = userInfo["inches"]
                         val ft = userInfo["feet"]
 
-                        inches.setText(ins)
-                        feet.setText(ft)
-                        age.setText(userInfo["age"])
-                        weight.setText(userInfo["weight"])
-                        targetAreas.setText(userInfo["targetAreas"])
+                        if (ins.toString().isNotEmpty()) {
+                            inches.setText(ins.toString())
+                        }
+
+                        if(feet.toString().isNotEmpty()){
+                            feet.setText(ft.toString())
+                        }
+
+                        if (userInfo["age"].toString().isNotEmpty())
+                        {
+                            age.setText(userInfo["age"].toString())
+                        }
+
+                        if(userInfo["weight"].toString().isNotEmpty()){
+                            weight.setText(userInfo["weight"].toString())
+                        }
+                        targetAreas.setText(userInfo["targetAreas"].toString())
                     }
                 }
             }

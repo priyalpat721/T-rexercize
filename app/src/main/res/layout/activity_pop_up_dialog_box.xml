@@ -11,6 +11,7 @@
         android:layout_height="48dp"
         android:autofillHints=""
         android:ems="10"
+        android:maxLength="15"
         android:hint="@string/get_abs"
         android:inputType="textAutoCorrect|textPersonName"
         android:textColorHint="#00838F"

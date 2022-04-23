@@ -58,13 +58,13 @@
                 android:id="@+id/change_snap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:background="@android:color/transparent"
                 android:text="@string/take_daily_snap"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/snapImage"
                 app:layout_constraintEnd_toEndOf="@+id/snapImage"
-                app:layout_constraintTop_toTopOf="@+id/snapImage"
-                app:layout_constraintVertical_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/snapImage"
                 app:strokeColor="#000000"
                 app:strokeWidth="10000dp" />
 
@@ -72,16 +72,14 @@
                 android:id="@+id/save_snap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:background="@android:color/transparent"
                 android:text="Save snap"
                 android:textColor="@color/white"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/snapImage"
                 app:layout_constraintEnd_toEndOf="@+id/snapImage"
-                app:layout_constraintTop_toTopOf="@+id/snapImage"
-                app:layout_constraintVertical_bias="1.0"
-                app:strokeColor="#000000"
-                app:strokeWidth="10000dp" />
+                app:layout_constraintStart_toStartOf="@+id/snapImage" />
 
             <TextView
                 android:id="@+id/snapText"
@@ -126,8 +124,8 @@
 
             <ImageView
                 android:id="@+id/snapImage"
-                android:layout_width="wrap_content"
-                android:layout_height="200dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
@@ -145,14 +143,50 @@
                 android:id="@+id/save_mood"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@android:color/transparent"
                 android:text="Save mood"
                 android:textColor="#2196F3"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/moodText"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/moodText"
                 app:layout_constraintTop_toTopOf="@+id/moodText"
+                app:strokeColor="#000000"
+                app:strokeWidth="10000dp" />
+
+            <Button
+                android:id="@+id/change_mood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@android:color/transparent"
+                android:text="Change mood"
+                android:textColor="#2196F3"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/moodText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/moodText"
+                app:layout_constraintTop_toTopOf="@+id/moodText"
+                app:strokeColor="#000000"
+                app:strokeWidth="10000dp" />
+
+            <Button
+                android:id="@+id/rest_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@android:color/transparent"
+                android:text="Rest day"
+                android:textColor="#2196F3"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/workoutText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/workoutText"
+                app:layout_constraintTop_toTopOf="@+id/workoutText"
                 app:strokeColor="#000000"
                 app:strokeWidth="10000dp" />
 
@@ -175,6 +209,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/workoutText">
@@ -192,7 +227,7 @@
                 <TextView
                     android:id="@+id/noWorkout"
                     android:layout_width="146dp"
-                    android:layout_height="101dp"
+                    android:layout_height="wrap_content"
                     android:text="No workout done for this day. Exercise now!"
                     android:textAlignment="center"
                     android:textSize="20sp"

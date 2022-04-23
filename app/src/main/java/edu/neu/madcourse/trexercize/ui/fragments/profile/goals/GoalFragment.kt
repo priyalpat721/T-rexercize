@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.Timestamp
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -261,14 +260,16 @@ class GoalFragment : Fragment(R.layout.fragment_goal) {
                                 }
                             }
                             if (card != null) {
-                                if (card.favorite) {
-                                    favList.add(card)
-                                }
-                                else if (card.done) {
-                                    doneList.add(card)
-                                }
-                                else {
-                                    pendingList.add(card)
+                                when {
+                                    card.favorite -> {
+                                        favList.add(card)
+                                    }
+                                    card.done -> {
+                                        doneList.add(card)
+                                    }
+                                    else -> {
+                                        pendingList.add(card)
+                                    }
                                 }
                             }
                         }

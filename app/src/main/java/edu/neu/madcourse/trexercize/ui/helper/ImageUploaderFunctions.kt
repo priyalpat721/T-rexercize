@@ -69,7 +69,7 @@ class ImageUploaderFunctions {
         if (userId != null) {
             // task snapshot returns a lot of information, including the path
             storageRef.child("images").child(userId).child(fileName).putFile(path)
-                .addOnSuccessListener {
+                .addOnSuccessListener { it ->
                     // once we have the path, we just download the url from cloud
                     storageRef.child("${it.metadata?.path}").downloadUrl.addOnSuccessListener { picture ->
                         val pictureUri = picture.toString()
@@ -85,7 +85,7 @@ class ImageUploaderFunctions {
                                     it1
                                 ).child("calendar").get().addOnSuccessListener {
                                     userCalendar = it.value.toString()
-                                    println("Calendar " + userCalendar)
+                                    println("Calendar $userCalendar")
                                     // populate the page with data from database
                                     db.child("calendars").child(userCalendar).child(date)
                                         .child("dailySnap").setValue(pictureUri)
@@ -114,21 +114,23 @@ class ImageUploaderFunctions {
 
         if (userId != null) {
             storageRef.child("images").child(userId).child(fileName).putFile(path)
-        }
-
-        Log.i("Gallery", "images/${userId}/${fileName}")
-        storageRef.child("images/${userId}/${fileName}").downloadUrl.addOnSuccessListener { picture ->
-            val userProfileUri = picture.toString()
-            Log.i("SUCCESS", userProfileUri)
-            Firebase.auth.currentUser?.uid?.let { it1 ->
-                db.child("users").child(it1).child("profilePicture").setValue(userProfileUri)
-            }
-        }.addOnFailureListener {
-            Toast.makeText(
-                context,
-                "Sorry, the picture could not be uploaded",
-                Toast.LENGTH_LONG
-            ).show()
+                .addOnSuccessListener {
+                    storageRef.child("${it.metadata?.path}").downloadUrl.addOnSuccessListener { picture
+                        ->
+                        val pictureUri = picture.toString()
+                        Firebase.auth.currentUser?.uid?.let { it1 ->
+                            db.child("users").child(it1).child("profilePicture")
+                                .setValue(pictureUri)
+                        }
+                    }
+                }
+                .addOnFailureListener {
+                    Toast.makeText(
+                        context,
+                        "Sorry, the picture could not be uploaded",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
         }
     }
 }

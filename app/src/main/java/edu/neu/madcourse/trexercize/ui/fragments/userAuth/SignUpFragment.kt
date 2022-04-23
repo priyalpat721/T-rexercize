@@ -115,21 +115,28 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                     Log.i("Calendar", calendarDoc)
                     val time = Timestamp.now()
 
+                    val streakInfo = hashMapOf(
+                        "longest streak count" to "0",
+                        "current streak count" to "0",
+                        "last snap date" to "none"
+                    )
 
                     val newUser = hashMapOf(
                         "name" to nameText,
                         "password" to "password",
                         "email" to emailAddress,
-                        "age" to "0",
+                        "age" to "",
                         "dateJoined" to time.toDate().toString(),
-                        "foot" to "0",
-                        "inches" to "0",
-                        "streak" to "0",
-                        "weight" to "0",
+                        "feet" to "",
+                        "inches" to "",
+                        "gym" to "None",
+                        "streakInfo" to streakInfo,
+                        "weight" to "",
                         "calendar" to calendarDoc,
                         "targetAreas" to "",
                         "profilePicture" to "https://firebasestorage.googleapis.com/v0/b/t-rexercize.appspot.com/o/exercisedino.png?alt=media&token=9ef0f90d-80fa-4e5d-9747-856baf0024c8"
                     )
+
                     Firebase.auth.currentUser?.uid?.let {
                         db.child("users").child(it).setValue(newUser)
                     }

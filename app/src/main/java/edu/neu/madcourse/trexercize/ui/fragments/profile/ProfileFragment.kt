@@ -67,35 +67,70 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 profileList.clear()
                 for (snap in snapshot.children) {
                     if (snap.key == Firebase.auth.currentUser?.uid.toString()) {
-                        val userInfo = snap.value as Map<String, String>
-                        name.text = userInfo["name"]
-                        gym.text = userInfo["gym"]
+                        val userInfo = snap.value as Map<*, *>
+                        name.text = userInfo["name"] as CharSequence?
+                        gym.text = userInfo["gym"] as CharSequence?
                         context?.let { Glide.with(it).load(userInfo["profilePicture"]).into(profile) }
-                        val inches = userInfo["inches"]
-                        val feet = userInfo["feet"]
-                        var height = "${feet}ft ${inches}in"
-                        var bmi : Double
+                        val inches = userInfo["inches"] as CharSequence?
+                        val feet = userInfo["feet"] as CharSequence?
+                        var height = "$feet ft $inches in"
+                        var totalInches = 0
                         if (inches.isNullOrEmpty() || feet.isNullOrEmpty()) {
-                            bmi = 0.0
-                            height = "0ft 0in"
+                            height = "0 ft 0 in"
                         }else{
-                            val totalInches = (Integer.parseInt(feet) * 12) + Integer.parseInt(inches)
-                            bmi = (userInfo["weight"]?.let { Integer.parseInt(it).toDouble() }
-                                ?.div(totalInches.toDouble()) ?: 0.0) / totalInches.toDouble() * 703
+                             totalInches = (Integer.parseInt(feet as String) * 12) + Integer.parseInt(
+                                inches as String)
                         }
 
-                        profileList.add(ProfileCard("Age", userInfo["age"].toString()))
-                        profileList.add(ProfileCard("Height", height))
-                        profileList.add(ProfileCard("Weight", userInfo["weight"].toString()))
-                        profileList.add(ProfileCard("BMI", String.format("%.2f", bmi)))
-
-                        if (userInfo["targetAreas"].isNullOrEmpty()) {
-                            profileList.add(ProfileCard("Target Areas", ""))
+                        profileList.add(ProfileCard("  Age", userInfo["age"].toString()))
+                        profileList.add(ProfileCard(" Height", height))
+                        profileList.add(ProfileCard(" Weight", userInfo["weight"].toString() + " lbs"))
+                        if (userInfo["weight"].toString() == "") {
+                            profileList.add(ProfileCard(" BMI", String.format("%.2f", 0.0)))
                         }
                         else{
-                            profileList.add(ProfileCard("Target Areas", userInfo["targetAreas"].toString()))
+                            val bmi = (userInfo["weight"]?.let { Integer.parseInt(it as String).toDouble() }
+                                ?.div(totalInches.toDouble()) ?: 0.0) / totalInches.toDouble() * 703
+                            profileList.add(ProfileCard(" BMI", String.format("%.2f", bmi)))
                         }
-                        profileList.add(ProfileCard("Longest Streak", userInfo["streak"].toString()))
+
+                        if (userInfo["targetAreas"].toString().isEmpty()) {
+                            profileList.add(ProfileCard(" Target Areas", "None"))
+                        }
+                        else{
+                            profileList.add(ProfileCard(" Target Areas", userInfo["targetAreas"].toString()))
+                        }
+                        for (info in userInfo) {
+                            if (info.key == "streakInfo") {
+                                val streakInfo = info.value as Map<*, *>
+                                for (sInfo in streakInfo) {
+                                    if (sInfo.key == "longest streak count") {
+                                        profileList.add(
+                                            ProfileCard(
+                                                " Longest Streak",
+                                                sInfo.value as String?
+                                            )
+                                        )
+                                    }
+
+                                    if (sInfo.key == "current streak count") {
+                                        profileList.add(
+                                            ProfileCard(
+                                                " Current Streak",
+                                                sInfo.value as String?
+                                            )
+                                        )
+                                    }
+                                    if (sInfo.key == "last snap date") {
+                                        profileList.add(
+                                            ProfileCard("Last Snap Date",
+                                                sInfo.value as String?
+                                            )
+                                        )
+                                    }
+                                }
+                            }
+                        }
                         adapter?.notifyDataSetChanged()
                     }
                 }

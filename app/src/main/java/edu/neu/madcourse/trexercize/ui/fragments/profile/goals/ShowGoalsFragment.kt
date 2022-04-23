@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.ImageButton
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +28,7 @@ class ShowGoalsFragment : Fragment(R.layout.fragment_show_goals) {
     private val doneList: ArrayList<ShowGoalCard> = ArrayList()
     private val favList: ArrayList<ShowGoalCard> = ArrayList()
     private val pendingList: ArrayList<ShowGoalCard> = ArrayList()
+    private lateinit var showMotivatedDino : ConstraintLayout
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,6 +40,7 @@ class ShowGoalsFragment : Fragment(R.layout.fragment_show_goals) {
         }
 
         recyclerView = view.findViewById(R.id.recycler_view_show)
+        showMotivatedDino = view.findViewById(R.id.no_recycler_shown)
         setUpResources()
 
         listenForChanges()
@@ -103,6 +106,15 @@ class ShowGoalsFragment : Fragment(R.layout.fragment_show_goals) {
                         goalList.addAll(favList)
                         goalList.addAll(pendingList)
                         goalList.addAll(doneList)
+
+                        if (goalList.isNullOrEmpty()) {
+                            recyclerView?.visibility = View.GONE
+                            showMotivatedDino.visibility = View.VISIBLE
+                        }
+                        else{
+                            recyclerView?.visibility = View.VISIBLE
+                            showMotivatedDino.visibility = View.GONE
+                        }
                         adapter?.notifyDataSetChanged()
 
                     }

@@ -49,6 +49,9 @@
                 android:name="date"
                 android:defaultValue="No date" />
         </action>
+        <action
+            android:id="@+id/action_calendarFragment_to_signOutFragment"
+            app:destination="@id/signOutFragment" />
     </fragment>
     <fragment
         android:id="@+id/exerciseFragment"
@@ -67,6 +70,9 @@
             app:popUpTo="@id/individualExerciseFragment">
 
         </action>
+        <action
+            android:id="@+id/action_exerciseFragment_to_signOutFragment"
+            app:destination="@id/signOutFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -82,6 +88,9 @@
         <action
             android:id="@+id/action_profileFragment_to_showGoalsFragment"
             app:destination="@id/showGoalsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_signOutFragment"
+            app:destination="@id/signOutFragment" />
     </fragment>
     <fragment
         android:id="@+id/dayFragment"
@@ -174,6 +183,9 @@
             android:name="exerciseCategory"
             app:argType="string"
             android:defaultValue="no category" />
+        <action
+            android:id="@+id/action_eachExerciseFragment_to_individualExerciseFragment3"
+            app:destination="@id/individualExerciseFragment" />
     </fragment>
     <fragment
         android:id="@+id/goalFragment"
