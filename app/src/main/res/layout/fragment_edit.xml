@@ -39,8 +39,8 @@
                         android:layout_width="130dp"
                         android:layout_height="130dp"
                         android:layout_marginStart="8dp"
-                        app:civ_border_color="#00897B"
-                        app:civ_border_width="1dp"
+                        app:civ_border_color="#5CBCB3"
+                        app:civ_border_width="2dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/description_profile"
                         app:layout_constraintHorizontal_bias="0.15"
@@ -120,7 +120,8 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.4"
                             app:layout_constraintStart_toEndOf="@+id/textView5"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:autofillHints="" />
 
                         <EditText
                             android:id="@+id/gym_name"
@@ -140,7 +141,8 @@
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="@+id/name"
                             app:layout_constraintTop_toBottomOf="@+id/name"
-                            app:layout_constraintVertical_bias="1.0" />
+                            app:layout_constraintVertical_bias="1.0"
+                            android:autofillHints="" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -149,7 +151,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ScrollView
+                    <androidx.core.widget.NestedScrollView
                         android:id="@+id/scrollView2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -244,7 +246,8 @@
                                     tools:layout_conversion_absoluteHeight="53dp"
                                     tools:layout_conversion_absoluteWidth="77dp"
                                     tools:layout_editor_absoluteX="159dp"
-                                    tools:layout_editor_absoluteY="368dp" />
+                                    tools:layout_editor_absoluteY="368dp"
+                                    android:autofillHints="" />
 
                                 <EditText
                                     android:id="@+id/feet"
@@ -323,6 +326,7 @@
                                     android:minWidth="48dp"
                                     android:textColorHint="#78909C"
                                     android:textSize="24sp"
+                                    android:inputType="number"
                                     app:layout_constraintBottom_toBottomOf="@+id/weight3"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toEndOf="@+id/weight3"
@@ -330,7 +334,8 @@
                                     app:layout_constraintVertical_bias="0.619"
                                     tools:ignore="DuplicateSpeakableTextCheck"
                                     tools:layout_conversion_absoluteHeight="53dp"
-                                    tools:layout_conversion_absoluteWidth="82dp" />
+                                    tools:layout_conversion_absoluteWidth="82dp"
+                                    android:autofillHints="" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <androidx.constraintlayout.widget.ConstraintLayout
@@ -373,18 +378,24 @@
                                     android:maxLength="65"
                                     android:textColorHint="#78909C"
                                     android:textSize="24sp"
+                                    android:inputType="textMultiLine"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toEndOf="@+id/target_areas2"
                                     app:layout_constraintTop_toTopOf="parent"
                                     tools:ignore="DuplicateSpeakableTextCheck"
                                     tools:layout_conversion_absoluteHeight="53dp"
-                                    tools:layout_conversion_absoluteWidth="143dp" />
+                                    tools:layout_conversion_absoluteWidth="143dp"
+                                    android:autofillHints="" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <TextView
                                 android:id="@+id/txtProfile"
                                 style="@style/txtAcmeregular36"
+                                android:shadowColor="#000000"
+                                android:shadowDx="1.5"
+                                android:shadowDy="1.5"
+                                android:shadowRadius="1.6"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
@@ -399,7 +410,7 @@
                                 tools:layout_conversion_absoluteHeight="61dp"
                                 tools:layout_conversion_absoluteWidth="208dp" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
-                    </ScrollView>
+                    </androidx.core.widget.NestedScrollView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
