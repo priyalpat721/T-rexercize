@@ -85,7 +85,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         profileList.add(ProfileCard("  Age", userInfo["age"].toString()))
                         profileList.add(ProfileCard(" Height", height))
                         profileList.add(ProfileCard(" Weight", userInfo["weight"].toString() + " lbs"))
-                        if (userInfo["weight"].toString() == "0") {
+                        if (userInfo["weight"].toString() == "") {
                             profileList.add(ProfileCard(" BMI", String.format("%.2f", 0.0)))
                         }
                         else{
@@ -95,7 +95,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         }
 
                         if (userInfo["targetAreas"].toString().isEmpty()) {
-                            profileList.add(ProfileCard(" Target Areas", ""))
+                            profileList.add(ProfileCard(" Target Areas", "None"))
                         }
                         else{
                             profileList.add(ProfileCard(" Target Areas", userInfo["targetAreas"].toString()))
