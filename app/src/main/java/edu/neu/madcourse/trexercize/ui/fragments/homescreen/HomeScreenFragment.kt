@@ -20,8 +20,6 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import edu.neu.madcourse.trexercize.R
 import edu.neu.madcourse.trexercize.ui.fragments.exercise.EachExerciseCardListener
-import edu.neu.madcourse.trexercize.ui.fragments.exercise.ExerciseCard
-import edu.neu.madcourse.trexercize.ui.fragments.exercise.ExerciseFragmentDirections
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -30,7 +28,6 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
-    private var user = Firebase.auth.currentUser?.uid
     private var db = Firebase.database.reference
     private var favoritesList: MutableList<FavoriteExerciseCard> = ArrayList()
     private var recyclerView: RecyclerView? = null
@@ -51,12 +48,12 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setUpData() {
-        var musclesMap = HashMap<String, Int>()
-        musclesMap.put("arms", R.drawable.arms)
-        musclesMap.put("back", R.drawable.back)
-        musclesMap.put("chest", R.drawable.chest)
-        musclesMap.put("core", R.drawable.abs)
-        musclesMap.put("legs", R.drawable.legs)
+        val musclesMap = HashMap<String, Int>()
+        musclesMap["arms"] = R.drawable.arms
+        musclesMap["back"] = R.drawable.back
+        musclesMap["chest"] = R.drawable.chest
+        musclesMap["core"] = R.drawable.abs
+        musclesMap["legs"] = R.drawable.legs
 
         favoritesList.clear()
         Firebase.auth.currentUser?.uid?.let {
@@ -64,11 +61,11 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
                 .addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         for (snap in snapshot.children) {
-                            var data = snap.value as Map<String, String>
-                            var favoriteExerciseCard = FavoriteExerciseCard(
+                            val data = snap.value as Map<String, String>
+                            val favoriteExerciseCard = FavoriteExerciseCard(
                                 snap.key,
                                 data.getValue("muscle groups"),
-                                musclesMap.get(data.getValue("muscle groups"))
+                                musclesMap[data.getValue("muscle groups")]
                             )
                             Log.i("New Favorite", favoriteExerciseCard.toString())
                             favoritesList.add(favoriteExerciseCard)

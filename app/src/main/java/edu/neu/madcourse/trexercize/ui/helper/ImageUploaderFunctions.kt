@@ -69,7 +69,7 @@ class ImageUploaderFunctions {
         if (userId != null) {
             // task snapshot returns a lot of information, including the path
             storageRef.child("images").child(userId).child(fileName).putFile(path)
-                .addOnSuccessListener {
+                .addOnSuccessListener { it ->
                     // once we have the path, we just download the url from cloud
                     storageRef.child("${it.metadata?.path}").downloadUrl.addOnSuccessListener { picture ->
                         val pictureUri = picture.toString()
@@ -85,7 +85,7 @@ class ImageUploaderFunctions {
                                     it1
                                 ).child("calendar").get().addOnSuccessListener {
                                     userCalendar = it.value.toString()
-                                    println("Calendar " + userCalendar)
+                                    println("Calendar $userCalendar")
                                     // populate the page with data from database
                                     db.child("calendars").child(userCalendar).child(date)
                                         .child("dailySnap").setValue(pictureUri)
