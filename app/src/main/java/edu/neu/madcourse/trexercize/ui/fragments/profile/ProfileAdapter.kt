@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import edu.neu.madcourse.trexercize.R
 
 class ProfileAdapter(
-    private val profileList: ArrayList<ProfileCard> = ArrayList<ProfileCard>(),
+    private val profileList: ArrayList<ProfileCard> = ArrayList(),
     private val context: Context
 
 ) : RecyclerView.Adapter<ProfileViewHolder>() {

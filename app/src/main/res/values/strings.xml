@@ -75,4 +75,6 @@
     <string name="get_abs">Get abs!</string>
     <string name="goal">Goal</string>
     <string name="restSnap">Have a nice rest day! Make sure to take a rest snap!</string>
+    <string name="edit_goals">Edit Goals</string>
+    <string name="lbs">lbs</string>
 </resources>

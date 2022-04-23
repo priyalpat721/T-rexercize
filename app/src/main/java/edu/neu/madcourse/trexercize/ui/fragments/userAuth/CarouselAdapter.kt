@@ -5,7 +5,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import edu.neu.madcourse.trexercize.R
 
@@ -27,7 +26,7 @@ class CarouselAdapter(
     @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: CarouselViewHolder, position: Int) {
 
-        var pos = position % carouselList.size
+        val pos = position % carouselList.size
         Glide.with(context).load(carouselList[pos].imageUrl).into(holder.image)
     }
 }
