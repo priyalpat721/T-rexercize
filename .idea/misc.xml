@@ -3,13 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/priya/AndroidStudioProjects/T-rexercize/app/src/main/res/drawable/alternate_goal_border.xml" value="0.134" />
         <entry key="..\:/Users/priya/AndroidStudioProjects/T-rexercize/app/src/main/res/drawable/border.xml" value="0.1155" />
         <entry key="..\:/Users/priya/AndroidStudioProjects/T-rexercize/app/src/main/res/drawable/goal_border.xml" value="0.1155" />
         <entry key="..\:/Users/priya/AndroidStudioProjects/T-rexercize/app/src/main/res/layout/fragment_edit.xml" value="0.4" />
-        <entry key="..\:/Users/priya/AndroidStudioProjects/T-rexercize/app/src/main/res/layout/fragment_edit.xml" value="0.4" />
-        <entry key="..\:/Users/priya/AndroidStudioProjects/T-rexercize/app/src/main/res/layout/fragment_day.xml" value="0.24139492753623187" />
-        <entry key="..\:/Users/priya/AndroidStudioProjects/T-rexercize/app/src/main/res/layout/fragment_edit.xml" value="0.1" />
         <entry key="..\:/Users/priya/AndroidStudioProjects/T-rexercize/app/src/main/res/layout/fragment_gallery.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/priya/AndroidStudioProjects/T-rexercize/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
         <entry key="..\:/Users/priya/AndroidStudioProjects/trexercize/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.339" />
@@ -75,8 +71,10 @@
         <entry key="app/src/main/res/layout/fragment_home_screen.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.35015869140625" />
         <entry key="app/src/main/res/layout/fragment_selector.xml" value="0.24895833333333334" />
+        <entry key="app/src/main/res/layout/fragment_show_goals.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/layout/fragment_sign_out.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/layout/profile_card_layout.xml" value="0.24895833333333334" />
+        <entry key="app/src/main/res/layout/show_goal_card.xml" value="0.24895833333333334" />
       </map>
     </option>
   </component>
