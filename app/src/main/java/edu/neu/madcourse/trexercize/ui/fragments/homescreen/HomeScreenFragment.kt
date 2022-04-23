@@ -9,9 +9,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -43,23 +45,26 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
         navBar?.visibility = View.VISIBLE
         streakCounter = view.findViewById(R.id.streak_counter)
         setUpResources()
+        manageSwipes()
         setUpData()
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setUpData() {
-        val musclesMap = HashMap<String, Int>()
-        musclesMap["arms"] = R.drawable.arms
-        musclesMap["back"] = R.drawable.back
-        musclesMap["chest"] = R.drawable.chest
-        musclesMap["core"] = R.drawable.abs
-        musclesMap["legs"] = R.drawable.legs
+        var musclesMap = HashMap<String, Int>()
+        musclesMap.put("arms", R.drawable.arms)
+        musclesMap.put("back", R.drawable.back)
+        musclesMap.put("chest", R.drawable.chest)
+        musclesMap.put("core", R.drawable.abs)
+        musclesMap.put("full body", R.drawable.full_body)
+        musclesMap.put("legs", R.drawable.legs)
 
         favoritesList.clear()
         Firebase.auth.currentUser?.uid?.let {
             db.child("users").child(it).child("favorites")
                 .addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
+                        favoritesList.clear()
                         for (snap in snapshot.children) {
                             val data = snap.value as Map<String, String>
                             val favoriteExerciseCard = FavoriteExerciseCard(
@@ -155,5 +160,36 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
         homeScreenAdapter?.setEachOnClickListener(listener)
         recyclerView?.adapter = homeScreenAdapter
         recyclerView?.layoutManager = LinearLayoutManager(context)
+    }
+
+    private fun manageSwipes() {
+        // deletes the url card
+        val deleteOnLeft =
+            ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+                // should only delete, not move the cards around
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                    return false
+                }
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    val position = viewHolder.layoutPosition
+                    Firebase.auth.currentUser?.let {
+                        db.child("users").child(it.uid)
+                            .child("favorites").child(favoritesList[position].favoriteExercise!!).removeValue()
+                    }
+                    favoritesList.removeAt(position)
+                    homeScreenAdapter!!.notifyItemRemoved(position)
+                    val success = Snackbar.make(
+                        recyclerView!!,
+                        "Successfully deleted!", Snackbar.LENGTH_LONG
+                    )
+                    success.show()
+                }
+            })
+        deleteOnLeft.attachToRecyclerView(recyclerView)
     }
 }
