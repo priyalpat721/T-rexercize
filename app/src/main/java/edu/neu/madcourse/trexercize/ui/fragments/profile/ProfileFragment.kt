@@ -84,16 +84,16 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                                 ?.div(totalInches.toDouble()) ?: 0.0) / totalInches.toDouble() * 703
                         }
 
-                        profileList.add(ProfileCard("Age", userInfo["age"].toString()))
-                        profileList.add(ProfileCard("Height", height))
-                        profileList.add(ProfileCard("Weight", userInfo["weight"].toString()))
-                        profileList.add(ProfileCard("BMI", String.format("%.2f", bmi)))
+                        profileList.add(ProfileCard("  Age", userInfo["age"].toString()))
+                        profileList.add(ProfileCard(" Height", height))
+                        profileList.add(ProfileCard(" Weight", userInfo["weight"].toString()))
+                        profileList.add(ProfileCard(" BMI", String.format("%.2f", bmi)))
 
                         if (userInfo["targetAreas"].isNullOrEmpty()) {
-                            profileList.add(ProfileCard("Target Areas", ""))
+                            profileList.add(ProfileCard(" Target Areas", ""))
                         }
                         else{
-                            profileList.add(ProfileCard("Target Areas", userInfo["targetAreas"].toString()))
+                            profileList.add(ProfileCard(" Target Areas", userInfo["targetAreas"].toString()))
                         }
                         for (info in userInfo) {
                             if (info.key == "streakInfo") {
@@ -102,7 +102,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                                     if (sInfo.key == "longest streak count") {
                                         profileList.add(
                                             ProfileCard(
-                                                "Longest Streak",
+                                                " Longest Streak",
                                                 sInfo.value
                                             )
                                         )
@@ -111,11 +111,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                                     if (sInfo.key == "current streak count") {
                                         profileList.add(
                                             ProfileCard(
-                                                "Current Streak",
+                                                " Current Streak",
                                                 sInfo.value
                                             )
                                         )
                                     }
+
                                 }
                             }
                         }
