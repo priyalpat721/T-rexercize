@@ -107,6 +107,15 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                                             )
                                         )
                                     }
+
+                                    if (sInfo.key == "current streak count") {
+                                        profileList.add(
+                                            ProfileCard(
+                                                "Current Streak",
+                                                sInfo.value
+                                            )
+                                        )
+                                    }
                                 }
                             }
                         }
