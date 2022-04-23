@@ -49,10 +49,12 @@ class DayFragment : Fragment(R.layout.fragment_day) {
     private lateinit var changeSnapButton: Button
     private lateinit var saveSnapButton: Button
     private lateinit var saveMoodButton: Button
+    private lateinit var changeMoodButton: Button
     private lateinit var restDayButton: Button
     private lateinit var snapImage: ImageView
     private lateinit var moodImage: ImageView
     private lateinit var noWorkout: ConstraintLayout
+    private lateinit var speechText: TextView
     lateinit var adapter: ExerciseTextAdapter
     private var path: Uri? = null
     private lateinit var storageRef: StorageReference
@@ -149,6 +151,8 @@ class DayFragment : Fragment(R.layout.fragment_day) {
         recyclerView.layoutManager = LinearLayoutManager(context)
         moodImage = view.findViewById(R.id.moodSticker)
 
+        speechText = view.findViewById(R.id.noWorkout)
+
         // populate day view with snap, workouts, and mood
         Firebase.auth.currentUser?.uid?.let { it1 ->
             db.child("users").child(
@@ -165,10 +169,14 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                             for (snap in snapshot.children) {
                                 if (snap.key == "dailySnap") {
                                     // set pic image view
-                                    changeSnapButton.visibility = GONE
+                                    //changeSnapButton.visibility = GONE
                                     snapImage = view.findViewById(R.id.snapImage)
                                     context?.let { it2 ->
                                         Glide.with(it2).load(snap.value).into(snapImage)
+                                    }
+                                    if (args.date == currentDay) {
+                                        changeSnapButton.text = "Edit snap"
+                                        changeSnapButton.visibility = VISIBLE
                                     }
                                 }
                                 if (snap.key == "workout") {
@@ -200,6 +208,9 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                                 }
                                 if (snap.key == "mood") {
                                     // set the mode image view
+                                    if (args.date == currentDay) {
+                                        changeMoodButton.visibility = VISIBLE
+                                    }
                                     saveMoodButton.visibility = GONE
                                     stickerScroll.visibility = GONE
                                     stickerBack.visibility = GONE
@@ -235,8 +246,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                                         val speechDino: ImageView =
                                             view.findViewById(R.id.speechdino)
                                         speechDino.setImageResource(R.drawable.sleepdino2)
-                                        val speechText: TextView = view.findViewById(R.id.noWorkout)
-                                        speechText.text = getString(R.string.restSnap)
+                                        speechText.text = "Have a nice rest day! Make sure to take a rest snap!"
                                     }
                                     restDayButton.visibility = GONE
                                 }
@@ -245,10 +255,13 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                             if (mood == "none") {
                                 if (args.date == currentDay) {
                                     saveMoodButton.visibility = VISIBLE
+                                    stickerScroll.visibility = VISIBLE
+                                    stickerBack.visibility = VISIBLE
+                                    stickerForward.visibility = VISIBLE
+                                } else {
+                                    moodImage.visibility = VISIBLE
+                                    moodImage.setImageResource(android.R.drawable.ic_menu_close_clear_cancel)
                                 }
-                                stickerScroll.visibility = VISIBLE
-                                stickerBack.visibility = VISIBLE
-                                stickerForward.visibility = VISIBLE
                             }
                             snapImage.visibility = VISIBLE
                             if (exerciseList.isEmpty()) {
@@ -319,12 +332,15 @@ class DayFragment : Fragment(R.layout.fragment_day) {
             .setValue(currentDay)
 
             saveSnapButton.visibility = GONE
+            changeSnapButton.text = "Edit snap"
+            changeSnapButton.visibility = VISIBLE
         }
 
         stickerScroll = view.findViewById(R.id.stickerScroll)
         stickerBack = view.findViewById(R.id.stickerBack)
         stickerForward = view.findViewById(R.id.stickerForward)
         saveMoodButton = view.findViewById(R.id.save_mood)
+        changeMoodButton = view.findViewById(R.id.change_mood)
         moodImage = view.findViewById(R.id.moodSticker)
 
         saveMoodButton.setOnClickListener {
@@ -346,7 +362,17 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                 stickerBack.visibility = GONE
                 stickerForward.visibility = GONE
                 moodImage.visibility = VISIBLE
+                changeMoodButton.visibility = VISIBLE
             }
+        }
+
+        changeMoodButton.setOnClickListener {
+            stickerScroll.visibility = VISIBLE
+            stickerBack.visibility = VISIBLE
+            stickerForward.visibility = VISIBLE
+            moodImage.visibility = GONE
+            changeMoodButton.visibility = GONE
+            saveMoodButton.visibility = VISIBLE
         }
 
         // rest day button for rest days
@@ -401,7 +427,6 @@ class DayFragment : Fragment(R.layout.fragment_day) {
             // display dino saying it is a rest day
             val speechDino: ImageView = view.findViewById(R.id.speechdino)
             speechDino.setImageResource(R.drawable.sleepdino2)
-            val speechText: TextView = view.findViewById(R.id.noWorkout)
             speechText.text = getString(R.string.restSnap)
 
             restDayButton.visibility = GONE
