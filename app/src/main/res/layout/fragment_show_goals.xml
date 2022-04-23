@@ -24,7 +24,7 @@
         tools:ignore="RedundantDescriptionCheck" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/noRecycler"
+        android:id="@+id/no_recycler_shown"
         android:layout_width="0dp"
         android:layout_height="180dp"
         android:layout_marginStart="8dp"
@@ -43,13 +43,14 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/motivatedino" />
+            app:srcCompat="@drawable/motivatedino"
+            android:contentDescription="@string/dino_with_dialog" />
 
         <TextView
             android:id="@+id/noWorkout"
             android:layout_width="146dp"
             android:layout_height="wrap_content"
-            android:text="#DinoAbsGoal"
+            android:text="@string/dinoabsgoal"
             android:textAlignment="center"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/speech"
@@ -69,7 +70,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/speechdino"
             app:layout_constraintTop_toTopOf="@+id/speechdino"
-            app:srcCompat="@drawable/speechbubble2" />
+            app:srcCompat="@drawable/speechbubble2"
+            android:contentDescription="@string/dino_with_dialog" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
