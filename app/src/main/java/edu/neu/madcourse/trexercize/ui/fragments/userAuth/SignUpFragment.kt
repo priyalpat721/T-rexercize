@@ -129,6 +129,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                         "dateJoined" to time.toDate().toString(),
                         "foot" to "0",
                         "inches" to "0",
+                        "gym" to "None",
                         "streakInfo" to streakInfo,
                         "weight" to "0",
                         "calendar" to calendarDoc,

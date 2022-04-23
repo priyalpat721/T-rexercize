@@ -73,11 +73,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         context?.let { Glide.with(it).load(userInfo["profilePicture"]).into(profile) }
                         val inches = userInfo["inches"] as CharSequence?
                         val feet = userInfo["feet"] as CharSequence?
-                        var height = "${feet}ft ${inches}in"
+                        var height = "$feet ft $inches in"
                         var bmi : Double
                         if (inches.isNullOrEmpty() || feet.isNullOrEmpty()) {
                             bmi = 0.0
-                            height = "0ft 0in"
+                            height = "0 ft 0 in"
                         }else{
                             val totalInches = (Integer.parseInt(feet as String) * 12) + Integer.parseInt(
                                 inches as String
@@ -88,7 +88,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
                         profileList.add(ProfileCard("  Age", userInfo["age"].toString()))
                         profileList.add(ProfileCard(" Height", height))
-                        profileList.add(ProfileCard(" Weight", userInfo["weight"].toString() + "lbs"))
+                        profileList.add(ProfileCard(" Weight", userInfo["weight"].toString() + " lbs"))
                         if (userInfo["weight"].toString() == "0") {
                             profileList.add(ProfileCard(" BMI", String.format("%.2f", 0.0)))
                         }

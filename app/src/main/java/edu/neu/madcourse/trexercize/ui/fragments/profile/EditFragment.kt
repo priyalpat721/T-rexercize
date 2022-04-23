@@ -126,7 +126,7 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
                             name.setText(userInfo["name"].toString())
                         }
                         if (userInfo["gym"].toString().isEmpty()) {
-                            gym.setText("")
+                            gym.setText("None")
                         }
                         else{
                             gym.setText(userInfo["gym"].toString())
@@ -136,9 +136,6 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
                         val ft = userInfo["feet"]
 
                         if (ins.toString().isNotEmpty()) {
-                            inches.setText("")
-                        }
-                        else {
                             inches.setText(ins.toString())
                         }
 
