@@ -117,9 +117,9 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
                 exerciseList.clear()
                 for (snap in snapshot.children) {
                     val exerciseName = snap.key
-
                     snap.key?.let { db.child(title.text.toString().lowercase()).child(it).
                     addValueEventListener(object : ValueEventListener {
+
                         @SuppressLint("SetTextI18n")
                         override fun onDataChange(snapshot: DataSnapshot) {
                             for (snap in snapshot.children) {
