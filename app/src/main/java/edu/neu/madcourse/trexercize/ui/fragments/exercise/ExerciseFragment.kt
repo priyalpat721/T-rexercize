@@ -26,47 +26,65 @@ class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // recycler view for the Exercise Fragment page. It will display everything in grid view
         recyclerView = view.findViewById(R.id.exercise_recycler_view)
-        equipmentButton = view.findViewById(R.id.select_equipment)
-        EQUIPMENT_ARRAY = arrayOf("dumbbell", "barbell", "yoga mat", "ab wheel", "resistance bands", "cable", "pull up bar")
 
+        // Button to launch the equipment dialogue to select available equipment
+        equipmentButton = view.findViewById(R.id.select_equipment)
+
+        // The list of equipment the app supports currently
+        EQUIPMENT_ARRAY = arrayOf("dumbbell", "barbell", "yoga mat", "ab wheel", "resistance bands", "cable", "pull up bar", "none")
+
+        // on click listener for equipment button
+        // when the button is pressed, the code in this listener is executed
         equipmentButton?.setOnClickListener{
 
             //clears the equipment list every time this fragment is loaded onto the screen
             // in other words, the equipment selection is reset
             selectedIndices.clear()
             equipmentList.clear()
+
+            // Building an alert dialogue for the selecting equipment. A user can select multiple
+            // equipment from the given list which will then filter out the exercises in the next
+            // fragment. Android documentation was used to implement this dialogue.
             val builder = AlertDialog.Builder(context)
-            // Set the dialog title
+            // Sets the title of the dialogue
             builder.setTitle("Select your equipment")
-                // Specify the list array, the items to be selected by default (null for none),
-                // and the listener through which to receive callbacks when items are selected
+
+                //takes in a equipment list array, what items are already checked initially,
+                // and a listener that updates the indices of selected equipment.
                 .setMultiChoiceItems(EQUIPMENT_ARRAY, null,
                     DialogInterface.OnMultiChoiceClickListener { dialog, which, isChecked ->
                         if (isChecked) {
-                            // If the user checked the item, add it to the selected items
+                            // If the user checked the item, add it to the selectedIndices
                             selectedIndices.add(which)
+                            // if the user checked the item, add it to the equiupmentList
+                            // equipmentList is a string arraylist that keeps track of the string
+                            // at the indices of selectedIndices[]
                             equipmentList.add(EQUIPMENT_ARRAY!![which])
                         } else if (selectedIndices.contains(which)) {
 
                             var targetIndex = selectedIndices.indexOf(which)
 
-                            // Else, if the item is already in the array, remove it
+                            // Else, if the item is already in the array, we remove it
                             selectedIndices.removeAt(targetIndex)
 
                             equipmentList.remove(EQUIPMENT_ARRAY!![which])
                         }
                     })
-                // Set the action buttons
+                // positive and negative buttons
                 .setPositiveButton("Ok",
                     DialogInterface.OnClickListener { dialog, id ->
-                        // User clicked OK, so save the selectedItems results somewhere
-                        // or return them to the component that opened the dialog
+                        // When user clicks OK, we save the selectedIndices results
+                        // in the equipmentList array and pass that to the next fragment
+                        // when a category is clicked.
                         Toast.makeText(context, "# of equipment: ${selectedIndices.size}", Toast.LENGTH_SHORT).show()
                     })
                 .setNegativeButton("Cancel",
                     DialogInterface.OnClickListener { dialog, id ->
 
+                        // when the user clicks on cancel, we clear both the lists
+                        // to reset the selection so exercises don't get filtered.
                         selectedIndices.clear()
                         equipmentList.clear()
                     })
@@ -77,26 +95,32 @@ class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
         setUpData()
     }
 
+    // This method is responsible for housing the onClick listener of each card of the recycler view
+    // and launching the next fragment when an exercise category is clicked.
     private fun setUpResources(){
 
         val listener: EachExerciseCardListener = object : EachExerciseCardListener {
             override fun onItemClick(position: Int) {
                 val category: ExerciseCard = exerciseList[position]
                 val title = category.title
-                Toast.makeText(context, "This is the category: $title", Toast.LENGTH_SHORT).show()
 
+                // object of type NavDirections. we will pass in the equipment List so
+                // only the exercises that use that equipment are displayed and the others
+                // are filtered out.
                 val action: NavDirections
                 action = ExerciseFragmentDirections.actionExerciseFragmentToIndividualExerciseFragment(
                     equipmentList.toTypedArray()
                 )
 
+                // sending the "title"/category into the action object's arguments so it can be
+                // used to query the correct collection.
                 action.also {
                     if (title != null) {
                         action.title = title
                     }
                     action.equipmentList = equipmentList.toTypedArray()
                 }
-
+                // launches the next fragment which is IndividualExerciseFragment
                 view?.findNavController()?.navigate(action)
 
             }
@@ -108,6 +132,7 @@ class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
 
     }
 
+    // This method is responsible for initializing the recyclerview that uses a Grid Layout
     @SuppressLint("NotifyDataSetChanged")
     private fun setUpData(){
         exerciseList.clear()

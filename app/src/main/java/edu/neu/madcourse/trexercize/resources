@@ -18,6 +18,7 @@ Navigation - Passing data:
 https://developer.android.com/guide/navigation/navigation-pass-data
 https://kotlinlang.org/docs/typecasts.html#safe-nullable-cast-operator
 https://developer.android.com/jetpack/androidx/releases/navigation
+https://stackoverflow.com/questions/54360151/android-navigation-popbackstack
 
 Navigation - Changing fragments:
 https://developer.android.com/guide/navigation/navigation-navigate
@@ -93,3 +94,17 @@ https://stackoverflow.com/questions/31235183/recyclerview-how-to-smooth-scroll-t
 
 Page snap helper:
 https://developer.android.com/reference/androidx/recyclerview/widget/PagerSnapHelper
+
+Adding a webview:
+https://developer.android.com/reference/android/webkit/WebView
+https://developer.android.com/guide/webapps/webview
+https://www.youtube.com/watch?v=TUXui5ItBkM
+https://gist.github.com/TjWallas/5432924
+
+Android Grid Layout:
+https://developer.android.com/reference/android/widget/GridLayout
+
+android dialogue box:
+https://developer.android.com/guide/topics/ui/dialogs
+
+
