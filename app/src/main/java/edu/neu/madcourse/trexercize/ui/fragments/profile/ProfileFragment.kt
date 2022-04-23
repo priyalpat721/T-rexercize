@@ -67,20 +67,22 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 profileList.clear()
                 for (snap in snapshot.children) {
                     if (snap.key == Firebase.auth.currentUser?.uid.toString()) {
-                        val userInfo = snap.value as Map<String, String>
-                        name.text = userInfo["name"]
-                        gym.text = userInfo["gym"]
+                        val userInfo = snap.value as Map<*, *>
+                        name.text = userInfo["name"] as CharSequence?
+                        gym.text = userInfo["gym"] as CharSequence?
                         context?.let { Glide.with(it).load(userInfo["profilePicture"]).into(profile) }
-                        val inches = userInfo["inches"]
-                        val feet = userInfo["feet"]
+                        val inches = userInfo["inches"] as CharSequence?
+                        val feet = userInfo["feet"] as CharSequence?
                         var height = "${feet}ft ${inches}in"
                         var bmi : Double
                         if (inches.isNullOrEmpty() || feet.isNullOrEmpty()) {
                             bmi = 0.0
                             height = "0ft 0in"
                         }else{
-                            val totalInches = (Integer.parseInt(feet) * 12) + Integer.parseInt(inches)
-                            bmi = (userInfo["weight"]?.let { Integer.parseInt(it).toDouble() }
+                            val totalInches = (Integer.parseInt(feet as String) * 12) + Integer.parseInt(
+                                inches as String
+                            )
+                            bmi = (userInfo["weight"]?.let { Integer.parseInt(it as String).toDouble() }
                                 ?.div(totalInches.toDouble()) ?: 0.0) / totalInches.toDouble() * 703
                         }
 
@@ -89,7 +91,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         profileList.add(ProfileCard(" Weight", userInfo["weight"].toString()))
                         profileList.add(ProfileCard(" BMI", String.format("%.2f", bmi)))
 
-                        if (userInfo["targetAreas"].isNullOrEmpty()) {
+                        if (userInfo["targetAreas"].toString().isEmpty()) {
                             profileList.add(ProfileCard(" Target Areas", ""))
                         }
                         else{
@@ -97,13 +99,13 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         }
                         for (info in userInfo) {
                             if (info.key == "streakInfo") {
-                                val streakInfo = info.value as Map<String, String>
+                                val streakInfo = info.value as Map<*, *>
                                 for (sInfo in streakInfo) {
                                     if (sInfo.key == "longest streak count") {
                                         profileList.add(
                                             ProfileCard(
                                                 " Longest Streak",
-                                                sInfo.value
+                                                sInfo.value as String?
                                             )
                                         )
                                     }
@@ -112,14 +114,14 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                                         profileList.add(
                                             ProfileCard(
                                                 " Current Streak",
-                                                sInfo.value
+                                                sInfo.value as String?
                                             )
                                         )
                                     }
                                     if (sInfo.key == "last snap date") {
                                         profileList.add(
                                             ProfileCard("Last Snap Date",
-                                                sInfo.value
+                                                sInfo.value as String?
                                             )
                                         )
                                     }

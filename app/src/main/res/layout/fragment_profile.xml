@@ -168,7 +168,8 @@
                     android:layout_height="match_parent"
                     android:paddingStart="5dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="RtlSymmetry">
 
                 </androidx.recyclerview.widget.RecyclerView>
 
