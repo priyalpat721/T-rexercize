@@ -4,8 +4,11 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
@@ -37,9 +40,12 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
     private var streakCounter : TextView? = null
     private lateinit var currentLocalDate: LocalDate
     private lateinit var snapLocalDate: LocalDate
+    private lateinit var noFavorites: ConstraintLayout
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        noFavorites = view.findViewById(R.id.no_favorites_constraint)
+        noFavorites.visibility = GONE
         recyclerView = view.findViewById(R.id.favorites_rec_view)
         val navBar: BottomNavigationView? = activity?.findViewById(R.id.bottom_navigation_bar)
         navBar?.visibility = View.VISIBLE
@@ -75,6 +81,12 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
                             Log.i("New Favorite", favoriteExerciseCard.toString())
                             favoritesList.add(favoriteExerciseCard)
                             homeScreenAdapter?.notifyDataSetChanged()
+                        }
+                        if (favoritesList.isEmpty()){
+                            noFavorites.visibility = VISIBLE
+                        }
+                        else{
+                            noFavorites.visibility = GONE
                         }
                     }
 
