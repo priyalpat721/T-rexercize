@@ -25,8 +25,9 @@ class CarouselAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: CarouselViewHolder, position: Int) {
-
-        val pos = position % carouselList.size
-        Glide.with(context).load(carouselList[pos].imageUrl).into(holder.image)
+        if (carouselList.size != 0) {
+            val pos = position % carouselList.size
+            Glide.with(context).load(carouselList[pos].imageUrl).into(holder.image)
+        }
     }
 }
