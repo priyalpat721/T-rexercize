@@ -78,4 +78,8 @@
     <string name="edit_goals">Edit Goals</string>
     <string name="lbs">lbs</string>
     <string name="dinoabsgoal">Set some goals! \n #DinoAbsGoals</string>
+    <string name="name_l">name</string>
+    <string name="gym_l">gym</string>
+    <string name="age_l">age</string>
+    <string name="target_areas_l">target areas</string>
 </resources>

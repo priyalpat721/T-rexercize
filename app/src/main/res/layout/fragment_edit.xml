@@ -41,6 +41,8 @@
                         android:layout_marginStart="8dp"
                         app:civ_border_color="#5CBCB3"
                         app:civ_border_width="2dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="4dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/description_profile"
                         app:layout_constraintHorizontal_bias="0.15"
@@ -58,7 +60,6 @@
                         android:text="@string/choose_image"
                         android:textColor="@color/navy"
                         app:layout_constraintEnd_toEndOf="@+id/profile_image"
-                        app:layout_constraintHorizontal_bias="0.73"
                         app:layout_constraintStart_toStartOf="@+id/profile_image"
                         app:layout_constraintTop_toBottomOf="@+id/profile_image" />
 
@@ -85,50 +86,51 @@
                             android:text="@string/gym"
                             android:textColor="@color/black"
                             android:textSize="20sp"
-                            app:layout_constraintBottom_toBottomOf="@+id/gym_name"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/textView5"
-                            app:layout_constraintTop_toTopOf="@+id/gym_name"
-                            app:layout_constraintVertical_bias="0.476" />
+                            app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
                         <TextView
                             android:id="@+id/textView5"
                             style="@style/txtRobotoregular14"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginStart="4dp"
                             android:text="@string/name"
                             android:textSize="20sp"
-                            app:layout_constraintBottom_toBottomOf="@+id/name"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/name"
-                            app:layout_constraintVertical_bias="0.0" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.100000024" />
 
                         <EditText
                             android:id="@+id/name"
                             style="@style/txtRobotoregular14"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:hint="@string/name"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:autofillHints=""
+                            android:hint="@string/name_l"
                             android:inputType="text"
                             android:maxLength="15"
                             android:minHeight="48dp"
                             android:textColorHint="#006064"
                             android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView5"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.4"
                             app:layout_constraintStart_toEndOf="@+id/textView5"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:autofillHints="" />
+                            app:layout_constraintTop_toTopOf="@+id/textView5" />
 
                         <EditText
                             android:id="@+id/gym_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:hint="@string/gym"
+                            android:autofillHints=""
+                            android:hint="@string/gym_l"
                             android:inputType="text"
                             android:maxLength="15"
                             android:minWidth="48dp"
@@ -136,13 +138,9 @@
                             android:textColor="@color/black"
                             android:textColorHint="#006064"
                             android:textSize="18sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="@+id/name"
-                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView6"
                             app:layout_constraintStart_toStartOf="@+id/name"
-                            app:layout_constraintTop_toBottomOf="@+id/name"
-                            app:layout_constraintVertical_bias="1.0"
-                            android:autofillHints="" />
+                            app:layout_constraintTop_toTopOf="@+id/textView6" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -175,7 +173,6 @@
                                 android:id="@+id/constraintLayout2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="16dp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="0.052"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -191,12 +188,7 @@
                                     android:textSize="24sp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:layout_constraintVertical_bias="0.312"
-                                    tools:layout_conversion_absoluteHeight="32dp"
-                                    tools:layout_conversion_absoluteWidth="42dp"
-                                    tools:layout_editor_absoluteX="16dp"
-                                    tools:layout_editor_absoluteY="313dp" />
+                                    app:layout_constraintTop_toTopOf="parent" />
 
                                 <EditText
                                     android:id="@+id/age"
@@ -205,7 +197,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="16dp"
                                     android:gravity="start"
-                                    android:hint="@string/age"
+                                    android:hint="@string/age_l"
                                     android:importantForAutofill="no"
                                     android:inputType="number"
                                     android:textColorHint="#78909C"
@@ -214,9 +206,7 @@
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toEndOf="@+id/age3"
                                     app:layout_constraintTop_toTopOf="@+id/age3"
-                                    tools:ignore="DuplicateSpeakableTextCheck"
-                                    tools:layout_conversion_absoluteHeight="53dp"
-                                    tools:layout_conversion_absoluteWidth="49dp" />
+                                    tools:ignore="DuplicateSpeakableTextCheck" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <androidx.constraintlayout.widget.ConstraintLayout
@@ -227,9 +217,7 @@
                                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
                                 app:layout_constraintHorizontal_bias="0.0"
                                 app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
-                                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-                                tools:layout_conversion_absoluteHeight="53dp"
-                                tools:layout_conversion_absoluteWidth="237dp">
+                                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
                                 <EditText
                                     android:id="@+id/inches"
@@ -243,10 +231,6 @@
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintTop_toTopOf="parent"
-                                    tools:layout_conversion_absoluteHeight="53dp"
-                                    tools:layout_conversion_absoluteWidth="77dp"
-                                    tools:layout_editor_absoluteX="159dp"
-                                    tools:layout_editor_absoluteY="368dp"
                                     android:autofillHints="" />
 
                                 <EditText
@@ -263,9 +247,7 @@
                                     app:layout_constraintBottom_toBottomOf="@+id/inches"
                                     app:layout_constraintEnd_toStartOf="@+id/inches"
                                     app:layout_constraintStart_toEndOf="@+id/height2"
-                                    app:layout_constraintTop_toTopOf="@+id/inches"
-                                    tools:layout_conversion_absoluteHeight="53dp"
-                                    tools:layout_conversion_absoluteWidth="49dp" />
+                                    app:layout_constraintTop_toTopOf="@+id/inches"/>
 
                                 <TextView
                                     android:id="@+id/height2"
@@ -278,11 +260,7 @@
                                     app:layout_constraintBottom_toBottomOf="@+id/feet"
                                     app:layout_constraintEnd_toStartOf="@+id/feet"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="@+id/feet"
-                                    tools:layout_conversion_absoluteHeight="32dp"
-                                    tools:layout_conversion_absoluteWidth="70dp"
-                                    tools:layout_editor_absoluteX="16dp"
-                                    tools:layout_editor_absoluteY="379dp" />
+                                    app:layout_constraintTop_toTopOf="@+id/feet"/>
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <androidx.constraintlayout.widget.ConstraintLayout
@@ -293,9 +271,7 @@
                                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
                                 app:layout_constraintHorizontal_bias="0.0"
                                 app:layout_constraintStart_toStartOf="@+id/constraintLayout3"
-                                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
-                                tools:layout_conversion_absoluteHeight="58dp"
-                                tools:layout_conversion_absoluteWidth="187dp">
+                                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
                                 <TextView
                                     android:id="@+id/weight3"
@@ -309,11 +285,7 @@
                                     app:layout_constraintEnd_toStartOf="@+id/weight"
                                     app:layout_constraintHorizontal_bias="0.0"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    tools:layout_conversion_absoluteHeight="32dp"
-                                    tools:layout_conversion_absoluteWidth="74dp"
-                                    tools:layout_editor_absoluteX="16dp"
-                                    tools:layout_editor_absoluteY="434dp" />
+                                    app:layout_constraintTop_toTopOf="parent"/>
 
                                 <EditText
                                     android:id="@+id/weight"
@@ -326,15 +298,11 @@
                                     android:minWidth="48dp"
                                     android:textColorHint="#78909C"
                                     android:textSize="24sp"
-                                    android:inputType="number"
                                     app:layout_constraintBottom_toBottomOf="@+id/weight3"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toEndOf="@+id/weight3"
                                     app:layout_constraintTop_toTopOf="@+id/weight3"
-                                    app:layout_constraintVertical_bias="0.619"
                                     tools:ignore="DuplicateSpeakableTextCheck"
-                                    tools:layout_conversion_absoluteHeight="53dp"
-                                    tools:layout_conversion_absoluteWidth="82dp"
                                     android:autofillHints="" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -343,12 +311,12 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="16dp"
+                                android:layout_marginBottom="16dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout4"
                                 app:layout_constraintHorizontal_bias="0.01"
                                 app:layout_constraintStart_toStartOf="@+id/constraintLayout4"
-                                app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
-                                tools:layout_conversion_absoluteHeight="53dp"
-                                tools:layout_conversion_absoluteWidth="303dp">
+                                app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
                                 <TextView
                                     android:id="@+id/target_areas2"
@@ -361,11 +329,7 @@
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toStartOf="@+id/target_areas"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    tools:layout_conversion_absoluteHeight="32dp"
-                                    tools:layout_conversion_absoluteWidth="135dp"
-                                    tools:layout_editor_absoluteX="16dp"
-                                    tools:layout_editor_absoluteY="490dp" />
+                                    app:layout_constraintTop_toTopOf="parent" />
 
                                 <EditText
                                     android:id="@+id/target_areas"
@@ -373,20 +337,18 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="16dp"
+                                    android:autofillHints=""
                                     android:gravity="start"
-                                    android:hint="@string/target_areas"
+                                    android:hint="@string/target_areas_l"
+                                    android:inputType="textMultiLine"
                                     android:maxLength="65"
                                     android:textColorHint="#78909C"
                                     android:textSize="24sp"
-                                    android:inputType="textMultiLine"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toEndOf="@+id/target_areas2"
                                     app:layout_constraintTop_toTopOf="parent"
-                                    tools:ignore="DuplicateSpeakableTextCheck"
-                                    tools:layout_conversion_absoluteHeight="53dp"
-                                    tools:layout_conversion_absoluteWidth="143dp"
-                                    android:autofillHints="" />
+                                    tools:ignore="DuplicateSpeakableTextCheck" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <TextView
@@ -402,13 +364,10 @@
                                 android:ellipsize="end"
                                 android:singleLine="true"
                                 android:text="@string/edit_profile"
-                                android:textColor="#00ACC1"
                                 android:textSize="48sp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                tools:layout_conversion_absoluteHeight="61dp"
-                                tools:layout_conversion_absoluteWidth="208dp" />
+                                app:layout_constraintTop_toTopOf="parent"/>
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.core.widget.NestedScrollView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -426,36 +385,27 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:layout_conversion_absoluteHeight="48dp"
-                        tools:layout_conversion_absoluteWidth="411dp">
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <Button
                             android:id="@+id/cancel_btn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="72dp"
                             android:text="@android:string/cancel"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.0"
-                            tools:layout_conversion_absoluteHeight="48dp"
-                            tools:layout_conversion_absoluteWidth="93dp" />
+                            app:layout_constraintStart_toEndOf="@+id/done_btn"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <Button
                             android:id="@+id/done_btn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="24dp"
                             android:text="@string/done"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/cancel_btn"
-                            app:layout_constraintHorizontal_bias="0.234"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:layout_conversion_absoluteHeight="48dp"
-                            tools:layout_conversion_absoluteWidth="88dp" />
+                            app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -465,32 +415,28 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayout6"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginEnd="32dp"
                         android:layout_marginBottom="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.095"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0"
-                        tools:layout_conversion_absoluteHeight="48dp"
-                        tools:layout_conversion_absoluteWidth="241dp">
+                        app:layout_constraintVertical_bias="0.0">
 
                         <Button
                             android:id="@+id/edit_goals_btn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="58dp"
-                            android:layout_marginEnd="1dp"
                             android:text="@string/edit_goals"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/goals_to_do"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:layout_conversion_absoluteHeight="48dp"
-                            tools:layout_conversion_absoluteWidth="122dp" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:id="@+id/goals_to_do"
@@ -500,13 +446,8 @@
                             android:textColor="@color/black"
                             android:textSize="24sp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/edit_goals_btn"
-                            app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            tools:layout_conversion_absoluteHeight="32dp"
-                            tools:layout_conversion_absoluteWidth="61dp"
-                            tools:layout_editor_absoluteX="16dp"
-                            tools:layout_editor_absoluteY="533dp" />
+                            app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
