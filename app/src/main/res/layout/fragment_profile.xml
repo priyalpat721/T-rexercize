@@ -110,11 +110,12 @@
                         style="@style/txtRobotoregular14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="52dp"
                         android:hint="@string/name"
                         android:maxLength="15"
                         android:textSize="20sp"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.098"
+                        app:layout_constraintStart_toEndOf="@+id/textView2"
                         app:layout_constraintTop_toTopOf="@+id/textView2" />
 
                     <TextView
@@ -122,10 +123,10 @@
                         style="@style/txtRobotoregular14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
                         android:text="@string/name"
                         android:textSize="20sp"
-                        app:layout_constraintEnd_toStartOf="@+id/name"
-                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
