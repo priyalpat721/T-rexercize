@@ -63,6 +63,7 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
 
         }
 
+        // back btn to navigate the user back to the the exercise categories page
         val backBtn = view.findViewById<ImageButton>(R.id.back_to_categories)
         backBtn.setOnClickListener {
             val action: NavDirections = IndividualExerciseFragmentDirections.
@@ -75,6 +76,8 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
         listenForChanges()
     }
 
+    // This method is responsible for housing the onClick listener of each card of the recycler view
+    // and launching the next fragment when a specific exercise is clicked. It also initializes the recyclerview
     private fun setUpResources(){
 
         val listener: IndividualExerciseListener = object : IndividualExerciseListener {
@@ -86,6 +89,7 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
                 action = IndividualExerciseFragmentDirections.
                 actionIndividualExerciseFragmentToEachExerciseFragment()
 
+                // the action to EachExerciseFragment passes the exercise name and its category as arguments
                 action.also {
                     if (exerciseName != null) {
                         action.exerciseName = exerciseName
@@ -103,6 +107,7 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
 
     }
 
+    // This method is responsible for querying the DB to populate the recycler view with the exercises
     @SuppressLint("NotifyDataSetChanged")
     private fun listenForChanges() {
         exerciseList.clear()
@@ -137,11 +142,15 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
                                 }
                             }
 
+                            // Checks if exercises for the equipment selected exist or not.
+                            // If there are no exercises, it displays a dino that notifies the user
                             if(exerciseList.isEmpty()) {
 
                                 noExercises.visibility = VISIBLE
                             } else {
+
                                 noExercises.visibility = GONE
+
                             }
                         }
                         override fun onCancelled(error: DatabaseError) {

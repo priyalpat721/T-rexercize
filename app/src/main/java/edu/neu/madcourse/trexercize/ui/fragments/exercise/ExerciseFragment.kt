@@ -44,6 +44,9 @@ class ExerciseFragment : Fragment(R.layout.fragment_exercise) {
             selectedIndices.clear()
             equipmentList.clear()
 
+            // Building an alert dialogue for the selecting equipment. A user can select multiple
+            // equipment from the given list which will then filter out the exercises in the next
+            // fragment. Android documentation was used to implement this dialogue.
             val builder = AlertDialog.Builder(context)
             // Sets the title of the dialogue
             builder.setTitle("Select your equipment")

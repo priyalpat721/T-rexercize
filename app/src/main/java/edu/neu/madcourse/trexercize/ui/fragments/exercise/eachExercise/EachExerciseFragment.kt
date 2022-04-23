@@ -63,11 +63,13 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
         actualEquipment = view.findViewById(R.id.actual_equipment_text_view)
 
 
+        // gets the exercise name, and category from the action object's arguments
         exerciseTitle.text = args.exerciseName
         exerciseMuscleGroup.text = "Muscle Group:"
         exerciseCategory = args.exerciseCategory
         exerciseEquipment.text = "Equipment needed"
 
+        // back button takes the user back to the exericse list.
         val backBtn = view.findViewById<ImageButton>(R.id.back_to_exercise_list)
         backBtn.setOnClickListener {
 //            val action: NavDirections = EachExerciseFragmentDirections.actionEachExerciseFragmentToIndividualExerciseFragment3(
@@ -78,6 +80,8 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
             findNavController().popBackStack()
         }
 
+        // checks if the current exercise already exists in the user's favorites list and changes
+        // the button text accordingly
         if(addToFavorites.text.toString() == "Add to Favorites") {
             Firebase.auth.uid?.let {
                 db.child("users").child(it).child("favorites").addValueEventListener(object :
@@ -101,6 +105,7 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
             }
         }
 
+        // adds the current exercise to the current day for the user.
         addToTodayWorkout.setOnClickListener {
             Firebase.auth.uid?.let { it1->
                 db.child("users").child(it1).addValueEventListener(object: ValueEventListener{
@@ -114,7 +119,7 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
                                 db.child("calendars").child(currentCalendarId.toString()).child(date).child("workout").child(exerciseTitle.text.toString()).setValue(currentExercise)
                                 db.child("calendars").child(currentCalendarId.toString()).child(date).child("rest day").setValue("false")
                                 addToTodayWorkout.text = "Added!"
-                                //Toast.makeText(context, "Workout added!", Toast.LENGTH_SHORT).show()
+
                             }
                         }
                     }
@@ -127,6 +132,8 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
             }
         }
 
+        // This button adds the current exercise to the favorites. If the exercise is already in
+        // favorites list, then it displays a toast which doesn't let the user add it again
         addToFavorites.setOnClickListener {
             if(addToFavorites.text.toString() == "Already in Favorites") {
                 Toast.makeText(context, "This exercise already exists in your favorites", Toast.LENGTH_SHORT).show()
@@ -142,6 +149,7 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
 
     }
 
+    // This method is responsible for setting up the recycler view and its adapter
     private fun setUpResources(){
 
         eachExerciseAdapter = this.context?.let { EachExerciseAdapter(exerciseDescription, it) }
@@ -149,20 +157,23 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
         recyclerView!!.layoutManager = LinearLayoutManager(context)
 
     }
+
+    // This method is responsible for querying the DB to populate the fragment with video info
     @SuppressLint("NotifyDataSetChanged")
     private fun setUpData(){
 
         db.child(exerciseCategory.lowercase()).child(exerciseTitle.text.toString()).addValueEventListener(object :
             ValueEventListener {
-            @SuppressLint("SetTextI18n")
+            @SuppressLint("SetTextI18n", "SetJavaScriptEnabled")
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (snap in snapshot.children) {
 
+                    // initializes a web view with the proper video
                     if(snap.key == "video") {
                         videoLink = snap.value.toString()
                         exerciseVideo.webViewClient = WebViewClient()
                         exerciseVideo.apply{
-//                            println("This is the video link: $videoLink")
+
                             videoLink?.let { loadUrl(it) }
                             settings.javaScriptEnabled = true
                             settings.safeBrowsingEnabled = true
@@ -179,6 +190,8 @@ class EachExerciseFragment : Fragment(R.layout.each_exercise_layout) {
 
     }
 
+    // This method is responsible for querying the DB with the relevant information to populate the
+    // the recycler view with the description.
     @SuppressLint("NotifyDataSetChanged")
     private fun listenForChanges() {
         exerciseDescription.clear()
