@@ -74,24 +74,23 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         val inches = userInfo["inches"] as CharSequence?
                         val feet = userInfo["feet"] as CharSequence?
                         var height = "$feet ft $inches in"
-                        var bmi = 0.0
+                        var totalInches = 0
                         if (inches.isNullOrEmpty() || feet.isNullOrEmpty()) {
                             height = "0 ft 0 in"
                         }else{
-                            val totalInches = (Integer.parseInt(feet as String) * 12) + Integer.parseInt(
-                                inches as String
-                            )
-                            bmi = (userInfo["weight"]?.let { Integer.parseInt(it as String).toDouble() }
-                                ?.div(totalInches.toDouble()) ?: 0.0) / totalInches.toDouble() * 703
+                             totalInches = (Integer.parseInt(feet as String) * 12) + Integer.parseInt(
+                                inches as String)
                         }
 
                         profileList.add(ProfileCard("  Age", userInfo["age"].toString()))
                         profileList.add(ProfileCard(" Height", height))
                         profileList.add(ProfileCard(" Weight", userInfo["weight"].toString() + " lbs"))
-                        if (userInfo["weight"].toString() == "0" && userInfo["height"].toString() != "0 ft 0 in") {
+                        if (userInfo["weight"].toString() == "0") {
                             profileList.add(ProfileCard(" BMI", String.format("%.2f", 0.0)))
                         }
                         else{
+                            val bmi = (userInfo["weight"]?.let { Integer.parseInt(it as String).toDouble() }
+                                ?.div(totalInches.toDouble()) ?: 0.0) / totalInches.toDouble() * 703
                             profileList.add(ProfileCard(" BMI", String.format("%.2f", bmi)))
                         }
 

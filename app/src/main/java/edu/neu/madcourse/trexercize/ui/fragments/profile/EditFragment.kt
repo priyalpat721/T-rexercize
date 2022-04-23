@@ -139,25 +139,16 @@ class EditFragment : Fragment(R.layout.fragment_edit) {
                             inches.setText(ins.toString())
                         }
 
-                        if(feet.toString().isEmpty()){
-                            feet.setText("")
-                        }
-                        else{
+                        if(feet.toString().isNotEmpty()){
                             feet.setText(ft.toString())
                         }
 
-                        if (userInfo["age"].toString().isEmpty())
+                        if (userInfo["age"].toString().isNotEmpty())
                         {
-                            age.setText("")
-                        }
-                        else{
                             age.setText(userInfo["age"].toString())
                         }
 
-                        if(userInfo["weight"].toString().isEmpty()){
-                            weight.setText("")
-                        }
-                        else{
+                        if(userInfo["weight"].toString().isNotEmpty()){
                             weight.setText(userInfo["weight"].toString())
                         }
                         targetAreas.setText(userInfo["targetAreas"].toString())
