@@ -34,27 +34,39 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
     private lateinit var noExercises: ConstraintLayout
 
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // finding constraint layout and setting its visibility to GONE initially.
+        // The constraint layout holds ImageViews and TextView to indicate if
+        // exercises in that category exist or not
         noExercises = view.findViewById(R.id.no_exercises_constraint)
         noExercises.visibility = GONE
+
+        // recycler view for the list of exercises for the particular category
         recyclerView = view.findViewById(R.id.each_category_exercises)
         title = view.findViewById(R.id.category_name)
         equipmentSelected = view.findViewById(R.id.equipment_selected)
+
+        // gets the title and the equipment list from the action object's arguments passed from ExerciseFragment
         title.text = args.title
         equipmentList = args.equipmentList
+
+        // displays the selected equipment.
         if(equipmentList!!.isEmpty()) {
             equipmentSelected.text = "Showing all exercises"
         } else {
 
-            equipmentSelected.text = "Showing exercises for the following equipment: \n\n" + equipmentList.contentToString()
+            equipmentSelected.text = "Showing exercises for the following equipment: \n\n" +
+                    equipmentList.contentToString()
 
         }
 
         val backBtn = view.findViewById<ImageButton>(R.id.back_to_categories)
         backBtn.setOnClickListener {
-            val action: NavDirections = IndividualExerciseFragmentDirections.actionIndividualExerciseFragmentToExerciseFragment(
+            val action: NavDirections = IndividualExerciseFragmentDirections.
+            actionIndividualExerciseFragmentToExerciseFragment(
             )
             view.findNavController().navigate(action)
         }
@@ -69,10 +81,10 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
             override fun onItemClick(position: Int) {
                 val exercise: IndividualExerciseCard = exerciseList[position]
                 val exerciseName = exercise.exerciseName
-                Toast.makeText(context, "This is the exercise name: $exerciseName", Toast.LENGTH_SHORT).show()
 
                 val action: NavDirections
-                action = IndividualExerciseFragmentDirections.actionIndividualExerciseFragmentToEachExerciseFragment()
+                action = IndividualExerciseFragmentDirections.
+                actionIndividualExerciseFragmentToEachExerciseFragment()
 
                 action.also {
                     if (exerciseName != null) {
@@ -100,32 +112,30 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
                 exerciseList.clear()
                 for (snap in snapshot.children) {
                     val exerciseName = snap.key
-//
-                    snap.key?.let { db.child(title.text.toString().lowercase()).child(it).addValueEventListener(object : ValueEventListener {
+
+                    snap.key?.let { db.child(title.text.toString().lowercase()).child(it).
+                    addValueEventListener(object : ValueEventListener {
                         @SuppressLint("SetTextI18n")
                         override fun onDataChange(snapshot: DataSnapshot) {
                             for (snap in snapshot.children) {
                                 if(snap.key == "equipment") {
-                                    val equipmentArray = snap.value as ArrayList<String>
+                                    val equipmentArray = snap.value as ArrayList<*>
                                     val equipment = equipmentArray[0]
-//
+
                                     if(equipmentList?.isEmpty() == true) {
                                         exerciseList.add(IndividualExerciseCard(exerciseName))
-//                                        noExercises = view!!.findViewById(R.id.no_exercises_constraint)
-//                                        noExercises.visibility = GONE
 
                                         exerciseAdapter?.notifyDataSetChanged()
                                     }
-                                     else if(equipmentList?.isNotEmpty() == true && equipmentList!!.contains(equipment)) {
+                                     else if(equipmentList?.isNotEmpty() == true && equipmentList!!.
+                                        contains(equipment)) {
                                         exerciseList.add(IndividualExerciseCard(exerciseName))
-//                                        noExercises = view!!.findViewById(R.id.no_exercises_constraint)
-//                                        noExercises.visibility = GONE
+
                                         exerciseAdapter?.notifyDataSetChanged()
                                     }
 
                                 }
                             }
-
 
                             if(exerciseList.isEmpty()) {
 
@@ -139,10 +149,8 @@ class IndividualExerciseFragment : Fragment(R.layout.each_category_screen) {
                         }
                     }) }
 
-
-//                    exerciseList.add(IndividualExerciseCard(exerciseName))
                 }
-//                exerciseAdapter?.notifyDataSetChanged()
+
             }
             override fun onCancelled(error: DatabaseError) {
                 // not implemented
