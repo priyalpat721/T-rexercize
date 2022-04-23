@@ -96,7 +96,7 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
                         db.child("users")
                             .child(Firebase.auth.currentUser?.uid.toString())
                             .child("streakInfo").child("current streak count")
-                            .setValue(0)
+                            .setValue("0")
                     }
                 }
             } }

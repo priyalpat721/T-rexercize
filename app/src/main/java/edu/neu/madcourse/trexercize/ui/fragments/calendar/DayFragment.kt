@@ -295,7 +295,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                 db.child("users")
                     .child(Firebase.auth.currentUser?.uid.toString())
                     .child("streakInfo").child("current streak count")
-                    .setValue(1)
+                    .setValue("1")
                 currentStreak = 1
             }
             // if the previously taken pic was yesterday
