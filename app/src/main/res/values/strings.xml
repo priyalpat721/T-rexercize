@@ -77,5 +77,5 @@
     <string name="restSnap">Have a nice rest day! Make sure to take a rest snap!</string>
     <string name="edit_goals">Edit Goals</string>
     <string name="lbs">lbs</string>
-    <string name="dinoabsgoal">#DinoAbsGoal</string>
+    <string name="dinoabsgoal">Set some goals! \n #DinoAbsGoals</string>
 </resources>

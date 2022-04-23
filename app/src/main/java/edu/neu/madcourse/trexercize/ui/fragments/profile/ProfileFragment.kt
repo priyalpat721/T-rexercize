@@ -74,9 +74,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         val inches = userInfo["inches"] as CharSequence?
                         val feet = userInfo["feet"] as CharSequence?
                         var height = "$feet ft $inches in"
-                        var bmi : Double
+                        var bmi = 0.0
                         if (inches.isNullOrEmpty() || feet.isNullOrEmpty()) {
-                            bmi = 0.0
                             height = "0 ft 0 in"
                         }else{
                             val totalInches = (Integer.parseInt(feet as String) * 12) + Integer.parseInt(
@@ -89,7 +88,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         profileList.add(ProfileCard("  Age", userInfo["age"].toString()))
                         profileList.add(ProfileCard(" Height", height))
                         profileList.add(ProfileCard(" Weight", userInfo["weight"].toString() + " lbs"))
-                        if (userInfo["weight"].toString() == "0") {
+                        if (userInfo["weight"].toString() == "0" && userInfo["height"].toString() != "0 ft 0 in") {
                             profileList.add(ProfileCard(" BMI", String.format("%.2f", 0.0)))
                         }
                         else{
