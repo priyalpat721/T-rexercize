@@ -1,6 +1,7 @@
 package edu.neu.madcourse.trexercize.ui.fragments.exercise.eachCategory
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +24,9 @@ class IndividualExerciseAdapter(
 
     override fun onBindViewHolder(holder: IndividualExerciseViewHolder, position: Int) {
         holder.exerciseName.text = eachCategoryExercises[position].exerciseName.toString()
+        if (position % 2 == 0) {
+            holder.background.setCardBackgroundColor(Color.rgb(117,197,195))
+        }
     }
 
     override fun getItemCount(): Int {
