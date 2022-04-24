@@ -102,6 +102,9 @@
         <action
             android:id="@+id/action_dayFragment_to_calendarFragment"
             app:destination="@id/calendarFragment" />
+        <action
+            android:id="@+id/action_dayFragment_to_signOutFragment"
+            app:destination="@id/signOutFragment" />
     </fragment>
     <fragment
         android:id="@+id/signOutFragment"
@@ -186,6 +189,9 @@
         <action
             android:id="@+id/action_eachExerciseFragment_to_individualExerciseFragment3"
             app:destination="@id/individualExerciseFragment" />
+        <action
+            android:id="@+id/action_eachExerciseFragment_to_signOutFragment"
+            app:destination="@id/signOutFragment" />
     </fragment>
     <fragment
         android:id="@+id/goalFragment"
