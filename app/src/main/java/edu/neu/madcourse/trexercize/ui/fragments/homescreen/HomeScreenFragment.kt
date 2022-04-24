@@ -128,7 +128,7 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
                     override fun onDataChange(snapshot: DataSnapshot) {
                             val count = snapshot.value.toString()
                             if (count == "0") {
-                                streakCounter?.text = "0 day streak... Hit the gym!"
+                                streakCounter?.text = "0 day streak... Take your daily snap!"
                             } else {
                                 streakCounter?.text = "\uD83D\uDD25 $count day streak! Keep it up!"
                             }
