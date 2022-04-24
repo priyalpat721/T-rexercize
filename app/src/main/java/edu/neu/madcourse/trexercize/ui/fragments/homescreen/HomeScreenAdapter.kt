@@ -25,7 +25,7 @@ class HomeScreenAdapter(
         holder.exerciseCategory.text = favoritesList[position].exerciseCategory.toString()
         favoritesList[position].categoryImage?.let { holder.categoryImage.setImageResource(it)
             if (position % 2 == 0) {
-                holder.background.setBackgroundColor(Color.rgb(92,188,179))
+                holder.background.setCardBackgroundColor(Color.rgb(117,197,195))
             }}
     }
 

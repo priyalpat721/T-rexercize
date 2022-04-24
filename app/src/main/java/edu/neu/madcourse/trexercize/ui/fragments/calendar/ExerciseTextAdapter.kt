@@ -26,7 +26,7 @@ class ExerciseTextAdapter(
         holder.exerciseName.text = exerciseList[position].exerciseName.toString()
         holder.exerciseMuscleGroups.text = exerciseList[position].exerciseMuscleGroups.toString()
         if (position % 2 == 0) {
-            holder.button.setBackgroundColor(Color.rgb(92,188,179))
+            holder.button.setBackgroundColor(Color.rgb(117,197,195))
         }
     }
 
