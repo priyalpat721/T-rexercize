@@ -1,10 +1,8 @@
 package edu.neu.madcourse.trexercize.ui.fragments.calendar
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import android.widget.CalendarView
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections

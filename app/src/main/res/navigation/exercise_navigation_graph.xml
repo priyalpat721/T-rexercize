@@ -64,7 +64,6 @@
         <action
             android:id="@+id/action_calendarFragment_to_signOutFragment"
             app:destination="@id/signOutFragment"
-            app:launchSingleTop="true"
             app:popUpTo='@id/signInFragment'
             app:popUpToInclusive="true" />
     </fragment>
@@ -135,7 +134,6 @@
         <action
             android:id="@+id/action_dayFragment_to_signOutFragment"
             app:destination="@id/signOutFragment"
-            app:launchSingleTop="true"
             app:popUpTo='@id/signInFragment'
             app:popUpToInclusive="true" />
     </fragment>
