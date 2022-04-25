@@ -132,7 +132,7 @@
                             android:autofillHints=""
                             android:hint="@string/gym_l"
                             android:inputType="text"
-                            android:maxLength="15"
+                            android:maxLength="12"
                             android:minWidth="48dp"
                             android:minHeight="48dp"
                             android:textColor="@color/black"
