@@ -30,7 +30,6 @@ import com.google.firebase.storage.StorageReference
 import edu.neu.madcourse.trexercize.R
 import edu.neu.madcourse.trexercize.ui.helper.ImageUploaderFunctions
 import java.lang.Integer.parseInt
-import java.sql.Types.NULL
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -200,7 +199,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                                                     )
                                                 )
                                                 //println("EXERCISE: $exerciseString MUSCLE: $muscleString")
-                                                adapter?.notifyDataSetChanged()
+                                                adapter.notifyDataSetChanged()
                                             }
                                         }
 

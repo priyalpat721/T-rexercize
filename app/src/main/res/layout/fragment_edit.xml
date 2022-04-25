@@ -115,15 +115,15 @@
                             android:autofillHints=""
                             android:hint="@string/name_l"
                             android:inputType="text"
-                            android:maxLength="15"
-                            android:minHeight="48dp"
-                            android:textColorHint="#006064"
+                            android:maxLength="12"
+                            android:minWidth="48dp"
+                            android:minHeight="48dp"                            android:textColorHint="#006064"
                             android:textSize="18sp"
                             app:layout_constraintBottom_toBottomOf="@+id/textView5"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.4"
                             app:layout_constraintStart_toEndOf="@+id/textView5"
-                            app:layout_constraintTop_toTopOf="@+id/textView5" />
+                            app:layout_constraintTop_toTopOf="@+id/textView5"/>
 
                         <EditText
                             android:id="@+id/gym_name"
@@ -200,6 +200,7 @@
                                     android:hint="@string/age_l"
                                     android:importantForAutofill="no"
                                     android:inputType="number"
+                                    android:minWidth="48dp"
                                     android:textColorHint="#78909C"
                                     android:textSize="24sp"
                                     app:layout_constraintBottom_toBottomOf="@+id/age3"
