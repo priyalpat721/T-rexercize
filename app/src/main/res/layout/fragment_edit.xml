@@ -297,6 +297,7 @@
                                     android:autofillHints=""
                                     android:gravity="start"
                                     android:hint="@string/lbs"
+                                    android:inputType="number"
                                     android:minWidth="48dp"
                                     android:textColorHint="#78909C"
                                     android:textSize="24sp"
