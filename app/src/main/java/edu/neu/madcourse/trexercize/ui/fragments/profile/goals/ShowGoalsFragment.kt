@@ -32,8 +32,8 @@ class ShowGoalsFragment : Fragment(R.layout.fragment_show_goals) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        backButton = view.findViewById(R.id.back_btn4)
 
+        backButton = view.findViewById(R.id.back_btn4)
         backButton.setOnClickListener {
             val action: NavDirections = ShowGoalsFragmentDirections.actionShowGoalsFragmentToProfileFragment()
             view.findNavController().navigate(action)

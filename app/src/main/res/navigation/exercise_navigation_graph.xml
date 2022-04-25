@@ -8,39 +8,51 @@
     <fragment
         android:id="@+id/homeScreenFragment"
         android:name="edu.neu.madcourse.trexercize.ui.fragments.homescreen.HomeScreenFragment"
-        android:label="HomeScreenFragment" >
+        android:label="HomeScreenFragment"
+        tools:layout="@layout/fragment_home_screen">
         <action
             android:id="@+id/action_homeScreenFragment_to_exerciseFragment"
             app:destination="@id/exerciseFragment"
             app:enterAnim="@android:anim/slide_out_right"
             app:exitAnim="@android:anim/slide_in_left"
             app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right"/>
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo='@id/exerciseFragment'
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_homeScreenFragment_to_profileFragment"
             app:destination="@id/profileFragment"
             app:enterAnim="@android:anim/slide_out_right"
             app:exitAnim="@android:anim/slide_in_left"
             app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right"/>
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo='@id/profileFragment'
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_homeScreenFragment_to_calendarFragment"
             app:destination="@id/calendarFragment"
             app:enterAnim="@android:anim/slide_out_right"
             app:exitAnim="@android:anim/slide_in_left"
             app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right"/>
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo='@id/calendarFragment'
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_homeScreenFragment_to_signOutFragment"
-            app:destination="@id/signOutFragment" />
+            app:destination="@id/signOutFragment"
+            app:popUpTo='@id/signInFragment'
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_homeScreenFragment_to_eachExerciseFragment"
-            app:destination="@id/eachExerciseFragment" />
+            app:destination="@id/eachExerciseFragment"
+            app:popUpTo='@id/eachExerciseFragment'
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/calendarFragment"
         android:name="edu.neu.madcourse.trexercize.ui.fragments.calendar.CalendarFragment"
-        android:label="CalendarFragment">
+        android:label="CalendarFragment"
+        tools:layout="@layout/fragment_calendar">
         <action
             android:id="@+id/action_calendarFragment_to_dayFragment"
             app:destination="@id/dayFragment"
@@ -51,19 +63,24 @@
         </action>
         <action
             android:id="@+id/action_calendarFragment_to_signOutFragment"
-            app:destination="@id/signOutFragment" />
+            app:destination="@id/signOutFragment"
+            app:popUpTo='@id/signInFragment'
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/exerciseFragment"
         android:name="edu.neu.madcourse.trexercize.ui.fragments.exercise.ExerciseFragment"
-        android:label="ExerciseFragment" >
+        android:label="ExerciseFragment"
+        tools:layout="@layout/fragment_exercise">
         <action
             android:id="@+id/action_exerciseFragment_to_calendarFragment"
             app:destination="@id/calendarFragment"
             app:enterAnim="@android:anim/slide_out_right"
             app:exitAnim="@android:anim/slide_in_left"
             app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right"/>
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo='@id/calendarFragment'
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_exerciseFragment_to_individualExerciseFragment"
             app:destination="@id/individualExerciseFragment"
@@ -72,7 +89,9 @@
         </action>
         <action
             android:id="@+id/action_exerciseFragment_to_signOutFragment"
-            app:destination="@id/signOutFragment" />
+            app:destination="@id/signOutFragment"
+            app:popUpTo='@id/signInFragment'
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -81,30 +100,42 @@
         app:enterAnim="@android:anim/slide_out_right"
         app:exitAnim="@android:anim/slide_in_left"
         app:popEnterAnim="@android:anim/slide_in_left"
-        app:popExitAnim="@android:anim/slide_out_right">
+        app:popExitAnim="@android:anim/slide_out_right"
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_editFragment"
-            app:destination="@id/editFragment" />
+            app:destination="@id/editFragment"
+            app:popUpTo='@id/editFragment'
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_profileFragment_to_showGoalsFragment"
-            app:destination="@id/showGoalsFragment" />
+            app:destination="@id/showGoalsFragment"
+            app:popUpTo='@id/showGoalsFragment'
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_profileFragment_to_signOutFragment"
-            app:destination="@id/signOutFragment" />
+            app:destination="@id/signOutFragment"
+            app:popUpTo='@id/signInFragment'
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/dayFragment"
         android:name="edu.neu.madcourse.trexercize.ui.fragments.calendar.DayFragment"
-        android:label="DayFragment" >
+        android:label="DayFragment"
+        tools:layout="@layout/fragment_day">
         <argument
             android:name="date"
             app:argType="string"/>
         <action
             android:id="@+id/action_dayFragment_to_calendarFragment"
-            app:destination="@id/calendarFragment" />
+            app:destination="@id/calendarFragment"
+            app:popUpTo='@id/calendarFragment'
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_dayFragment_to_signOutFragment"
-            app:destination="@id/signOutFragment" />
+            app:destination="@id/signOutFragment"
+            app:popUpTo='@id/signInFragment'
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/signOutFragment"
@@ -112,25 +143,31 @@
         android:label="fragment_sign_out"
         tools:layout="@layout/fragment_sign_out">
         <action
-            android:id="@+id/action_signOutFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
-        <action
             android:id="@+id/action_signOutFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
+            app:destination="@id/signInFragment"
+            app:popUpTo='@id/signInFragment'
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/editFragment"
         android:name="edu.neu.madcourse.trexercize.ui.fragments.profile.EditFragment"
-        android:label="EditFragment" >
+        android:label="EditFragment"
+        tools:layout="@layout/fragment_edit">
         <action
             android:id="@+id/action_editFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/profileFragment"
+            app:popUpTo='@id/profileFragment'
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_editFragment_to_selectorFragment"
-            app:destination="@id/selectorFragment" />
+            app:destination="@id/selectorFragment"
+            app:popUpTo='@id/selectorFragment'
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_editFragment_to_goalFragment"
-            app:destination="@id/goalFragment" />
+            app:destination="@id/goalFragment"
+            app:popUpTo='@id/profileFragment'
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/galleryFragment"
@@ -139,98 +176,132 @@
         tools:layout="@layout/fragment_gallery" >
         <action
             android:id="@+id/action_galleryFragment_to_selectorFragment"
-            app:destination="@id/selectorFragment" />
+            app:destination="@id/selectorFragment"
+            app:popUpTo='@id/selectorFragment'
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_galleryFragment_to_editFragment"
-            app:destination="@id/editFragment" />
+            app:destination="@id/editFragment"
+            app:popUpTo='@id/profileFragment'
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/selectorFragment"
         android:name="edu.neu.madcourse.trexercize.ui.fragments.profile.SelectorFragment"
         android:label="fragment_selector"
-        tools:layout="@layout/fragment_selector" >
+        tools:layout="@layout/fragment_selector">
         <action
             android:id="@+id/action_selectorFragment_to_galleryFragment"
-            app:destination="@id/galleryFragment" />
+            app:destination="@id/galleryFragment"
+            app:popUpTo='@id/galleryFragment'
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_selectorFragment_to_editFragment"
-            app:destination="@id/editFragment" />
+            app:destination="@id/editFragment"
+            app:popUpTo='@id/profileFragment'
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/individualExerciseFragment"
         android:name="edu.neu.madcourse.trexercize.ui.fragments.exercise.eachCategory.IndividualExerciseFragment"
-        android:label="IndividualExerciseFragment" >
+        android:label="IndividualExerciseFragment"
+        tools:layout="@layout/each_category_screen">
         <action
             android:id="@+id/action_individualExerciseFragment_to_exerciseFragment"
-            app:destination="@id/exerciseFragment" />
+            app:destination="@id/exerciseFragment"
+            app:popUpTo='@id/exerciseFragment'
+            app:popUpToInclusive="true"/>
         <argument
             android:name="title"
             app:argType="string"
-            android:defaultValue="no title" />
+            android:defaultValue="no title"/>
         <action
             android:id="@+id/action_individualExerciseFragment_to_eachExerciseFragment"
-            app:destination="@id/eachExerciseFragment" />
+            app:destination="@id/eachExerciseFragment"
+            app:popUpTo='@id/eachExerciseFragment'
+            app:popUpToInclusive="true"/>
         <argument
             android:name="equipmentList"
-            app:argType="string[]" />
+            app:argType="string[]"/>
     </fragment>
     <fragment
         android:id="@+id/eachExerciseFragment"
         android:name="edu.neu.madcourse.trexercize.ui.fragments.exercise.eachExercise.EachExerciseFragment"
-        android:label="EachExerciseFragment" >
+        android:label="EachExerciseFragment"
+        tools:layout="@layout/each_exercise_layout">
         <argument
             android:name="exerciseName"
             app:argType="string"
-            android:defaultValue="No exercise Name" />
+            android:defaultValue="No exercise Name"
+            app:popUpTo='@id/eachExerciseFragment'
+            app:popUpToInclusive="true"/>
         <argument
             android:name="exerciseCategory"
             app:argType="string"
-            android:defaultValue="no category" />
+            android:defaultValue="no category"/>
         <action
             android:id="@+id/action_eachExerciseFragment_to_individualExerciseFragment3"
-            app:destination="@id/individualExerciseFragment" />
+            app:destination="@id/individualExerciseFragment"
+            app:popUpTo='@id/individualExerciseFragment'
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_eachExerciseFragment_to_signOutFragment"
-            app:destination="@id/signOutFragment" />
+            app:destination="@id/signOutFragment"
+            app:popUpTo='@id/signInFragment'
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/goalFragment"
         android:name="edu.neu.madcourse.trexercize.ui.fragments.profile.goals.GoalFragment"
         android:label="fragment_goal"
-        tools:layout="@layout/fragment_goal" >
+        tools:layout="@layout/fragment_goal">
         <action
             android:id="@+id/action_goalFragment_to_editFragment"
-            app:destination="@id/editFragment" />
+            app:destination="@id/editFragment"
+            app:popUpTo='@id/profileFragment'
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="edu.neu.madcourse.trexercize.ui.fragments.userAuth.SignUpFragment"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" >
+        tools:layout="@layout/fragment_sign_up">
         <action
             android:id="@+id/action_signUpFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
+            app:destination="@id/signInFragment"
+            app:popUpTo='@id/signInFragment'
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_signUpFragment_to_homeScreenFragment"
-            app:destination="@id/homeScreenFragment" />
+            app:destination="@id/homeScreenFragment"
+            app:popUpTo='@id/homeScreenFragment'
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
         android:name="edu.neu.madcourse.trexercize.ui.fragments.userAuth.SignInFragment"
-        android:label="SignInFragment" >
+        android:label="SignInFragment"
+        tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
+            app:destination="@id/signUpFragment"
+            app:popUpTo='@id/signUpFragment'
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_signInFragment_to_homeScreenFragment"
-            app:destination="@id/homeScreenFragment" />
+            app:destination="@id/homeScreenFragment"
+            app:popUpTo='@id/homeScreenFragment'
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/showGoalsFragment"
         android:name="edu.neu.madcourse.trexercize.ui.fragments.profile.goals.ShowGoalsFragment"
-        android:label="ShowGoalsFragment" >
+        android:label="ShowGoalsFragment"
+        tools:layout="@layout/fragment_show_goals">
         <action
             android:id="@+id/action_showGoalsFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/profileFragment"
+            app:popUpTo='@id/profileFragment'
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
