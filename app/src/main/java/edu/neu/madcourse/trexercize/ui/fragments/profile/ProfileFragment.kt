@@ -68,8 +68,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 for (snap in snapshot.children) {
                     if (snap.key == Firebase.auth.currentUser?.uid.toString()) {
                         val userInfo = snap.value as Map<*, *>
-                        name.text = userInfo["name"] as CharSequence?
-                        gym.text = userInfo["gym"] as CharSequence?
+                        name.text = userInfo["name"] as String?
+                        gym.text = userInfo["gym"] as String?
                         context?.let { Glide.with(it).load(userInfo["profilePicture"]).into(profile) }
                         val inches = userInfo["inches"] as CharSequence?
                         val feet = userInfo["feet"] as CharSequence?

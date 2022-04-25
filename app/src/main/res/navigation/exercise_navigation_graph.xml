@@ -40,7 +40,6 @@
         <action
             android:id="@+id/action_homeScreenFragment_to_signOutFragment"
             app:destination="@id/signOutFragment"
-            app:launchSingleTop="true"
             app:popUpTo='@id/signInFragment'
             app:popUpToInclusive="true" />
         <action
@@ -145,11 +144,6 @@
         android:name="edu.neu.madcourse.trexercize.ui.fragments.userAuth.SignOutFragment"
         android:label="fragment_sign_out"
         tools:layout="@layout/fragment_sign_out">
-        <action
-            android:id="@+id/action_signOutFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment"
-            app:popUpTo='@id/signUpFragment'
-            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_signOutFragment_to_signInFragment"
             app:destination="@id/signInFragment"
