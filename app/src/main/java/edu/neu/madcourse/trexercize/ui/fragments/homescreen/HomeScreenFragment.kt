@@ -139,9 +139,6 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
                     }
                 })
         }
-//        Firebase.auth.currentUser?.uid?.let { db.child("users").child(it)
-//            .child("streakInfo").child("current streak count")
-//            .get().addValueEventListener { streak_counter?.text = "\uD83D\uDD25 ${it.value} day streak... Hit the gym!" } }
     }
 
     private fun setUpResources() {

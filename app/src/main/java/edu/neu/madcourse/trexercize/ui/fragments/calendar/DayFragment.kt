@@ -71,10 +71,12 @@ class DayFragment : Fragment(R.layout.fragment_day) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // get the current date
         val currentDay = SimpleDateFormat("M-d-yyyy", Locale.getDefault()).format(
             Date()
         )
 
+        // the title of the page is the date clicked on the calendar
         val dateBox = view.findViewById<TextView>(R.id.currentDateText)
         dateBox.text = args.date
 
@@ -96,40 +98,13 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                                     DateTimeFormatter.ofPattern("M-d-yyyy")
                                 )
                             }
-                            /*db.child("users").child(Firebase.auth.currentUser?.uid.toString())
-                                .child("streakInfo").child("last snap date")
-                                .setValue(currentDay)*/
                         }
                         if (snap.key == "current streak count") {
                             currentStreak = parseInt(snap.value.toString())
-                            /*if (snapLocalDate.isBefore(currentLocalDate.minusDays(1))) {
-                                db.child("users")
-                                    .child(Firebase.auth.currentUser?.uid.toString())
-                                    .child("streakInfo").child("current streak count")
-                                    .setValue(1)
-                                currentStreak = 1
-                            }
-                            val updateCount = currentCount + 1
-                            if (snapLocalDate.isEqual(currentLocalDate.minusDays(1))) {
-                                db.child("users")
-                                    .child(Firebase.auth.currentUser?.uid.toString())
-                                    .child("streakInfo").child("current streak count")
-                                    .setValue(updateCount)
-                                currentStreak = updateCount
-                            }*/
                         }
                         if (snap.key == "longest streak count") {
                             longestStreak = parseInt(snap.value.toString())
-                            /*if (longestStreak < currentStreak) {
-                                db.child("users")
-                                    .child(Firebase.auth.currentUser?.uid.toString())
-                                    .child("streakInfo").child("longest streak count")
-                                    .setValue(currentStreak)
-                            }*/
                         }
-                        // if there is streak info update it
-                        // need to reset the current streak to 0 if it's a new day
-                        // and no snap was taken on the previous day so need to track that
                     }
                 }
                 override fun onCancelled(error: DatabaseError) {
@@ -142,14 +117,13 @@ class DayFragment : Fragment(R.layout.fragment_day) {
             val action: NavDirections = DayFragmentDirections.actionDayFragmentToCalendarFragment()
             view.findNavController().navigate(action)
         }
-        // recycler view
+        // recycler view to show exercises for the day
         recyclerView = view.findViewById(R.id.workoutRecycler)
         //adapter = ExerciseTextAdapter(view.context)
         adapter = ExerciseTextAdapter(exerciseList, this.requireContext())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
         moodImage = view.findViewById(R.id.moodSticker)
-
         speechText = view.findViewById(R.id.noWorkout)
 
         // populate day view with snap, workouts, and mood
@@ -158,7 +132,6 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                 it1
             ).child("calendar").get().addOnSuccessListener {
                 userCalendar = it.value.toString()
-                //println("Calendar " + userCalendar)
                 // populate the page with data from database
                 db.child("calendars").child(userCalendar).child(args.date)
                     .addValueEventListener(object : ValueEventListener {
@@ -168,7 +141,6 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                             for (snap in snapshot.children) {
                                 if (snap.key == "dailySnap") {
                                     // set pic image view
-                                    //changeSnapButton.visibility = GONE
                                     snapImage = view.findViewById(R.id.snapImage)
                                     context?.let { it2 ->
                                         Glide.with(it2).load(snap.value).into(snapImage)
@@ -184,21 +156,17 @@ class DayFragment : Fragment(R.layout.fragment_day) {
                                     // set the workout items to exercise list
                                     val workoutInfo = snap.value as Map<String, String>
                                     for (exercise in workoutInfo) {
-                                        //println("exercise $exercise")
                                         val exerciseInfo = exercise.value as Map<String, String>
                                         for (info in exerciseInfo) {
-                                            //println("info $info")
                                             if (info.key == "muscle groups") {
                                                 val exerciseString = exercise.key
                                                 val muscleString = info.value
-                                                //exerciseList.add(ExerciseTextCard("exerciseString", "muscleString"))
                                                 exerciseList.add(
                                                     ExerciseTextCard(
                                                         exerciseString,
                                                         muscleString
                                                     )
                                                 )
-                                                //println("EXERCISE: $exerciseString MUSCLE: $muscleString")
                                                 adapter.notifyDataSetChanged()
                                             }
                                         }
@@ -342,6 +310,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
         changeMoodButton = view.findViewById(R.id.change_mood)
         moodImage = view.findViewById(R.id.moodSticker)
 
+        // update the mood to the selected mood
         saveMoodButton.setOnClickListener {
             if (mood == "none") {
                 Toast.makeText(context, "No mood selected", Toast.LENGTH_SHORT).show()
@@ -365,6 +334,7 @@ class DayFragment : Fragment(R.layout.fragment_day) {
             }
         }
 
+        // to edit the mood
         changeMoodButton.setOnClickListener {
             stickerScroll.visibility = VISIBLE
             stickerBack.visibility = VISIBLE
@@ -380,36 +350,8 @@ class DayFragment : Fragment(R.layout.fragment_day) {
             restDayButton.visibility = VISIBLE
         }
 
+        // for days where we need to rest
         restDayButton.setOnClickListener {
-            // the streak info only updates if we take a snap?
-            /*if (snapLocalDate == null
-                || snapLocalDate!!.isBefore(currentLocalDate.minusDays(1))) {
-                db.child("users")
-                    .child(Firebase.auth.currentUser?.uid.toString())
-                    .child("streakInfo").child("current streak count")
-                    .setValue(1)
-                currentStreak = 1
-            }
-            // if the previously taken pic was yesterday
-            else if (snapLocalDate!!.isEqual(currentLocalDate.minusDays(1))) {
-                currentStreak += 1
-                db.child("users")
-                    .child(Firebase.auth.currentUser?.uid.toString())
-                    .child("streakInfo").child("current streak count")
-                    .setValue(currentStreak.toString())
-            }
-            // update longest streak
-            if (currentStreak > longestStreak) {
-                db.child("users")
-                    .child(Firebase.auth.currentUser?.uid.toString())
-                    .child("streakInfo").child("longest streak count")
-                    .setValue(currentStreak.toString())
-            }
-            // update last snap date
-            db.child("users").child(Firebase.auth.currentUser?.uid.toString())
-                .child("streakInfo").child("last snap date")
-                .setValue(currentDay)*/
-
             // save that this day was a rest day
             var calendar: String
             Firebase.auth.currentUser?.uid?.let { it1 ->
