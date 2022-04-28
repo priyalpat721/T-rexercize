@@ -13,10 +13,7 @@ class ExerciseTextAdapter(
     var context: Context
 
 ) : RecyclerView.Adapter<ExerciseTextViewHolder>() {
-    /*private var dataList = emptyList<ExerciseTextCard>()
-    internal fun setDataList(dataList:List<ExerciseTextCard>) {
-        this.dataList = dataList
-    }*/
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseTextViewHolder {
         val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.exercise_text_card_layout, parent, false)
