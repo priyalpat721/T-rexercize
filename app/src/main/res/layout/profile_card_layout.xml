@@ -9,6 +9,7 @@
     <TextView
         android:id="@+id/value"
         style="@style/txtRobotoregular18"
+        android:textColor = "?android:textColorSecondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -31,6 +32,7 @@
         android:layout_marginBottom="12dp"
         android:gravity="start"
         android:hint="Label"
+        android:textColor = "?android:textColorPrimary"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

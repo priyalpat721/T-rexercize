@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:background="@color/white"
+        android:background="@android:color/transparent"
         android:contentDescription="@string/back_button"
         android:minWidth="32dp"
         android:minHeight="32dp"

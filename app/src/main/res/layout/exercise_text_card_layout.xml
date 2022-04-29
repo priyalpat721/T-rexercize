@@ -23,6 +23,7 @@
             android:layout_marginStart="32dp"
             android:elevation="100dp"
             android:text="exercise name"
+            android:textColor="@color/gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/goalBack"
             app:layout_constraintTop_toTopOf="@+id/goalBack" />
@@ -34,6 +35,7 @@
             android:layout_marginEnd="32dp"
             android:elevation="100dp"
             android:text="exercise muscle groups"
+            android:textColor="@color/gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/goalBack"
             app:layout_constraintHorizontal_bias="1.0"

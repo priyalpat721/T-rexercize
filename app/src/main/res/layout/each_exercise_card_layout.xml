@@ -20,11 +20,12 @@
             android:id="@+id/each_exercise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="Description"
-            android:layout_marginLeft="10dp"
             android:padding="15dp"
+            android:text="Description"
+            android:textColor="@color/gray"
             android:textSize="16sp" />
     </LinearLayout>
 
